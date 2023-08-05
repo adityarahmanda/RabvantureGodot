@@ -1,0 +1,147 @@
+[gd_scene load_steps=11 format=3 uid="uid://cn8jvk4udikk5"]
+
+[ext_resource type="Texture2D" uid="uid://dvp0gwm4hloi" path="res://Super Mango Platformer Assets by JuhoSprite/Grass_Oneway.png" id="1_20f37"]
+[ext_resource type="Script" path="res://Player.gd" id="2_2vu2w"]
+[ext_resource type="Texture2D" uid="uid://656w21ljb0dr" path="res://viking2.png" id="2_mvhhf"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iits7"]
+texture = ExtResource("1_20f37")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:2/0 = 0
+2:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:2/0/physics_layer_0/angular_velocity = 0.0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:1/0 = 0
+2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:1/0/physics_layer_0/angular_velocity = 0.0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:2/0 = 0
+0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:2/0/physics_layer_0/angular_velocity = 0.0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:2/0 = 0
+1:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:2/0/physics_layer_0/angular_velocity = 0.0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_472sx"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_iits7")
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xqqgg"]
+radius = 5.5
+height = 21.0
+
+[sub_resource type="Animation" id="Animation_7kmth"]
+resource_name = "Idle"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 6]
+}
+
+[sub_resource type="Animation" id="Animation_082l0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_6663p"]
+resource_name = "Walk"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [9, 15]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ur0y1"]
+_data = {
+"Idle": SubResource("Animation_7kmth"),
+"RESET": SubResource("Animation_082l0"),
+"Walk": SubResource("Animation_6663p")
+}
+
+[node name="world" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+texture_filter = 1
+tile_set = SubResource("TileSet_472sx")
+format = 2
+layer_0/tile_data = PackedInt32Array(-1, 65536, 0, 65535, 65536, 1, 0, 65536, 1, 1, 65536, 1, -65535, 65536, 0, -65536, 65536, 0, -65534, 65536, 0, -65533, 65536, 0, 3, 65536, 1, 2, 65536, 1, -65532, 65536, 0, -65531, 131072, 0, 131071, 65536, 2, 65536, 65536, 2, 65537, 65536, 2, 65538, 65536, 2, 65539, 65536, 2, 4, 65536, 1, 65540, 65536, 2, 5, 131072, 1, 65541, 131072, 2, -5, 65536, 0, 65531, 65536, 1, 131067, 65536, 2, -4, 65536, 0, 65532, 65536, 1, 131068, 65536, 2, -3, 65536, 0, 65533, 65536, 1, 131069, 65536, 2, -2, 65536, 0, 65534, 65536, 1, 131070, 65536, 2, -6, 0, 0, 65530, 0, 1, 131066, 0, 2)
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(0, 1)
+script = ExtResource("2_2vu2w")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0, -50)
+zoom = Vector2(4, 4)
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+drag_horizontal_enabled = true
+drag_left_margin = 0.1
+drag_top_margin = 0.1
+drag_right_margin = 0.1
+drag_bottom_margin = 0.1
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+texture_filter = 1
+position = Vector2(0, -33)
+texture = ExtResource("2_mvhhf")
+hframes = 9
+vframes = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(1.5, -26.5)
+shape = SubResource("CapsuleShape2D_xqqgg")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+libraries = {
+"": SubResource("AnimationLibrary_ur0y1")
+}
