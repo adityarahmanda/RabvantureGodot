@@ -36,7 +36,6 @@ func handle_movement(delta):
 		elapsedChargeJumpTime += delta
 		elapsedJumpTime = 0
 
-	# Handle Jump
 	if is_on_floor():
 		ungroundedTime = 0
 		isJumping = false
