@@ -41,8 +41,11 @@ func handle_movement(delta):
 		ungroundedTime = 0
 		isJumping = false
 	else:
-		velocity.y += gravity * delta
 		ungroundedTime += delta
+		velocity.y += gravity * delta
+		
+	if ungroundedTime > JUMP_FORGIVENESS && !is_on_floor():
+		jumpVelocity = MIN_JUMP_VELOCITY
 
 	elapsedJumpTime += delta
 	if elapsedJumpTime <= JUMP_FORGIVENESS and ungroundedTime <= JUMP_FORGIVENESS and !isJumping and !isChargeJumping:
