@@ -1,0 +1,77 @@
+[gd_scene load_steps=9 format=3 uid="uid://d0vxcbdepsvch"]
+
+[ext_resource type="Script" path="res://Scripts/Enemy/EnemyRatEntity.gd" id="1_aa2fm"]
+[ext_resource type="Texture2D" uid="uid://dhw1s1dvbani0" path="res://Sprites/Rat.png" id="2_l0uqs"]
+[ext_resource type="Script" path="res://Scripts/Obstacle/Area2DObstacle.gd" id="3_kvbr8"]
+
+[sub_resource type="Animation" id="Animation_xvcas"]
+resource_name = "Idle"
+length = 0.5
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_ei878"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u8iwk"]
+_data = {
+"Idle": SubResource("Animation_xvcas"),
+"RESET": SubResource("Animation_ei878")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_syfhm"]
+size = Vector2(6.96015, 5.00458)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hdlot"]
+size = Vector2(7.31324, 5.29569)
+
+[node name="EnemyEntity" type="CharacterBody2D"]
+script = ExtResource("1_aa2fm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_l0uqs")
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_process_mode = 0
+libraries = {
+"": SubResource("AnimationLibrary_u8iwk")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.01191, 0.50229)
+shape = SubResource("RectangleShape2D_syfhm")
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("3_kvbr8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.991453, 0.462679)
+shape = SubResource("RectangleShape2D_hdlot")
+debug_color = Color(0.8, 0.352941, 0.607843, 0.419608)
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

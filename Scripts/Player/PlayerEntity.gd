@@ -1,6 +1,6 @@
-extends CharacterBody2D
+extends Entity
+class_name PlayerEntity
 
-@export var speed = 100.0
 @export var minJumpVelocity = 150.0
 @export var maxJumpVelocity = 300.0
 @export var chargeJumpTime = 1.0
@@ -19,7 +19,6 @@ var currentAnimation = ""
 func _physics_process(delta):
 	handle_movement(delta)
 	handle_facing()
-	handle_animation()
 
 func handle_movement(delta):
 	# Handle Jump
@@ -48,7 +47,6 @@ func handle_movement(delta):
 
 	elapsedJumpTime += delta
 	if elapsedJumpTime <= jumpForgiveness and ungroundedTime <= jumpForgiveness and !isJumping and !isChargeJumping:
-		print(jumpVelocity)
 		velocity.y = -jumpVelocity
 		isJumping = true
 
@@ -66,11 +64,6 @@ func handle_facing():
 		$Sprite2D.scale.x = 1
 	elif direction < 0:
 		$Sprite2D.scale.x = -1
-
-func handle_animation():
-	if isChargeJumping and is_on_floor():
-		currentAnimation = "ChargeJumpingWalk" if direction else "ChargeJumpingIdle"
-	else:
-		currentAnimation = "Walk" if direction else "Idle"
-	
-	$AnimationPlayer.play(currentAnimation)
+		
+func die():
+	print("Die")

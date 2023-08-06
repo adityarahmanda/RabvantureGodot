@@ -1,16 +1,16 @@
-[gd_scene load_steps=17 format=3 uid="uid://cn8jvk4udikk5"]
+[gd_scene load_steps=10 format=3 uid="uid://cn8jvk4udikk5"]
 
-[ext_resource type="Script" path="res://camera.gd" id="1_8gu3r"]
-[ext_resource type="Texture2D" uid="uid://dw748ui3xr6rv" path="res://Sprites/Tileset.png" id="2_2nt3c"]
-[ext_resource type="Script" path="res://Player.gd" id="2_2vu2w"]
-[ext_resource type="Texture2D" uid="uid://b7bt1sjsgu6d2" path="res://Sprites/Water.png" id="3_bysn3"]
-[ext_resource type="Texture2D" uid="uid://dgcacn63rq4lc" path="res://Sprites/rabbit.png" id="3_dydlt"]
+[ext_resource type="Script" path="res://Scripts/MainCamera.gd" id="1_53ebw"]
+[ext_resource type="Texture2D" uid="uid://dw748ui3xr6rv" path="res://Sprites/Tileset.png" id="2_yqqxh"]
+[ext_resource type="Texture2D" uid="uid://b7bt1sjsgu6d2" path="res://Sprites/Water.png" id="3_6go1c"]
+[ext_resource type="PackedScene" uid="uid://8dxu3a8poib7" path="res://Entities/Player.tscn" id="4_obr7k"]
+[ext_resource type="PackedScene" uid="uid://d0vxcbdepsvch" path="res://Entities/EnemyRat.tscn" id="6_t6mga"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_7or0s"]
 tile_data = PackedInt32Array(0, 1, 0, 65536, 1, 1, 131072, 1, 2, 1, 65537, 0, 65537, 65537, 1, 131073, 65537, 2, 2, 131073, 0, 65538, 131073, 1, 131074, 131073, 2)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b5twd"]
-texture = ExtResource("2_2nt3c")
+texture = ExtResource("2_yqqxh")
 texture_region_size = Vector2i(8, 8)
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -167,7 +167,7 @@ texture_region_size = Vector2i(8, 8)
 2:5/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0ryeq"]
-texture = ExtResource("3_bysn3")
+texture = ExtResource("3_6go1c")
 texture_region_size = Vector2i(8, 8)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -204,109 +204,10 @@ sources/1 = SubResource("TileSetAtlasSource_b5twd")
 sources/2 = SubResource("TileSetAtlasSource_0ryeq")
 pattern_0 = SubResource("TileMapPattern_7or0s")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uh6ah"]
-size = Vector2(7, 6)
-
-[sub_resource type="Animation" id="Animation_mvh8r"]
-resource_name = "ChargeJumpingIdle"
-length = 0.5
-loop_mode = 1
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [4, 5]
-}
-
-[sub_resource type="Animation" id="Animation_cibaa"]
-resource_name = "ChargeJumpingWalk"
-length = 0.5
-loop_mode = 1
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [6, 7]
-}
-
-[sub_resource type="Animation" id="Animation_7kmth"]
-resource_name = "Idle"
-length = 0.5
-loop_mode = 1
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 1]
-}
-
-[sub_resource type="Animation" id="Animation_082l0"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_6663p"]
-resource_name = "Walk"
-length = 0.5
-loop_mode = 1
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [2, 3]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ur0y1"]
-_data = {
-"ChargeJumpingIdle": SubResource("Animation_mvh8r"),
-"ChargeJumpingWalk": SubResource("Animation_cibaa"),
-"Idle": SubResource("Animation_7kmth"),
-"RESET": SubResource("Animation_082l0"),
-"Walk": SubResource("Animation_6663p")
-}
-
 [node name="world" type="Node2D"]
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -38)
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("followTarget")]
+offset = Vector2(0, -20)
 process_callback = 0
 limit_left = -200
 limit_top = -500
@@ -316,11 +217,11 @@ position_smoothing_enabled = true
 position_smoothing_speed = 8.0
 drag_horizontal_enabled = true
 drag_left_margin = 0.1
-drag_top_margin = 0.1
 drag_right_margin = 0.1
-drag_bottom_margin = 0.1
 editor_draw_limits = true
-script = ExtResource("1_8gu3r")
+editor_draw_drag_margin = true
+script = ExtResource("1_53ebw")
+followTarget = NodePath("../PlayerEntity")
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
@@ -328,27 +229,8 @@ tile_set = SubResource("TileSet_472sx")
 format = 2
 layer_0/tile_data = PackedInt32Array(-1, 262145, 0, 65535, 262145, 1, 0, 262145, 1, 1, 262145, 1, -65535, 262145, 0, -65536, 262145, 0, -65534, 262145, 0, -65533, 262145, 0, 3, 262145, 1, 2, 262145, 1, -65532, 262145, 0, -65531, 262145, 0, 131071, 262145, 2, 65536, 262145, 2, 65537, 262145, 2, 65538, 262145, 2, 65539, 262145, 2, 4, 262145, 1, 65540, 262145, 2, 5, 262145, 1, 65541, 262145, 2, -3, 262145, 0, 65533, 262145, 1, 131069, 262145, 2, -2, 262145, 0, 65534, 262145, 1, 131070, 262145, 2, -6, 262145, 0, 65530, 262145, 1, 131066, 262145, 2, -5, 262145, 0, 65531, 262145, 1, 131067, 262145, 2, -4, 262145, 0, 65532, 262145, 1, 131068, 262145, 2, -7, 262145, 0, -8, 262145, 0, -9, 262145, 0, -10, 262145, 0, 65526, 262145, 1, 131062, 262145, 2, 131063, 262145, 2, 131064, 262145, 2, 131065, 262145, 2, 65529, 262145, 1, 65527, 262145, 1, 65528, 262145, 1, -65530, 262145, 0, -65529, 262145, 0, -65528, 262145, 0, -65527, 262145, 0, -65526, 262145, 0, -65525, 262145, 0, -65524, 262145, 0, -65523, 262145, 0, -65522, 327681, 0, 14, 327681, 1, 65550, 327681, 2, 65549, 262145, 2, 65548, 262145, 2, 65547, 262145, 2, 65546, 262145, 2, 65545, 262145, 2, 65544, 262145, 2, 65543, 262145, 2, 65542, 262145, 2, 6, 262145, 1, 7, 262145, 1, 8, 262145, 1, 9, 262145, 1, 10, 262145, 1, 11, 262145, 1, 12, 262145, 1, 13, 262145, 1, -11, 262145, 0, -12, 262145, 0, -13, 262145, 0, -14, 262145, 0, -15, 196609, 0, 65521, 196609, 1, 65522, 262145, 1, 65523, 262145, 1, 65524, 262145, 1, 65525, 262145, 1, 131061, 262145, 2, 131060, 262145, 2, 131059, 262145, 2, 131058, 262145, 2, 131057, 196609, 2, -327692, 196609, 0, -327691, 262145, 0, -327690, 262145, 0, -327689, 327681, 0, -262153, 327681, 2, -262154, 262145, 2, -262155, 262145, 2, -262156, 196609, 2, -524292, 262145, 0, -524291, 262145, 0, -524290, 262145, 0, -524289, 262145, 0, -589824, 262145, 0, -589823, 262145, 0, -589822, 262145, 0, -589821, 262145, 0, -589820, 327681, 0, -524284, 327681, 2, -524285, 262145, 2, -524286, 262145, 2, -524287, 262145, 2, -524288, 262145, 2, -458753, 262145, 2, -458754, 262145, 2, -458755, 262145, 2, -458756, 262145, 2, -458757, 196609, 2, -524293, 196609, 0, -393208, 196609, 0, -393207, 262145, 0, -393206, 262145, 0, -393205, 327681, 0, -327669, 327681, 2, -327670, 262145, 2, -327671, 262145, 2, -327672, 196609, 2)
 
-[node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(0, 12)
-script = ExtResource("2_2vu2w")
-metadata/speed = 150.0
-metadata/minJumpVelocity = 100.0
-metadata/maxJumpVelocity = 300.0
-metadata/chargeJumpTime = 1.0
-metadata/jumpForgiveness = 0.2
+[node name="PlayerEntity" parent="." instance=ExtResource("4_obr7k")]
+position = Vector2(0, -24)
 
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
-texture_filter = 1
-position = Vector2(0, -33)
-texture = ExtResource("3_dydlt")
-hframes = 4
-vframes = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(-0.5, -32)
-shape = SubResource("RectangleShape2D_uh6ah")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
-libraries = {
-"": SubResource("AnimationLibrary_ur0y1")
-}
+[node name="EnemyRat" parent="." instance=ExtResource("6_t6mga")]
+position = Vector2(-35, -11)

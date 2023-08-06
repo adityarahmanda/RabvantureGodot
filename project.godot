@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Rabvanture"
-run/main_scene="res://world.tscn"
+run/main_scene="res://Scenes/World.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://Scripts/Global.gd"
 
 [display]
 
