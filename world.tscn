@@ -1,5 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://cn8jvk4udikk5"]
+[gd_scene load_steps=17 format=3 uid="uid://cn8jvk4udikk5"]
 
+[ext_resource type="Script" path="res://camera.gd" id="1_8gu3r"]
 [ext_resource type="Texture2D" uid="uid://dw748ui3xr6rv" path="res://Sprites/Tileset.png" id="2_2nt3c"]
 [ext_resource type="Script" path="res://Player.gd" id="2_2vu2w"]
 [ext_resource type="Texture2D" uid="uid://b7bt1sjsgu6d2" path="res://Sprites/Water.png" id="3_bysn3"]
@@ -304,6 +305,23 @@ _data = {
 
 [node name="world" type="Node2D"]
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -38)
+process_callback = 0
+limit_left = -200
+limit_top = -500
+limit_right = 200
+limit_bottom = 30
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+drag_horizontal_enabled = true
+drag_left_margin = 0.1
+drag_top_margin = 0.1
+drag_right_margin = 0.1
+drag_bottom_margin = 0.1
+editor_draw_limits = true
+script = ExtResource("1_8gu3r")
+
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
 tile_set = SubResource("TileSet_472sx")
@@ -318,21 +336,6 @@ metadata/minJumpVelocity = 100.0
 metadata/maxJumpVelocity = 300.0
 metadata/chargeJumpTime = 1.0
 metadata/jumpForgiveness = 0.2
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(0, -50)
-zoom = Vector2(4, 4)
-limit_left = -200
-limit_top = -500
-limit_right = 200
-limit_bottom = 30
-position_smoothing_enabled = true
-position_smoothing_speed = 8.0
-drag_horizontal_enabled = true
-drag_left_margin = 0.1
-drag_top_margin = 0.1
-drag_right_margin = 0.1
-drag_bottom_margin = 0.1
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
 texture_filter = 1
