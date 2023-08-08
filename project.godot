@@ -29,6 +29,10 @@ window/size/window_height_override=810
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[gui]
+
+theme/custom_font="res://Fonts/SilkScreen.tres"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

@@ -1,0 +1,9 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://c46yw2qrsmjj4"]
+
+[ext_resource type="FontFile" uid="uid://jmlkf1hswfmw" path="res://Fonts/Silkscreen-Regular.ttf" id="1_xxuh2"]
+
+[resource]
+base_font = ExtResource("1_xxuh2")
+opentype_features = {
+1667329140: 0
+}

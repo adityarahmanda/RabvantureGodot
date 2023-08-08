@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://0r8n88s6vpf"]
+[gd_scene load_steps=7 format=3 uid="uid://0r8n88s6vpf"]
 
 [ext_resource type="Script" path="res://Scripts/_Core/GameManager.gd" id="1_a6ent"]
 [ext_resource type="PackedScene" uid="uid://cn8jvk4udikk5" path="res://Scenes/WorldTest.tscn" id="2_kj4xq"]
 [ext_resource type="Script" path="res://Scripts/_Core/GameCamera.gd" id="3_lbwio"]
+[ext_resource type="PackedScene" uid="uid://do70gvk84lf4u" path="res://Components/UI/MainCanvas.tscn" id="3_pp1ww"]
 [ext_resource type="PackedScene" uid="uid://8dxu3a8poib7" path="res://Components/Entities/Player.tscn" id="3_qlgy4"]
 [ext_resource type="PackedScene" uid="uid://d0vxcbdepsvch" path="res://Components/Entities/EnemyRat.tscn" id="4_wt5pl"]
 
@@ -24,6 +25,8 @@ drag_right_margin = 0.1
 editor_draw_limits = true
 editor_draw_drag_margin = true
 script = ExtResource("3_lbwio")
+
+[node name="MainCanvas" parent="." instance=ExtResource("3_pp1ww")]
 
 [node name="World" parent="." instance=ExtResource("2_kj4xq")]
 
