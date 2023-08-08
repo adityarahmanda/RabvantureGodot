@@ -1,0 +1,120 @@
+[gd_scene load_steps=10 format=3 uid="uid://do70gvk84lf4u"]
+
+[ext_resource type="Script" path="res://Scenes/GameUI.gd" id="1_jxtuh"]
+[ext_resource type="Texture2D" uid="uid://ck25jqs26eslb" path="res://Sprites/Death_Icon.png" id="2_yaxwb"]
+[ext_resource type="Texture2D" uid="uid://dmx047q2aay1r" path="res://Sprites/Pause_Icon.png" id="3_af4s3"]
+[ext_resource type="Texture2D" uid="uid://cstfx8xbjy1ce" path="res://Sprites/SpriteAtlas/LeftInputButton.tres" id="4_pi05b"]
+[ext_resource type="Texture2D" uid="uid://c34dsctgexd4o" path="res://Sprites/SpriteAtlas/LeftPressedInputButton.tres" id="5_ghdgx"]
+[ext_resource type="Texture2D" uid="uid://l0gsbd8ud23h" path="res://Sprites/SpriteAtlas/RightInputButton.tres" id="6_pgs8b"]
+[ext_resource type="Texture2D" uid="uid://cfmbpss6ruwv" path="res://Sprites/SpriteAtlas/RightPressedInputButton.tres" id="7_ymh26"]
+[ext_resource type="Texture2D" uid="uid://b5ki4c688fvaf" path="res://Sprites/SpriteAtlas/UpInputButton.tres" id="8_2inei"]
+[ext_resource type="Texture2D" uid="uid://clq3kkw0fbt6s" path="res://Sprites/SpriteAtlas/UpPressedInputButton.tres" id="9_h2btb"]
+
+[node name="MainCanvas" type="CanvasLayer"]
+script = ExtResource("1_jxtuh")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="LeftTopContainer" type="HBoxContainer" parent="Control"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 1
+offset_left = 8.0
+offset_top = 4.0
+offset_right = 28.0
+offset_bottom = 18.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 4
+
+[node name="TextureRect" type="TextureRect" parent="Control/LeftTopContainer"]
+custom_minimum_size = Vector2(10, 10.5)
+layout_mode = 2
+size_flags_vertical = 0
+texture = ExtResource("2_yaxwb")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DeathCountLabel" type="Label" parent="Control/LeftTopContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 6
+text = "0"
+vertical_alignment = 1
+uppercase = true
+
+[node name="RightTopContainer" type="HBoxContainer" parent="Control"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -22.0
+offset_top = 4.0
+offset_right = -8.0
+offset_bottom = 18.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/separation = 4
+
+[node name="PauseButton" type="TextureButton" parent="Control/RightTopContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(14, 14)
+layout_mode = 2
+texture_normal = ExtResource("3_af4s3")
+stretch_mode = 5
+
+[node name="BottomLeftContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -31.0
+offset_right = 66.0
+offset_bottom = -12.0
+grow_vertical = 0
+
+[node name="LeftInputButton" type="TextureButton" parent="Control/BottomLeftContainer"]
+custom_minimum_size = Vector2(23.2, 19.2)
+layout_mode = 2
+texture_normal = ExtResource("4_pi05b")
+texture_pressed = ExtResource("5_ghdgx")
+stretch_mode = 4
+
+[node name="RightInputButton" type="TextureButton" parent="Control/BottomLeftContainer"]
+custom_minimum_size = Vector2(23.2, 19.2)
+layout_mode = 2
+texture_normal = ExtResource("6_pgs8b")
+texture_pressed = ExtResource("7_ymh26")
+stretch_mode = 4
+
+[node name="BottomRightContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -47.0
+offset_top = -31.0
+offset_right = -24.0
+offset_bottom = -12.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="UpInputButton" type="TextureButton" parent="Control/BottomRightContainer"]
+custom_minimum_size = Vector2(23.2, 19.2)
+layout_mode = 2
+texture_normal = ExtResource("8_2inei")
+texture_pressed = ExtResource("9_h2btb")
+stretch_mode = 4

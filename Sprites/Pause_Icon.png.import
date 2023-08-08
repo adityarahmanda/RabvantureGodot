@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://656w21ljb0dr"
-path="res://.godot/imported/viking2.png-8c770d38f1d3a95761c11481aa9c48fa.ctex"
+uid="uid://dmx047q2aay1r"
+path="res://.godot/imported/Pause_Icon.png-b82683e1d951896ff4ab36eb10280a54.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://viking2.png"
-dest_files=["res://.godot/imported/viking2.png-8c770d38f1d3a95761c11481aa9c48fa.ctex"]
+source_file="res://Sprites/Pause_Icon.png"
+dest_files=["res://.godot/imported/Pause_Icon.png-b82683e1d951896ff4ab36eb10280a54.ctex"]
 
 [params]
 
