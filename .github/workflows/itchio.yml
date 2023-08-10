@@ -18,8 +18,8 @@ jobs:
     steps:
       - name: Install Packages
         run: |
-          apt-get update
-          apt-get install libvulkan1 mesa-vulkan-drivers vulkan-utils
+          apt-get update -y
+          apt-get install -y mesa-vulkan-drivers
           apt-get install -y rsync
       - name: Checkout
         uses: actions/checkout@v3
