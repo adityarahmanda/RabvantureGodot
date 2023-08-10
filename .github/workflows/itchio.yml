@@ -16,7 +16,14 @@ jobs:
     container:
       image: barichello/godot-ci:4.1.1
     steps:
-      - uses: actions/checkout@v2
+      - name: Update packages
+        run: sudo apt-get update
+      - name: Install packages
+        run: |
+          sudo apt-get install --fix-missing libgl1-mesa-dev
+          apt-get install -y rsync
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/templates
@@ -30,10 +37,6 @@ jobs:
         with:
           name: web
           path: build/web
-      - name: Install rsync 📚
-        run: |
-          apt-get update && apt-get install -y rsync
-      - run: ls
       - name: Deploy
         uses: josephbmanley/butler-publish-itchio-action@v1.0.3
         env:
