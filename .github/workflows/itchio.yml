@@ -19,7 +19,6 @@ jobs:
       - name: Install Packages
         run: |
           apt-get update -y
-          apt-get install -y mesa-vulkan-drivers
           apt-get install -y rsync
       - name: Checkout
         uses: actions/checkout@v3
