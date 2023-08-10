@@ -12,13 +12,11 @@ on:
 
 jobs:
   itchio-deploy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     container:
       image: barichello/godot-ci:4.1.1
     steps:
       - uses: actions/checkout@v2
-      - uses: openrndr/setup-opengl@v1.1
-      - run: xvfb-run glxinfo
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/templates
