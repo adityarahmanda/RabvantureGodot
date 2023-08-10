@@ -16,11 +16,10 @@ jobs:
     container:
       image: barichello/godot-ci:4.1.1
     steps:
-      - name: Update packages
-        run: sudo apt-get update
-      - name: Install packages
+      - name: Install Packages
         run: |
-          sudo apt-get install --fix-missing libgl1-mesa-dev
+          apt-get update
+          apt-get install --fix-missing libgl1-mesa-dev
           apt-get install -y rsync
       - name: Checkout
         uses: actions/checkout@v3
