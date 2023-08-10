@@ -16,18 +16,17 @@ jobs:
     container:
       image: barichello/godot-ci:4.1.1
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          lfs: true
+      - uses: actions/checkout@v2
+      - uses: openrndr/setup-opengl@v1.1
+      - run: xvfb-run glxinfo
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/templates
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
       - name: Web Build
         run: |
-          mkdir -v -p build/web
-          godot -v --export-release "Web" ../build/web/index.html
+          mkdir -v -p ./build/web
+          godot -v --export-release "Web" ./build/web/index.html
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
