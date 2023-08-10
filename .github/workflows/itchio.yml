@@ -3,7 +3,6 @@ name: Itch.io Deploy Workflow
 env:
   GODOT_VERSION: 4.1.1
   EXPORT_NAME: rabvanture
-  PROJECT_PATH: test-project
 
 on:
   push:
@@ -28,16 +27,7 @@ jobs:
       - name: Web Build
         run: |
           mkdir -v -p build/web
-          cd $PROJECT_PATH
           godot -v --export "HTML5" ../build/web/index.html
-      - name: Setup Node.js 16
-        uses: actions/setup-node@v3
-        with:
-          node-version: "16.x"
-          cache: 'npm'
-          cache-dependency-path: tic-tac-toe-project/yarn.lock
-        env:
-          CI: true
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
@@ -54,4 +44,4 @@ jobs:
           CHANNEL: HTML
           ITCH_GAME: rabvanture-godot
           ITCH_USER: adityarahmanda
-          PACKAGE: ${PROJECT_PATH}/build/web/
+          PACKAGE: build/web
