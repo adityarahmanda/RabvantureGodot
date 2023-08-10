@@ -19,7 +19,7 @@ jobs:
       - name: Install Packages
         run: |
           apt-get update
-          apt-get install --fix-missing libgl1-mesa-dev
+          apt-get install -y --fix-missing libgl1-mesa-dev
           apt-get install -y rsync
       - name: Checkout
         uses: actions/checkout@v3
