@@ -1,5 +1,10 @@
 name: Itch.io Deploy Workflow
 
+env:
+  GODOT_VERSION: 4.1.1
+  EXPORT_NAME: rabvanture
+  PROJECT_PATH: test-project
+
 on:
   push:
     branches:
@@ -8,11 +13,23 @@ on:
 
 jobs:
   itchio-deploy:
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-20.04
+    container:
+      image: barichello/godot-ci:4.1.1
     steps:
-      - uses: actions/checkout@v3
-
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/templates
+          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+      - name: Web Build
+        run: |
+          mkdir -v -p build/web
+          cd $PROJECT_PATH
+          godot -v --export "HTML5" ../build/web/index.html
       - name: Setup Node.js 16
         uses: actions/setup-node@v3
         with:
@@ -21,20 +38,15 @@ jobs:
           cache-dependency-path: tic-tac-toe-project/yarn.lock
         env:
           CI: true
-
-      - name: Install yarn
-        run: npm install --global yarn
-
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
-
-      - name: yarn build
-        run: yarn build
-        env:
-          CI: true
-
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: web
+          path: build/web
+      - name: Install rsync 📚
+        run: |
+          apt-get update && apt-get install -y rsync
       - run: ls
-
       - name: Deploy
         uses: josephbmanley/butler-publish-itchio-action@v1.0.3
         env:
@@ -42,4 +54,4 @@ jobs:
           CHANNEL: HTML
           ITCH_GAME: rabvanture-godot
           ITCH_USER: adityarahmanda
-          PACKAGE: dist
+          PACKAGE: ${PROJECT_PATH}/build/web/
