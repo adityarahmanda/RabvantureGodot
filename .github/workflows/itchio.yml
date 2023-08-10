@@ -13,13 +13,12 @@ on:
 jobs:
   itchio-deploy:
     runs-on: ubuntu-latest
-    container:
-      image: barichello/godot-ci:4.1.1
     steps:
       - name: Install Packages
         run: |
+          add-apt-repository ppa:oibaf/graphics-drivers
           apt-get update
-          apt-get install -y --fix-missing libgl1-mesa-dev
+          apt-get libvulkan1 mesa-vulkan-drivers vulkan-utils
           apt-get install -y rsync
       - name: Checkout
         uses: actions/checkout@v3
