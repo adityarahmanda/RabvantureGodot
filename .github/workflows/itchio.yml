@@ -13,6 +13,8 @@ on:
 jobs:
   itchio-deploy:
     runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:4.1.1
     steps:
       - name: Install Packages
         run: |
