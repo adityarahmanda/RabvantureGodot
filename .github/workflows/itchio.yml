@@ -35,4 +35,4 @@ jobs:
         CHANNEL: HTML
         ITCH_GAME: rabvanture-godot
         ITCH_USER: adityarahmanda
-        PACKAGE: ${{ steps.export.outputs.archive_directory }}/*  
+        PACKAGE: ${{ steps.export.outputs.archive_directory }}/Web.zip
