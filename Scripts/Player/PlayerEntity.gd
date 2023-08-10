@@ -23,11 +23,11 @@ func _physics_process(delta) -> void:
 
 func handle_movement(delta) -> void:
 	# Handle Jump
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("ui_select"):
 		elapsed_charge_jump_time = 0
 		jump_velocity = min_jump_velocity
 		is_charge_jumping = true
-	if Input.is_action_just_released("ui_accept"):
+	if Input.is_action_just_released("ui_select"):
 		is_charge_jumping = false
 	
 	if is_charge_jumping:
