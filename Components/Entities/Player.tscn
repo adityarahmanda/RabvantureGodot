@@ -102,6 +102,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
+safe_margin = 0.001
 script = ExtResource("1_7g2fw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
