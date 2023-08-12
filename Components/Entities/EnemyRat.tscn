@@ -43,11 +43,11 @@ _data = {
 "Walk": SubResource("Animation_xvcas")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_syfhm"]
-size = Vector2(6.96015, 5.00458)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rst5e"]
+size = Vector2(7.02687, 5.00574)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hdlot"]
-size = Vector2(7.31324, 5.29569)
+size = Vector2(8.28504, 5.5187)
 
 [node name="EnemyEntity" type="CharacterBody2D"]
 script = ExtResource("1_aa2fm")
@@ -63,14 +63,14 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.01191, 0.50229)
-shape = SubResource("RectangleShape2D_syfhm")
+position = Vector2(1.01009, 0.483494)
+shape = SubResource("RectangleShape2D_rst5e")
 
 [node name="Area2D" type="Area2D" parent="."]
 script = ExtResource("3_kvbr8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0.991453, 0.462679)
+position = Vector2(0.643113, 0.48599)
 shape = SubResource("RectangleShape2D_hdlot")
 debug_color = Color(0.8, 0.352941, 0.607843, 0.419608)
 

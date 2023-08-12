@@ -17,7 +17,7 @@ func _physics_process(delta):
 	handle_facing()
 	handle_animation()
 	
-func handle_movement(delta):
+func handle_movement(_delta):
 	if(position.x <= init_pos.x):
 		velocity.x = speed
 		is_facing_right = true
