@@ -2,6 +2,7 @@ name: Itch.io Deploy Workflow
 
 env:
   GODOT_VERSION: 4.1.1
+  ITCHIO_LINK: "https://adityarahmanda.itch.io/rabvanture-godot"
 
 on:
   push:
@@ -42,3 +43,12 @@ jobs:
           ITCH_GAME: rabvanture-godot
           ITCH_USER: adityarahmanda
           PACKAGE: build/web
+      - name: Send Discord Notification
+        run: |
+          DISCORD_MESSAGE="Build (${{ steps.git.outputs.commitid }}) for Rabvanture (Godot) is now live! \nLink: ${ITCHIO_LINK}"
+          curl -X POST -H "Content-Type: application/json" -d "{\"content\": \"$DISCORD_MESSAGE\"}" ${{ secrets.WEBHOOK_URL }}
+      - name: Send Failed Discord Notification
+        if: failure()
+        run: |
+          DISCORD_MESSAGE="Build (${{ steps.git.outputs.commitid }}) for Rabvanture (Godot) is failed! :smiling_face_with_tear:"
+          curl -X POST -H "Content-Type: application/json" -d "{\"content\": \"$DISCORD_MESSAGE\"}" ${{ secrets.WEBHOOK_URL }}
