@@ -26,10 +26,7 @@ jobs:
       - name: Retrieve Git Commit ID
         id: git
         run: |
-          commit_id=$(git rev-parse HEAD | cut -c 1-8)
-          branch_name=$(git rev-parse --abbrev-ref HEAD)
-          echo "Commit ID: $commit_id"
-          echo "branchname=$branch_name" >> $GITHUB_OUTPUT
+          commit_id=$(git rev-parse --short HEAD)
           echo "commitid=$commit_id" >> $GITHUB_OUTPUT
       - name: Setup
         run: |
