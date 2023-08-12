@@ -23,11 +23,6 @@ jobs:
           apt-get install -y curl
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Retrieve Git Commit ID
-        id: git
-        run: |
-          commit_id=$(git rev-parse --short HEAD)
-          echo "commitid=$commit_id" >> $GITHUB_OUTPUT
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates
@@ -51,7 +46,7 @@ jobs:
           PACKAGE: build/web
       - name: Send Discord Notification
         run: |
-          DISCORD_MESSAGE="Build (${{ steps.git.outputs.commitid }}) for Rabvanture (Godot) is now live! \nLink: ${ITCHIO_LINK}"
+          DISCORD_MESSAGE="Build for Rabvanture (Godot) is now live! \nLink: ${ITCHIO_LINK}"
           curl -X POST -H "Content-Type: application/json" -d "{\"content\": \"$DISCORD_MESSAGE\"}" ${{ secrets.WEBHOOK_URL }}
       - name: Send Failed Discord Notification
         if: failure()
