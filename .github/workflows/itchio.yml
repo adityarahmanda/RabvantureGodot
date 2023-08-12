@@ -20,6 +20,7 @@ jobs:
         run: |
           apt-get update -y
           apt-get install -y rsync
+          apt-get install -y curl
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup
