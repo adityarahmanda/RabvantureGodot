@@ -1,16 +1,27 @@
-[gd_scene load_steps=7 format=3 uid="uid://0r8n88s6vpf"]
+[gd_scene load_steps=9 format=3 uid="uid://0r8n88s6vpf"]
 
 [ext_resource type="Script" path="res://Scripts/_Core/GameManager.gd" id="1_a6ent"]
+[ext_resource type="Script" path="res://Scripts/Services/LevelSetup.gd" id="2_d7xif"]
 [ext_resource type="PackedScene" uid="uid://cn8jvk4udikk5" path="res://Scenes/WorldTest.tscn" id="2_kj4xq"]
 [ext_resource type="Script" path="res://Scripts/_Core/GameCamera.gd" id="3_lbwio"]
 [ext_resource type="PackedScene" uid="uid://do70gvk84lf4u" path="res://Components/UI/MainCanvas.tscn" id="3_pp1ww"]
 [ext_resource type="PackedScene" uid="uid://8dxu3a8poib7" path="res://Components/Entities/Player.tscn" id="3_qlgy4"]
 [ext_resource type="PackedScene" uid="uid://d0vxcbdepsvch" path="res://Components/Entities/EnemyRat.tscn" id="4_wt5pl"]
 
+[sub_resource type="Curve2D" id="Curve2D_8ba41"]
+_data = {
+"points": PackedVector2Array(-66, 0, 66, 0, 0, 0, 0, 0, 0, 0, 66, 0)
+}
+point_count = 2
+
 [node name="Game" type="Node2D"]
 script = ExtResource("1_a6ent")
+metadata/_edit_horizontal_guides_ = [30.0]
 
-[node name="MainCamera" type="Camera2D" parent="."]
+[node name="Services" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="MainCamera" type="Camera2D" parent="Services"]
 offset = Vector2(0, -20)
 process_callback = 0
 limit_left = -200
@@ -26,7 +37,11 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 script = ExtResource("3_lbwio")
 
-[node name="MainCanvas" parent="." instance=ExtResource("3_pp1ww")]
+[node name="MainCanvas" parent="Services" instance=ExtResource("3_pp1ww")]
+
+[node name="LevelSetup" type="Node2D" parent="Services"]
+script = ExtResource("2_d7xif")
+pit_y_level = 30
 
 [node name="World" parent="." instance=ExtResource("2_kj4xq")]
 
@@ -34,4 +49,9 @@ script = ExtResource("3_lbwio")
 position = Vector2(0, -24)
 
 [node name="EnemyRat" parent="." instance=ExtResource("4_wt5pl")]
-position = Vector2(-35, -11)
+position = Vector2(-33, -75)
+floor_stop_on_slope = false
+speed = 20.0
+
+[node name="Path2D" type="Path2D" parent="EnemyRat"]
+curve = SubResource("Curve2D_8ba41")

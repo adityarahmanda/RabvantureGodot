@@ -1,6 +1,9 @@
 class_name PlayerEntity
 extends Entity
 
+@onready var level_setup : LevelSetup = %Services/LevelSetup
+@onready var sprite_2d : Sprite2D = $Sprite2D
+
 @export var min_jump_velocity := 150.0
 @export var max_jump_velocity := 300.0
 @export var charge_jump_time := 1.0
@@ -20,6 +23,7 @@ signal on_dead
 func _physics_process(delta) -> void:
 	handle_movement(delta)
 	handle_facing()
+	handle_fall_into_pit()
 
 func handle_movement(delta) -> void:
 	# Handle Jump
@@ -63,9 +67,13 @@ func handle_movement(delta) -> void:
 
 func handle_facing() -> void:
 	if direction > 0:
-		$Sprite2D.scale.x = 1
+		sprite_2d.scale.x = 1
 	elif direction < 0:
-		$Sprite2D.scale.x = -1
+		sprite_2d.scale.x = -1
 		
+func handle_fall_into_pit() -> void:
+	if position.y > level_setup.pit_y_level:
+		die()
+	
 func die() -> void:
 	emit_signal("on_dead")

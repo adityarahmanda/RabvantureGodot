@@ -4,8 +4,23 @@
 [ext_resource type="Texture2D" uid="uid://dhw1s1dvbani0" path="res://Sprites/Rat.png" id="2_l0uqs"]
 [ext_resource type="Script" path="res://Scripts/Obstacle/Area2DObstacle.gd" id="3_kvbr8"]
 
+[sub_resource type="Animation" id="Animation_ei878"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_xvcas"]
-resource_name = "Idle"
+resource_name = "Walk"
 length = 0.5
 loop_mode = 1
 step = 0.05
@@ -22,25 +37,10 @@ tracks/0/keys = {
 "values": [0, 1]
 }
 
-[sub_resource type="Animation" id="Animation_ei878"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u8iwk"]
 _data = {
-"Idle": SubResource("Animation_xvcas"),
-"RESET": SubResource("Animation_ei878")
+"RESET": SubResource("Animation_ei878"),
+"Walk": SubResource("Animation_xvcas")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_syfhm"]

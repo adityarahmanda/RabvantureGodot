@@ -1,7 +1,8 @@
 extends Node2D
+class_name GameManager
 
 @onready var player : PlayerEntity = $Player
-@onready var main_camera : GameCamera = $MainCamera
+@onready var main_camera : GameCamera = %Services/MainCamera
 
 func _ready() -> void:
 	SaveGame.load_json()
