@@ -2,6 +2,7 @@ class_name PlayerEntity
 extends Entity
 
 @onready var level_setup : LevelSetup = %Services/LevelSetup
+@onready var audio_manager : AudioManager = %Services/AudioManager
 @onready var sprite_2d : Sprite2D = $Sprite2D
 
 @export var min_jump_velocity := 150.0
@@ -58,6 +59,7 @@ func handle_movement(delta) -> void:
 	if ungrounded_time <= jump_forgiveness and elapsed_jump_time <= jump_forgiveness and !is_jumping and !is_charge_jumping:
 		velocity.y = -jump_velocity
 		is_jumping = true
+		audio_manager.play_sfx("jump")
 		
 	# Handle Movement
 	direction = clamp(Input.get_axis("ui_left", "ui_right"), -1, 1)

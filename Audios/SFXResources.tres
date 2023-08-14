@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Audio_Resource" load_steps=3 format=3 uid="uid://b3aacntbkmbb5"]
+
+[ext_resource type="Script" path="res://Scripts/AudioResources.gd" id="1_cdowc"]
+[ext_resource type="AudioStream" uid="uid://bbgbbheo33bco" path="res://Audios/SFX/jump.wav" id="1_e38td"]
+
+[resource]
+script = ExtResource("1_cdowc")
+audios = {
+"jump": ExtResource("1_e38td")
+}

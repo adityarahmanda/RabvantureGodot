@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://0r8n88s6vpf"]
+[gd_scene load_steps=10 format=3 uid="uid://0r8n88s6vpf"]
 
 [ext_resource type="Script" path="res://Scripts/_Core/GameManager.gd" id="1_a6ent"]
 [ext_resource type="Script" path="res://Scripts/Services/LevelSetup.gd" id="2_d7xif"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://do70gvk84lf4u" path="res://Components/UI/MainCanvas.tscn" id="3_pp1ww"]
 [ext_resource type="PackedScene" uid="uid://8dxu3a8poib7" path="res://Components/Entities/Player.tscn" id="3_qlgy4"]
 [ext_resource type="PackedScene" uid="uid://d0vxcbdepsvch" path="res://Components/Entities/EnemyRat.tscn" id="4_wt5pl"]
+[ext_resource type="PackedScene" uid="uid://co68gj4myluc8" path="res://Components/AudioManager.tscn" id="5_hcdug"]
 
 [sub_resource type="Curve2D" id="Curve2D_8ba41"]
 _data = {
@@ -42,6 +43,8 @@ script = ExtResource("3_lbwio")
 [node name="LevelSetup" type="Node2D" parent="Services"]
 script = ExtResource("2_d7xif")
 pit_y_level = 80
+
+[node name="AudioManager" parent="Services" instance=ExtResource("5_hcdug")]
 
 [node name="World" parent="." instance=ExtResource("2_kj4xq")]
 
