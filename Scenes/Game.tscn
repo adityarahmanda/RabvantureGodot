@@ -46,7 +46,6 @@ pit_y_level = 80
 [node name="World" parent="." instance=ExtResource("2_kj4xq")]
 
 [node name="Player" parent="." instance=ExtResource("3_qlgy4")]
-position = Vector2(0, 5)
 
 [node name="EnemyRat" parent="." instance=ExtResource("4_wt5pl")]
 position = Vector2(61, -339)

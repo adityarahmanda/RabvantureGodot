@@ -17,11 +17,13 @@ func register_signal_callbacks() -> void:
 	player.on_dead.connect(on_player_die.bind())
 
 func on_player_die() -> void:
+	await get_tree().create_timer(Global.reset_scene_delay).timeout
 	Global.death_count += 1
 	SaveGame.save_json()
 	reset_game()
 	
 func handle_score() -> void:
+	if (player == null): return
 	if (player.position.y > 0): return
 	
 	Global.score = absi(player.position.y as int)

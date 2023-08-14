@@ -20,6 +20,8 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 signal on_dead
 
+const DIE_PARTICLE = preload("res://Particles/DieParticle.tscn")
+
 func _physics_process(delta) -> void:
 	handle_movement(delta)
 	handle_facing()
@@ -84,4 +86,9 @@ func handle_fall_into_pit() -> void:
 		die()
 	
 func die() -> void:
+	var die_particle = DIE_PARTICLE.instantiate()
+	get_tree().current_scene.add_child(die_particle)
+	die_particle.position = position
+	die_particle.emitting = true
 	emit_signal("on_dead")
+	queue_free()
