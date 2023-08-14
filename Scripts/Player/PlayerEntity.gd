@@ -81,16 +81,22 @@ func handle_collision() -> void:
 	for index in collision_count:
 		var collision = get_slide_collision(index)
 		if (collision.get_collider().is_in_group("Obstacle")):
-			die()
+			die(Global.DeathType.HIT)
 
 func handle_fall_into_pit() -> void:
 	if position.y > level_setup.pit_y_level:
-		die()
+		die(Global.DeathType.FALL)
 	
-func die() -> void:
+func die(death_type : Global.DeathType) -> void:
 	var die_particle = DIE_PARTICLE.instantiate()
 	get_tree().current_scene.add_child(die_particle)
 	die_particle.position = position
 	die_particle.emitting = true
+	
+	if (death_type == Global.DeathType.FALL):
+		audio_manager.play_sfx("fall")
+	if (death_type == Global.DeathType.HIT):
+		audio_manager.play_sfx("hit")
+		
 	emit_signal("on_dead")
 	queue_free()

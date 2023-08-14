@@ -9,7 +9,7 @@ const SFX_RESOURCES : AudioResource = preload("res://Audios/SFXResources.tres")
 
 func _ready() -> void:
 	bgm_player.stream = BGM_RESOURCE
-	bgm_player.play()
+	bgm_player.play(Global.last_bgm_time)
 
 func play_sfx(audio_name : String) -> void:
 	sfx_player.stream = SFX_RESOURCES.audios.get(audio_name)
