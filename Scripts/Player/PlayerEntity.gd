@@ -76,7 +76,6 @@ func handle_collision() -> void:
 	var collision_count = get_slide_collision_count()
 	for index in collision_count:
 		var collision = get_slide_collision(index)
-		print(collision.get_collider().is_in_group("Obstacle"))
 		if (collision.get_collider().is_in_group("Obstacle")):
 			die()
 

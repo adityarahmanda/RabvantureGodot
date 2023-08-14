@@ -24,7 +24,7 @@ func on_player_die() -> void:
 func handle_score() -> void:
 	if (player.position.y > 0): return
 	
-	Global.score = absi(player.position.y)
+	Global.score = absi(player.position.y as int)
 	main_canvas.set_score(Global.score)
 
 func reset_game() -> void:

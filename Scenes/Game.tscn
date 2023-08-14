@@ -27,7 +27,7 @@ process_callback = 0
 limit_left = -300
 limit_top = -500
 limit_right = 300
-limit_bottom = 50
+limit_bottom = 80
 position_smoothing_enabled = true
 position_smoothing_speed = 8.0
 drag_horizontal_enabled = true
@@ -41,12 +41,12 @@ script = ExtResource("3_lbwio")
 
 [node name="LevelSetup" type="Node2D" parent="Services"]
 script = ExtResource("2_d7xif")
-pit_y_level = 30
+pit_y_level = 80
 
 [node name="World" parent="." instance=ExtResource("2_kj4xq")]
 
 [node name="Player" parent="." instance=ExtResource("3_qlgy4")]
-position = Vector2(0, -4)
+position = Vector2(0, 5)
 
 [node name="EnemyRat" parent="." instance=ExtResource("4_wt5pl")]
 position = Vector2(61, -339)
