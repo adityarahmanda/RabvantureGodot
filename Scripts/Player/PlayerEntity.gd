@@ -88,14 +88,13 @@ func handle_fall_into_pit() -> void:
 		die(Global.DeathType.FALL)
 	
 func die(death_type : Global.DeathType) -> void:
-	var die_particle = DIE_PARTICLE.instantiate()
-	get_tree().current_scene.add_child(die_particle)
-	die_particle.position = position
-	die_particle.emitting = true
-	
 	if (death_type == Global.DeathType.FALL):
 		audio_manager.play_sfx("fall")
 	if (death_type == Global.DeathType.HIT):
+		var die_particle = DIE_PARTICLE.instantiate()
+		get_tree().current_scene.add_child(die_particle)
+		die_particle.position = position
+		die_particle.emitting = true
 		audio_manager.play_sfx("hit")
 		
 	emit_signal("on_dead")
