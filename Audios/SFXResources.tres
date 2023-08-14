@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AudioResource" load_steps=5 format=3 uid="uid://b3aacntbkmbb5"]
+
+[ext_resource type="Script" path="res://Scripts/AudioResources.gd" id="1_cdowc"]
+[ext_resource type="AudioStream" uid="uid://bbgbbheo33bco" path="res://Audios/SFX/jump.wav" id="1_e38td"]
+[ext_resource type="AudioStream" uid="uid://c67qro52m5e4p" path="res://Audios/SFX/fall.wav" id="2_0ewfp"]
+[ext_resource type="AudioStream" uid="uid://pmi3vskq0uyq" path="res://Audios/SFX/hit.wav" id="3_0ru55"]
+
+[resource]
+script = ExtResource("1_cdowc")
+audios = {
+"fall": ExtResource("2_0ewfp"),
+"hit": ExtResource("3_0ru55"),
+"jump": ExtResource("1_e38td")
+}

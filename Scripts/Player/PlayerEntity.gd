@@ -2,6 +2,7 @@ class_name PlayerEntity
 extends Entity
 
 @onready var level_setup : LevelSetup = %Services/LevelSetup
+@onready var audio_manager : AudioManager = %Services/AudioManager
 @onready var sprite_2d : Sprite2D = $Sprite2D
 
 @export var min_jump_velocity := 150.0
@@ -19,6 +20,8 @@ var ungrounded_time := 0.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 signal on_dead
+
+const DIE_PARTICLE = preload("res://Particles/DieParticle.tscn")
 
 func _physics_process(delta) -> void:
 	handle_movement(delta)
@@ -56,6 +59,7 @@ func handle_movement(delta) -> void:
 	if ungrounded_time <= jump_forgiveness and elapsed_jump_time <= jump_forgiveness and !is_jumping and !is_charge_jumping:
 		velocity.y = -jump_velocity
 		is_jumping = true
+		audio_manager.play_sfx("jump")
 		
 	# Handle Movement
 	direction = clamp(Input.get_axis("ui_left", "ui_right"), -1, 1)
@@ -77,11 +81,21 @@ func handle_collision() -> void:
 	for index in collision_count:
 		var collision = get_slide_collision(index)
 		if (collision.get_collider().is_in_group("Obstacle")):
-			die()
+			die(Global.DeathType.HIT)
 
 func handle_fall_into_pit() -> void:
 	if position.y > level_setup.pit_y_level:
-		die()
+		die(Global.DeathType.FALL)
 	
-func die() -> void:
+func die(death_type : Global.DeathType) -> void:
+	if (death_type == Global.DeathType.FALL):
+		audio_manager.play_sfx("fall")
+	if (death_type == Global.DeathType.HIT):
+		var die_particle = DIE_PARTICLE.instantiate()
+		get_tree().current_scene.add_child(die_particle)
+		die_particle.position = position
+		die_particle.emitting = true
+		audio_manager.play_sfx("hit")
+		
 	emit_signal("on_dead")
+	queue_free()
