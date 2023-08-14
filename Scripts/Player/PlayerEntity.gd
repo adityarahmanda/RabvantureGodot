@@ -23,6 +23,7 @@ signal on_dead
 func _physics_process(delta) -> void:
 	handle_movement(delta)
 	handle_facing()
+	handle_collision()
 	handle_fall_into_pit()
 
 func handle_movement(delta) -> void:
@@ -70,7 +71,14 @@ func handle_facing() -> void:
 		sprite_2d.scale.x = 1
 	elif direction < 0:
 		sprite_2d.scale.x = -1
-		
+
+func handle_collision() -> void:
+	var collision_count = get_slide_collision_count()
+	for index in collision_count:
+		var collision = get_slide_collision(index)
+		if (collision.get_collider().is_in_group("Obstacle")):
+			die()
+
 func handle_fall_into_pit() -> void:
 	if position.y > level_setup.pit_y_level:
 		die()
