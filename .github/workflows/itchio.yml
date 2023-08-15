@@ -21,8 +21,11 @@ jobs:
           apt-get update -y
           apt-get install -y rsync
           apt-get install -y curl
-      - name: Checkout
-        uses: actions/checkout@v3
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/export_templates
+          cp web-template/web-template.zip ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable/web_debug.zip
+          cp web-template/web-template.zip ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable/web_release.zip
       - name: Web Build
         run: |
           mkdir -v -p ./build/web
