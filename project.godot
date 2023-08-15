@@ -11,10 +11,15 @@ config_version=5
 [application]
 
 config/name="Rabvanture"
+config/description="Rabbit Jump Adventure"
 run/main_scene="res://Scenes/Game.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 boot_splash/bg_color=Color(0.0862745, 0.121569, 0.152941, 1)
-config/icon="res://icon.svg"
+boot_splash/image="res://full-logo.png"
+boot_splash/fullsize=false
+boot_splash/use_filter=false
+config/icon="res://icon.png"
+boot_splash/minimum_display_time=3000
 
 [autoload]
 
@@ -25,10 +30,12 @@ SaveGame="*res://Scripts/_Core/SaveGame.gd"
 
 window/size/viewport_width=240
 window/size/viewport_height=135
+window/size/mode=2
 window/size/window_width_override=1440
 window/size/window_height_override=810
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+mouse_cursor/custom_image="res://cursor.png"
 
 [gui]
 
