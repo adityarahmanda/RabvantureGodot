@@ -1,6 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://d0vxcbdepsvch"]
+[gd_scene load_steps=9 format=3 uid="uid://dplxuau61pgqk"]
 
-[ext_resource type="Script" path="res://Scripts/Enemy/EnemyRatEntity.gd" id="1_aa2fm"]
+[ext_resource type="Script" path="res://Scripts/Enemy/EnemyEntity.gd" id="1_k5uxi"]
 [ext_resource type="Texture2D" uid="uid://dhw1s1dvbani0" path="res://Sprites/Rat.png" id="2_l0uqs"]
 [ext_resource type="Script" path="res://Scripts/Obstacle/Area2DObstacle.gd" id="3_kvbr8"]
 
@@ -49,8 +49,11 @@ size = Vector2(8.96845, 5.01845)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hdlot"]
 size = Vector2(11.221, 6.9662)
 
-[node name="EnemyEntity" type="CharacterBody2D"]
-script = ExtResource("1_aa2fm")
+[node name="EnemyRat" type="CharacterBody2D" node_paths=PackedStringArray("animator", "sprite_2d")]
+script = ExtResource("1_k5uxi")
+animator = NodePath("AnimationPlayer")
+sprite_2d = NodePath("Sprite2D")
+speed = 20.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(-1, 1)

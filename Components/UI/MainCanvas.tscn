@@ -1,12 +1,12 @@
 [gd_scene load_steps=5 format=3 uid="uid://do70gvk84lf4u"]
 
-[ext_resource type="Script" path="res://Scenes/GameUI.gd" id="1_jxtuh"]
+[ext_resource type="Script" path="res://Scripts/_Core/GameUI.gd" id="1_8jltk"]
 [ext_resource type="Texture2D" uid="uid://ck25jqs26eslb" path="res://Sprites/Death_Icon.png" id="2_yaxwb"]
 [ext_resource type="Texture2D" uid="uid://dmx047q2aay1r" path="res://Sprites/Pause_Icon.png" id="3_af4s3"]
 [ext_resource type="PackedScene" uid="uid://uc1b4mri88y4" path="res://Components/UI/GameUIInput.tscn" id="4_wb8iq"]
 
 [node name="MainCanvas" type="CanvasLayer"]
-script = ExtResource("1_jxtuh")
+script = ExtResource("1_8jltk")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -34,7 +34,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 6
-text = "0 m"
+text = "0m"
 vertical_alignment = 1
 uppercase = true
 

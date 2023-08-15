@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://0r8n88s6vpf"]
+[gd_scene load_steps=13 format=3 uid="uid://0r8n88s6vpf"]
 
 [ext_resource type="Script" path="res://Scripts/_Core/GameManager.gd" id="1_a6ent"]
 [ext_resource type="Script" path="res://Scripts/Services/LevelSetup.gd" id="2_d7xif"]
@@ -6,8 +6,11 @@
 [ext_resource type="Script" path="res://Scripts/_Core/GameCamera.gd" id="3_lbwio"]
 [ext_resource type="PackedScene" uid="uid://do70gvk84lf4u" path="res://Components/UI/MainCanvas.tscn" id="3_pp1ww"]
 [ext_resource type="PackedScene" uid="uid://8dxu3a8poib7" path="res://Components/Entities/Player.tscn" id="3_qlgy4"]
-[ext_resource type="PackedScene" uid="uid://d0vxcbdepsvch" path="res://Components/Entities/EnemyRat.tscn" id="4_wt5pl"]
+[ext_resource type="PackedScene" uid="uid://dplxuau61pgqk" path="res://Components/Entities/EnemyRat.tscn" id="4_wt5pl"]
 [ext_resource type="PackedScene" uid="uid://co68gj4myluc8" path="res://Components/AudioManager.tscn" id="5_hcdug"]
+[ext_resource type="Script" path="res://Scripts/Enemy/SimplePath2D.gd" id="9_1hwfg"]
+[ext_resource type="Script" path="res://Scripts/FSM/StateMachine.gd" id="10_pb5hm"]
+[ext_resource type="Script" path="res://Scripts/Enemy/States/FollowPathState.gd" id="11_5yr21"]
 
 [sub_resource type="Curve2D" id="Curve2D_8ba41"]
 _data = {
@@ -53,23 +56,50 @@ pit_y_level = 80
 [node name="EnemyRat" parent="." instance=ExtResource("4_wt5pl")]
 position = Vector2(61, -339)
 floor_stop_on_slope = false
-speed = 20.0
 
 [node name="Path2D" type="Path2D" parent="EnemyRat"]
 curve = SubResource("Curve2D_8ba41")
+script = ExtResource("9_1hwfg")
+
+[node name="StateMachine" type="Node2D" parent="EnemyRat" node_paths=PackedStringArray("state")]
+script = ExtResource("10_pb5hm")
+state = NodePath("FollowPathState")
+
+[node name="FollowPathState" type="Node2D" parent="EnemyRat/StateMachine" node_paths=PackedStringArray("actor", "simple_path_2d")]
+script = ExtResource("11_5yr21")
+actor = NodePath("../..")
+simple_path_2d = NodePath("../../Path2D")
 
 [node name="EnemyRat2" parent="." instance=ExtResource("4_wt5pl")]
 position = Vector2(-54, -339)
 floor_stop_on_slope = false
-speed = 20.0
 
 [node name="Path2D" type="Path2D" parent="EnemyRat2"]
 curve = SubResource("Curve2D_8ba41")
+script = ExtResource("9_1hwfg")
+
+[node name="StateMachine" type="Node2D" parent="EnemyRat2" node_paths=PackedStringArray("state")]
+script = ExtResource("10_pb5hm")
+state = NodePath("FollowPathState")
+
+[node name="FollowPathState" type="Node2D" parent="EnemyRat2/StateMachine" node_paths=PackedStringArray("actor", "simple_path_2d")]
+script = ExtResource("11_5yr21")
+actor = NodePath("../..")
+simple_path_2d = NodePath("../../Path2D")
 
 [node name="EnemyRat3" parent="." instance=ExtResource("4_wt5pl")]
-position = Vector2(-69, -427)
+position = Vector2(-67, -427)
 floor_stop_on_slope = false
-speed = 20.0
 
 [node name="Path2D" type="Path2D" parent="EnemyRat3"]
 curve = SubResource("Curve2D_8ba41")
+script = ExtResource("9_1hwfg")
+
+[node name="StateMachine" type="Node2D" parent="EnemyRat3" node_paths=PackedStringArray("state")]
+script = ExtResource("10_pb5hm")
+state = NodePath("FollowPathState")
+
+[node name="FollowPathState" type="Node2D" parent="EnemyRat3/StateMachine" node_paths=PackedStringArray("actor", "simple_path_2d")]
+script = ExtResource("11_5yr21")
+actor = NodePath("../..")
+simple_path_2d = NodePath("../../Path2D")
