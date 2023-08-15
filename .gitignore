@@ -11,3 +11,7 @@ mono_crash.*.json
 
 # build ignore
 [Bb]uild/
+
+# build ignore
+web-template/*
+!web-template/web-template.zip
