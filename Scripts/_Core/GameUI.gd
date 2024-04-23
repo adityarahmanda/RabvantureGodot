@@ -7,13 +7,18 @@ class_name GameUI
 
 func _ready() -> void:
 	assign_button_callbacks()
+	
+func refresh_ui() -> void:
 	death_count_label.text = str(Global.death_count)
 
 func assign_button_callbacks() -> void:
 	pauseButton.button_up.connect(on_pressed_pause_button.bind())
 	
 func on_pressed_pause_button() -> void:
-	print("Pause")
+	pass
 
 func set_score(score : int) -> void:
-	score_label.text = str(score) + "m"
+	if (score > 1000):
+		score_label.text = "%.2fkm" % (score / 1000.0)
+	else:
+		score_label.text = "%.fm" % score

@@ -10,6 +10,7 @@ func _ready() -> void:
 	SaveGame.load_json()
 	register_signal_callbacks()
 	main_camera.follow_target = player
+	main_canvas.refresh_ui()
 
 func _process(_delta) -> void:
 	handle_score()
@@ -26,9 +27,8 @@ func on_player_die() -> void:
 	
 func handle_score() -> void:
 	if (player == null): return
-	if (player.position.y > 0): return
 	
-	Global.score = absi(player.position.y as int)
+	Global.score = maxi(0, -player.position.y)
 	main_canvas.set_score(Global.score)
 
 func reset_game() -> void:
