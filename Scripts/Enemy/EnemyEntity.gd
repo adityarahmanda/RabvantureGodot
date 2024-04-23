@@ -3,8 +3,7 @@ extends Entity
 
 @export var animator :  AnimationPlayer
 @export var sprite_2d : Sprite2D
-
-var is_facing_right := true
+@export var is_facing_right := true
 	
 func _physics_process(_delta):
 	handle_facing()

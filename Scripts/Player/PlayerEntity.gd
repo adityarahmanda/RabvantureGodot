@@ -9,6 +9,7 @@ extends Entity
 @export var max_jump_velocity := 300.0
 @export var charge_jump_time := 1.0
 @export var jump_forgiveness := 0.2
+@export var spawn_transform : Node2D
 
 var direction := 0.0
 var is_jumping := false
@@ -22,6 +23,9 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 signal on_dead
 
 const DIE_PARTICLE = preload("res://Particles/DieParticle.tscn")
+
+func _ready() -> void:
+	global_position = spawn_transform.global_position
 
 func _physics_process(delta) -> void:
 	handle_movement(delta)
@@ -98,4 +102,5 @@ func die(death_type : Global.DeathType) -> void:
 		audio_manager.play_sfx("hit")
 		
 	emit_signal("on_dead")
+	
 	queue_free()
