@@ -25,7 +25,8 @@ signal on_dead
 const DIE_PARTICLE = preload("res://Particles/DieParticle.tscn")
 
 func _ready() -> void:
-	global_position = spawn_transform.global_position
+	if (spawn_transform != null):
+		global_position = spawn_transform.global_position
 
 func _physics_process(delta) -> void:
 	handle_movement(delta)
