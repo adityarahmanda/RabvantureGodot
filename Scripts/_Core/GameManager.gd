@@ -19,15 +19,15 @@ func register_signal_callbacks() -> void:
 	player.on_dead.connect(on_player_die.bind())
 
 func on_player_die() -> void:
-	await get_tree().create_timer(Global.reset_scene_delay).timeout
 	Global.death_count += 1
+	main_camera.follow_target = null
+	main_canvas.refresh_ui()
 	SaveGame.save_json()
-	reset_game()
+	await get_tree().create_timer(Global.reset_scene_delay).timeout
+	main_camera.follow_target = player
+	player.respawn()
 	
 func handle_score() -> void:
 	if (player == null): return
 	Global.score = maxi(0, -player.position.y as int)
 	main_canvas.set_score(Global.score)
-	
-func reset_game() -> void:
-	player.respawn()
