@@ -135,7 +135,7 @@ position = Vector2(-343, -826)
 curve = SubResource("Curve2D_ivlso")
 
 [node name="EnemyBat11" parent="." instance=ExtResource("12_nfxt6")]
-position = Vector2(-180, -915)
+position = Vector2(-180, -932)
 is_facing_right = false
 
 [node name="EnemyRat5" parent="." node_paths=PackedStringArray("animator") instance=ExtResource("4_wt5pl")]

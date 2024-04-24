@@ -13,8 +13,8 @@ extends Entity
 var spawn_position : Vector2
 
 var direction := 0.0
+var is_prepare_jump := false
 var is_jumping := false
-var is_charge_jumping := false
 var is_dead := false
 var elapsed_charge_jump_time := 0.0
 var elapsed_jump_time := jump_forgiveness
@@ -52,11 +52,11 @@ func handle_movement(delta) -> void:
 	if Input.is_action_just_pressed("ui_select"):
 		elapsed_charge_jump_time = 0
 		jump_velocity = min_jump_velocity
-		is_charge_jumping = true
+		is_prepare_jump = true
 	if Input.is_action_just_released("ui_select"):
-		is_charge_jumping = false
+		is_prepare_jump = false
 	
-	if is_charge_jumping:
+	if is_prepare_jump:
 		jump_velocity = lerp(jump_velocity, max_jump_velocity, elapsed_charge_jump_time / charge_jump_time)
 		jump_velocity = clamp(jump_velocity, min_jump_velocity, max_jump_velocity)
 		elapsed_charge_jump_time += delta
@@ -74,7 +74,7 @@ func handle_movement(delta) -> void:
 	if ungrounded_time > jump_forgiveness:
 		jump_velocity = min_jump_velocity
 	
-	if ungrounded_time <= jump_forgiveness and elapsed_jump_time <= jump_forgiveness and !is_jumping and !is_charge_jumping:
+	if ungrounded_time <= jump_forgiveness and elapsed_jump_time <= jump_forgiveness and !is_jumping and !is_prepare_jump:
 		velocity.y = -jump_velocity
 		is_jumping = true
 		audio_manager.play_sfx("jump")
