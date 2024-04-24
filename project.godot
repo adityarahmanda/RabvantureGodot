@@ -18,7 +18,7 @@ boot_splash/bg_color=Color(0.0862745, 0.121569, 0.152941, 1)
 boot_splash/image="res://full-logo.png"
 boot_splash/fullsize=false
 boot_splash/use_filter=false
-config/icon="res://icon.png"
+config/icon="res://Sprites/icon.png"
 boot_splash/minimum_display_time=3000
 
 [autoload]
@@ -84,6 +84,10 @@ ui_down={
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":1.0,"script":null)
 ]
 }
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://Localization/localization.en.translation", "res://Localization/localization.id.translation")
 
 [rendering]
 

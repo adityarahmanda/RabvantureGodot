@@ -104,7 +104,7 @@ func handle_collision() -> void:
 func handle_fall_into_pit() -> void:
 	if position.y > level_setup.pit_y_level:
 		die(Global.DeathType.FALL)
-	
+
 func die(death_type : Global.DeathType) -> void:
 	if (is_dead): return
 	

@@ -9,6 +9,7 @@ class_name GameManager
 func _ready() -> void:
 	SaveGame.load_json()
 	register_signal_callbacks()
+	set_locale()
 	main_camera.follow_target = player
 	main_canvas.refresh_ui()
 
@@ -17,6 +18,10 @@ func _process(_delta) -> void:
 	
 func register_signal_callbacks() -> void:
 	player.on_dead.connect(on_player_die.bind())
+
+func set_locale() -> void:
+	var locale = Global.locale if Global.locale == "" else OS.get_locale() 
+	TranslationServer.set_locale(locale)
 
 func on_player_die() -> void:
 	Global.death_count += 1

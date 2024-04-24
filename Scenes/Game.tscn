@@ -155,7 +155,6 @@ position = Vector2(0, -1)
 [node name="StateMachine" parent="EnemyBat12" index="5" node_paths=PackedStringArray("state")]
 state = NodePath("IdleState")
 
-[editable path="Services/TutorialManager"]
 [editable path="EnemyBat3"]
 [editable path="EnemyBat4"]
 [editable path="EnemyBat5"]
