@@ -26,11 +26,9 @@ func _physics_process(_delta) -> void:
 		if(actor.position.x <= simple_path_2d.start_pos.x):
 			actor.velocity.x = actor.speed
 			actor.is_facing_right = true
-			print_debug(actor.name + str(actor.is_facing_right))
 		elif (actor.position.x >= simple_path_2d.end_pos.x):
 			actor.velocity.x = -actor.speed
 			actor.is_facing_right = false
-			print_debug(actor.name + str(actor.is_facing_right))
 		
 	actor.move_and_slide()
 	

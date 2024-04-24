@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/PlayerAnimation.gd" id="3_rpphb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r0e1a"]
-size = Vector2(10, 10)
+size = Vector2(8, 9)
 
 [sub_resource type="Animation" id="Animation_mvh8r"]
 resource_name = "ChargeJumpingIdle"
@@ -117,11 +117,11 @@ vframes = 2
 frame = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-8.9407e-08, 2)
+position = Vector2(-1.19209e-07, 2.5)
 shape = SubResource("RectangleShape2D_r0e1a")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." node_paths=PackedStringArray("player")]
-playback_process_mode = 0
+callback_mode_process = 0
 libraries = {
 "": SubResource("AnimationLibrary_ur0y1")
 }

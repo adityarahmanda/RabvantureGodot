@@ -10,10 +10,12 @@ extends Entity
 @export var charge_jump_time := 1.0
 @export var jump_forgiveness := 0.2
 @export var spawn_transform : Node2D
+var spawn_position : Vector2
 
 var direction := 0.0
 var is_jumping := false
 var is_charge_jumping := false
+var is_dead := false
 var elapsed_charge_jump_time := 0.0
 var elapsed_jump_time := jump_forgiveness
 var jump_velocity := 0.0
@@ -25,17 +27,28 @@ signal on_dead
 const DIE_PARTICLE = preload("res://Particles/DieParticle.tscn")
 
 func _ready() -> void:
-	if (spawn_transform != null):
-		global_position = spawn_transform.global_position
+	cache_spawn_position()
+	respawn()
 
+func cache_spawn_position() -> void:
+	if (spawn_transform != null):
+		spawn_position = spawn_transform.global_position
+	else:
+		spawn_position = global_position
+
+func respawn() -> void:
+	global_position = spawn_position
+	visible = true
+	is_dead = false
+	
 func _physics_process(delta) -> void:
+	if (is_dead): return
 	handle_movement(delta)
 	handle_facing()
 	handle_collision()
 	handle_fall_into_pit()
 
 func handle_movement(delta) -> void:
-	# Handle Jump
 	if Input.is_action_just_pressed("ui_select"):
 		elapsed_charge_jump_time = 0
 		jump_velocity = min_jump_velocity
@@ -93,6 +106,8 @@ func handle_fall_into_pit() -> void:
 		die(Global.DeathType.FALL)
 	
 func die(death_type : Global.DeathType) -> void:
+	if (is_dead): return
+	
 	if (death_type == Global.DeathType.FALL):
 		audio_manager.play_sfx("fall")
 	if (death_type == Global.DeathType.HIT):
@@ -101,7 +116,7 @@ func die(death_type : Global.DeathType) -> void:
 		die_particle.position = position
 		die_particle.emitting = true
 		audio_manager.play_sfx("hit")
-		
-	emit_signal("on_dead")
 	
-	queue_free()
+	visible = false
+	is_dead = true
+	emit_signal("on_dead")

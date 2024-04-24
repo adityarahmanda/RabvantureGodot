@@ -1,4 +1,5 @@
 extends Control
+class_name GameUIInput
 
 @onready var left_input_button : TouchScreenButton = %LeftInputButton
 @onready var right_input_button : TouchScreenButton = %RightInputButton
