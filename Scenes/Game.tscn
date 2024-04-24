@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://0r8n88s6vpf"]
+[gd_scene load_steps=12 format=3 uid="uid://0r8n88s6vpf"]
 
 [ext_resource type="Script" path="res://Scripts/_Core/GameManager.gd" id="1_a6ent"]
 [ext_resource type="Script" path="res://Scripts/Services/LevelSetup.gd" id="2_d7xif"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://8dxu3a8poib7" path="res://Components/Entities/Player.tscn" id="3_qlgy4"]
 [ext_resource type="PackedScene" uid="uid://dplxuau61pgqk" path="res://Components/Entities/EnemyRat.tscn" id="4_wt5pl"]
 [ext_resource type="PackedScene" uid="uid://co68gj4myluc8" path="res://Components/AudioManager.tscn" id="5_hcdug"]
+[ext_resource type="PackedScene" uid="uid://b2ybqbou1we7y" path="res://Components/TutorialManager.tscn" id="6_3uky4"]
 [ext_resource type="PackedScene" uid="uid://r4665fd8w4ud" path="res://Components/Entities/EnemyBat.tscn" id="12_nfxt6"]
 
 [sub_resource type="Curve2D" id="Curve2D_ivlso"]
@@ -47,13 +48,15 @@ pit_y_level = 80
 
 [node name="AudioManager" parent="Services" instance=ExtResource("5_hcdug")]
 
+[node name="TutorialManager" parent="Services" instance=ExtResource("6_3uky4")]
+
 [node name="World" parent="." instance=ExtResource("2_kj4xq")]
 
 [node name="Spawn Position" type="Node2D" parent="."]
 position = Vector2(171, -1002)
 
 [node name="Player" parent="." instance=ExtResource("3_qlgy4")]
-position = Vector2(-1, -18)
+position = Vector2(-59, 1)
 
 [node name="EnemyRat" parent="." instance=ExtResource("4_wt5pl")]
 position = Vector2(61, -339)
@@ -152,6 +155,7 @@ position = Vector2(0, -1)
 [node name="StateMachine" parent="EnemyBat12" index="5" node_paths=PackedStringArray("state")]
 state = NodePath("IdleState")
 
+[editable path="Services/TutorialManager"]
 [editable path="EnemyBat3"]
 [editable path="EnemyBat4"]
 [editable path="EnemyBat5"]

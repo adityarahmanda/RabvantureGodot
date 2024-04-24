@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://b2ybqbou1we7y"]
+
+[ext_resource type="Script" path="res://Scripts/_Core/TutorialManager.gd" id="1_otsab"]
+[ext_resource type="Texture2D" uid="uid://cstfx8xbjy1ce" path="res://Sprites/SpriteAtlas/LeftInputButton.tres" id="2_l3073"]
+[ext_resource type="Texture2D" uid="uid://l0gsbd8ud23h" path="res://Sprites/SpriteAtlas/RightInputButton.tres" id="3_4vkom"]
+[ext_resource type="Texture2D" uid="uid://b5ki4c688fvaf" path="res://Sprites/SpriteAtlas/JumpInputButton.tres" id="4_6dsrm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fs54y"]
+size = Vector2(112, 73)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p7tmq"]
+size = Vector2(112, 73)
+
+[node name="TutorialManager" type="Node2D"]
+script = ExtResource("1_otsab")
+move_left_image = ExtResource("2_l3073")
+move_right_image = ExtResource("3_4vkom")
+jump_image = ExtResource("4_6dsrm")
+
+[node name="Move Tutorial Area" type="Area2D" parent="."]
+position = Vector2(-37, -26)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Move Tutorial Area"]
+position = Vector2(-11, 0)
+shape = SubResource("RectangleShape2D_fs54y")
+
+[node name="Jump Tutorial Area" type="Area2D" parent="."]
+position = Vector2(87, -26)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Jump Tutorial Area"]
+position = Vector2(-22, 0)
+shape = SubResource("RectangleShape2D_p7tmq")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -50.0
+offset_top = -26.0
+offset_right = 50.0
+offset_bottom = -10.0
+
+[node name="TutorialLabel" type="RichTextLabel" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -5.5
+offset_bottom = 5.5
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center][font_size=4]Hold and Release [Jump] to Jump
+Hold it longer to Jump Higher[/font_size][/center]"
+scroll_active = false
+
+[connection signal="body_entered" from="Move Tutorial Area" to="." method="_on_move_tutorial_area_body_entered"]
+[connection signal="body_exited" from="Move Tutorial Area" to="." method="_on_move_tutorial_area_body_exited"]
+[connection signal="body_entered" from="Jump Tutorial Area" to="." method="_on_jump_tutorial_area_body_entered"]
+[connection signal="body_exited" from="Jump Tutorial Area" to="." method="_on_jump_tutorial_area_body_exited"]

@@ -9,10 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://clq3kkw0fbt6s" path="res://Sprites/SpriteAtlas/JumpPressedInputButton.tres" id="7_8il7a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sw046"]
-size = Vector2(17.5, 20)
+size = Vector2(19, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wws6h"]
-size = Vector2(17.5, 20)
+size = Vector2(19, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4vy7o"]
 size = Vector2(25, 20)
@@ -32,14 +32,14 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 16.0
-offset_top = -31.0
-offset_right = 66.0
-offset_bottom = -12.0
+offset_top = -35.0
+offset_right = 79.0
+offset_bottom = -11.0
 grow_vertical = 0
 
 [node name="LeftInputButton" type="TouchScreenButton" parent="BottomLeftContainer"]
 unique_name_in_owner = true
-scale = Vector2(1.5, 1.5)
+scale = Vector2(1.8, 1.8)
 texture_normal = ExtResource("2_qcab3")
 texture_pressed = ExtResource("3_eikkm")
 shape = SubResource("RectangleShape2D_sw046")
@@ -47,8 +47,8 @@ visibility_mode = 1
 
 [node name="RightInputButton" type="TouchScreenButton" parent="BottomLeftContainer"]
 unique_name_in_owner = true
-position = Vector2(26, 0)
-scale = Vector2(1.5, 1.5)
+position = Vector2(34, 0)
+scale = Vector2(1.8, 1.8)
 texture_normal = ExtResource("4_rt6jr")
 texture_pressed = ExtResource("5_d00bu")
 shape = SubResource("RectangleShape2D_wws6h")
@@ -62,15 +62,15 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -47.0
-offset_top = -31.0
-offset_right = -24.0
+offset_top = -35.0
+offset_right = -18.0
 offset_bottom = -12.0
 grow_horizontal = 0
 grow_vertical = 0
 
 [node name="JumpInputButton" type="TouchScreenButton" parent="BottomRightContainer"]
 unique_name_in_owner = true
-scale = Vector2(1.5, 1.5)
+scale = Vector2(1.8, 1.8)
 texture_normal = ExtResource("6_xgaoa")
 texture_pressed = ExtResource("7_8il7a")
 shape = SubResource("RectangleShape2D_4vy7o")

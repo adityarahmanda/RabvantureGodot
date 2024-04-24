@@ -17,5 +17,4 @@ func handle_animation() -> void:
 	else:
 		currentAnimation = "Fall" if player.velocity.y > 0.0 else "Jump"
 	
-	print_debug(currentAnimation)
 	play(currentAnimation)
