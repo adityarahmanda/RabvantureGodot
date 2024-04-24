@@ -1,11 +1,11 @@
 [gd_scene load_steps=11 format=3 uid="uid://8dxu3a8poib7"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerEntity.gd" id="1_7g2fw"]
-[ext_resource type="Texture2D" uid="uid://dgcacn63rq4lc" path="res://Sprites/rabbit.png" id="2_7ahq6"]
+[ext_resource type="Texture2D" uid="uid://c7l726d4gavvb" path="res://Aseprite/rabbit.png" id="2_7j0o8"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerAnimation.gd" id="3_rpphb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r0e1a"]
-size = Vector2(7.98661, 5.97756)
+size = Vector2(10, 10)
 
 [sub_resource type="Animation" id="Animation_mvh8r"]
 resource_name = "ChargeJumpingIdle"
@@ -21,12 +21,13 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.25),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [4, 5]
+"values": [1, 2]
 }
 
 [sub_resource type="Animation" id="Animation_cibaa"]
 resource_name = "ChargeJumpingWalk"
 length = 0.5
+loop_mode = 1
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -38,7 +39,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.25),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [6, 7]
+"values": [1, 2]
 }
 
 [sub_resource type="Animation" id="Animation_7kmth"]
@@ -76,7 +77,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_6663p"]
 resource_name = "Walk"
-length = 0.5
+length = 0.4
 loop_mode = 1
 step = 0.05
 tracks/0/type = "value"
@@ -86,10 +87,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [2, 3]
+"values": [3, 4, 5, 6]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ur0y1"]
@@ -109,14 +110,14 @@ script = ExtResource("1_7g2fw")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, -1)
-texture = ExtResource("2_7ahq6")
+texture = ExtResource("2_7j0o8")
 offset = Vector2(0.5, 0)
 hframes = 4
 vframes = 2
 frame = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.0257881, 0.494241)
+position = Vector2(-8.9407e-08, 2)
 shape = SubResource("RectangleShape2D_r0e1a")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." node_paths=PackedStringArray("player")]
