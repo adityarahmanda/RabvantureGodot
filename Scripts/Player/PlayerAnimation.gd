@@ -11,7 +11,7 @@ func _process(_delta) -> void:
 func handle_animation() -> void:
 	if (player.is_on_floor()):
 		if player.is_prepare_jump:
-			currentAnimation = "PrepareJump"
+			currentAnimation = "PrepareJumpWalk" if player.direction else "PrepareJump"
 		else:
 			currentAnimation = "Walk" if player.direction else "Idle"
 	else:
