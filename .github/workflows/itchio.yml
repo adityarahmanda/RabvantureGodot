@@ -39,17 +39,15 @@ jobs:
           echo ${{ vars.SECRET_RELEASE_KEYSTORE_BASE64 }}
           echo ${{ vars.SECRET_RELEASE_KEYSTORE_USER }}
           echo ${{ vars.SECRET_RELEASE_KEYSTORE_PASSWORD }}
-          echo "Setting up android debug keystore =================================="
+          echo "Setting up android keystores =================================="
           keytool -keyalg RSA -genkeypair -alias androiddebugkey -keypass android -keystore debug.keystore -storepass android -dname "CN=Android Debug,O=Android,C=US" -validity 9999 -deststoretype pkcs12
           echo 'keystore/debug="debug.keystore"' >> export_presets.cfg
           echo 'keystore/debug_user="androiddebugkey"' >> export_presets.cfg
           echo 'keystore/debug_password="android"' >> export_presets.cfg
-          echo "Setting up android release keystore =================================="
-          echo ${{ vars.SECRET_RELEASE_KEYSTORE_BASE64 }} | base64 --decode > /root/release.keystore
-          sed 's@keystore/release=".*"@keystore/release="'/root/release.keystore'"@g' -i export_presets.cfg
-          sed 's@keystore/release_user=".*"@keystore/release_user="'${{ vars.SECRET_RELEASE_KEYSTORE_USER }}'"@g' -i export_presets.cfg
-          sed 's@keystore/release_password=".*"@keystore/release_password="'${{ vars.SECRET_RELEASE_KEYSTORE_PASSWORD }}'"@g' -i export_presets.cfg
-          echo "Log export presets ==================================================="
+          echo ${{ vars.SECRET_RELEASE_KEYSTORE_BASE64 }} | base64 --decode > release.keystore
+          echo 'keystore/release="release.keystore"' >> export_presets.cfg
+          echo 'keystore/release_user="${{ vars.SECRET_RELEASE_KEYSTORE_USER }}"' >> export_presets.cfg
+          echo 'keystore/release_password="${{ vars.SECRET_RELEASE_KEYSTORE_PASSWORD }}"' >> export_presets.cfg
           cat export_presets.cfg
           echo "Setting up android sdk path =========================================="
           echo 'export/android/android_sdk_path = "/usr/lib/android-sdk"' >> ~/.config/godot/editor_settings-4.tres
@@ -62,17 +60,22 @@ jobs:
           godot -v --headless --debug --export-debug "Android" ./build/android-debug/${EXPORT_NAME}.apk
       - name: Android Release Build
         run: |
-          godot -v --headless --export-release "Android" ./build/android/${EXPORT_NAME}.apk
+          godot -v --headless --export-release "Android" ./build/android-release/${EXPORT_NAME}.apk
       - name: Upload Web Artifact
         uses: actions/upload-artifact@v3
         with:
           name: web
           path: build/web
-      - name: Upload Android Artifact
+      - name: Upload Android Debug Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: android
-          path: build/android
+          name: android-debug
+          path: build/android-debug
+      - name: Upload Android Release Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: android-release
+          path: build/android-release
       - name: Deploy Web
         uses: josephbmanley/butler-publish-itchio-action@v1.0.3
         env:
