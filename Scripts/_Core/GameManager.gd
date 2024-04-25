@@ -6,7 +6,10 @@ class_name GameManager
 @onready var main_canvas : GameUI = %Services/MainCanvas
 @onready var audio_manager : AudioManager = %Services/AudioManager
 
+var is_paused : bool = false
+
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_PAUSABLE
 	SaveGame.load_json()
 	register_signal_callbacks()
 	set_locale()
@@ -15,13 +18,26 @@ func _ready() -> void:
 
 func _process(_delta) -> void:
 	handle_score()
+	handle_pause_input()
 	
 func register_signal_callbacks() -> void:
 	player.on_dead.connect(on_player_die.bind())
+	main_canvas.pause_button.button_up.connect(on_toggle_paused.bind())
 
 func set_locale() -> void:
 	var locale = Global.locale if Global.locale == "" else OS.get_locale() 
 	TranslationServer.set_locale(locale)
+
+func handle_pause_input() -> void:
+	if Input.is_action_just_released("ui_cancel"):
+		on_toggle_paused()
+
+func on_toggle_paused() -> void:
+	set_game_paused(!is_paused)
+
+func set_game_paused(is_true:bool) -> void:
+	main_canvas.show_pause_panel(is_true)
+	is_paused = is_true
 
 func on_player_die() -> void:
 	Global.death_count += 1

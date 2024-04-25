@@ -16,7 +16,7 @@ func _enter_state() -> void:
 func _exit_state() -> void:
 	set_physics_process(false)
 
-func _physics_process(_delta) -> void:
+func on_physics_process(_delta) -> void:
 	if (is_vertical):
 		if(actor.position.y <= simple_path_2d.end_pos.y):
 			actor.velocity.y = actor.speed

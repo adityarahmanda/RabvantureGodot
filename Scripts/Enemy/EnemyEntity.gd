@@ -5,7 +5,7 @@ extends Entity
 @export var sprite_2d : Sprite2D
 @export var is_facing_right := true
 	
-func _physics_process(_delta):
+func on_physics_process(_delta) -> void:
 	handle_facing()
 
 func handle_facing() -> void:

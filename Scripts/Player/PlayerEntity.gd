@@ -10,12 +10,11 @@ extends Entity
 @export var charge_jump_time := 1.0
 @export var jump_forgiveness := 0.2
 @export var spawn_transform : Node2D
-var spawn_position : Vector2
 
+var spawn_position : Vector2
 var direction := 0.0
 var is_prepare_jump := false
 var is_jumping := false
-var is_dead := false
 var elapsed_charge_jump_time := 0.0
 var elapsed_jump_time := jump_forgiveness
 var jump_velocity := 0.0
@@ -41,8 +40,7 @@ func respawn() -> void:
 	visible = true
 	is_dead = false
 	
-func _physics_process(delta) -> void:
-	if (is_dead): return
+func on_physics_process(delta) -> void:
 	handle_movement(delta)
 	handle_facing()
 	handle_collision()

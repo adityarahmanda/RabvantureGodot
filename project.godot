@@ -87,6 +87,10 @@ ui_down={
 ]
 }
 
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
 [internationalization]
 
 locale/translations=PackedStringArray("res://Localization/localization.en.translation", "res://Localization/localization.id.translation")
