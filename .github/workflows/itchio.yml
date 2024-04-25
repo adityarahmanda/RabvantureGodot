@@ -27,7 +27,7 @@ jobs:
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
-      - name: Populate .godot/imported
+      - name: Setup Godot
         run: |
           mkdir -v -p ./build/web
           mkdir -v -p ./build/android
@@ -35,19 +35,11 @@ jobs:
       - name: Web Build
         run: |
           godot -v --headless --export-debug "Web" ./build/web/index.html
-      - name: Android Build
-        run: |
-          godot -v --headless --export-debug "Android" ./build/android/index.apk
       - name: Upload Web Artifact
         uses: actions/upload-artifact@v3
         with:
           name: web
           path: build/web
-      - name: Upload Android Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: android
-          path: build/android
       - name: Deploy Web
         uses: josephbmanley/butler-publish-itchio-action@v1.0.3
         env:
@@ -56,6 +48,14 @@ jobs:
           ITCH_GAME: rabvanture-godot
           ITCH_USER: adityarahmanda
           PACKAGE: build/web
+      - name: Android Build
+        run: |
+          godot -v --headless --debug --export-debug "Android" ./build/android/index.apk
+      - name: Upload Android Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: android
+          path: build/android
       - name: Deploy Android
         uses: josephbmanley/butler-publish-itchio-action@v1.0.3
         env:
