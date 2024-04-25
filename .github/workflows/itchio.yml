@@ -23,25 +23,47 @@ jobs:
           apt-get install -y rsync
           apt-get install -y curl
           apt-get install -y android-sdk
+          sdkmanager --sdk_root="/usr/lib/android-sdk" "platform-tools" "build-tools;33.0.2" "platforms;android-33" "cmdline-tools;latest" "cmake;3.10.2.4988404" "ndk;23.2.8568313"
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup
         run: |
-          mkdir -v -p ~/.local/share/godot/export_templates
-          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
-      - name: Setup Godot
-        run: |
+          echo "Setting up build folders ============================================="
           mkdir -v -p ./build/web
           mkdir -v -p ./build/android
+          echo "Setting up godot export template ====================================="
+          mkdir -v -p ~/.local/share/godot/export_templates
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+          echo "Setting up android release keystore =================================="
+          echo $SECRET_RELEASE_KEYSTORE_BASE64 | base64 --decode > /root/release.keystore
+          sed 's@keystore/release=".*"@keystore/release="'/root/release.keystore'"@g' -i export_presets.cfg
+          sed 's@keystore/release_user=".*"@keystore/release_user="'$SECRET_RELEASE_KEYSTORE_USER'"@g' -i export_presets.cfg
+          sed 's@keystore/release_password=".*"@keystore/release_password="'$SECRET_RELEASE_KEYSTORE_PASSWORD'"@g' -i export_presets.cfg
+          echo "Setting up android sdk path =========================================="
+          echo 'export/android/android_sdk_path = "/usr/lib/android-sdk"' >> ~/.config/godot/editor_settings-4.tres
+      - name: Log Godot Export Preset and Settings
+        run: |
+          cat export_presets.cfg
+          cat ~/.config/godot/editor_settings-4.tres
+      - name: Setup Godot
+        run: |
           godot -v --headless --export-debug "Web" ./build/web/index.html
       - name: Web Build
         run: |
           godot -v --headless --export-debug "Web" ./build/web/index.html
+      - name: Android Build
+        run: |
+          godot -v --headless --export-release "Android" ./build/android/${EXPORT_NAME}.apk
       - name: Upload Web Artifact
         uses: actions/upload-artifact@v3
         with:
           name: web
           path: build/web
+      - name: Upload Android Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: android
+          path: build/android
       - name: Deploy Web
         uses: josephbmanley/butler-publish-itchio-action@v1.0.3
         env:
@@ -50,22 +72,6 @@ jobs:
           ITCH_GAME: rabvanture-godot
           ITCH_USER: adityarahmanda
           PACKAGE: build/web
-      - name: Android Build
-        run: |
-          echo $SECRET_RELEASE_KEYSTORE_BASE64 | base64 --decode > /root/release.keystore
-          sed 's@keystore/release=".*"@keystore/release="'/root/release.keystore'"@g' -i export_presets.cfg
-          sed 's@keystore/release_user=".*"@keystore/release_user="'$SECRET_RELEASE_KEYSTORE_USER'"@g' -i export_presets.cfg
-          sed 's@keystore/release_password=".*"@keystore/release_password="'$SECRET_RELEASE_KEYSTORE_PASSWORD'"@g' -i export_presets.cfg
-          cat export_presets.cfg
-          sdkmanager --sdk_root="/usr/lib/android-sdk" "platform-tools" "build-tools;33.0.2" "platforms;android-33" "cmdline-tools;latest" "cmake;3.10.2.4988404" "ndk;23.2.8568313"
-          echo 'export/android/android_sdk_path = "/usr/lib/android-sdk"' >> ~/.config/godot/editor_settings-4.tres
-          cat ~/.config/godot/editor_settings-4.tres
-          godot -v --headless --export-release "Android" ./build/android/${EXPORT_NAME}.apk
-      - name: Upload Android Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: android
-          path: build/android
       - name: Deploy Android
         uses: josephbmanley/butler-publish-itchio-action@v1.0.3
         env:
