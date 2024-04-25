@@ -54,6 +54,7 @@ jobs:
           sed 's@keystore/debug=".*"@keystore/debug="'/root/debug.keystore'"@g' -i export_presets.cfg
           sed 's@keystore/debug_user=".*"@keystore/debug_user="'$SECRET_DEBUG_KEYSTORE_USER'"@g' -i export_presets.cfg
           sed 's@keystore/debug_password=".*"@keystore/debug_password="'$SECRET_DEBUG_KEYSTORE_PASSWORD'"@g' -i export_presets.cfg
+          cat export_presets.cfg
           godot -v --headless --debug --export-debug "Android" ./build/android/index.apk
       - name: Upload Android Artifact
         uses: actions/upload-artifact@v3
