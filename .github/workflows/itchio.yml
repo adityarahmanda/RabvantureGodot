@@ -26,5 +26,31 @@ jobs:
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates
-          cd /root/.local/share/godot/export_templates/
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
           ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
+      - name: Web Build
+        run: |
+          mkdir -v -p ./build/web
+          godot -v --headless --export-release "Web" ./build/web/index.html
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: web
+          path: build/web
+      - name: Deploy
+        uses: josephbmanley/butler-publish-itchio-action@v1.0.3
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.ITCH_IO_API_KEY }}
+          CHANNEL: HTML
+          ITCH_GAME: rabvanture-godot
+          ITCH_USER: adityarahmanda
+          PACKAGE: build/web
+      - name: Send Discord Notification
+        run: |
+          DISCORD_MESSAGE="Build for Rabbit Jump is now live! \nLink: ${ITCHIO_LINK}"
+          curl -X POST -H "Content-Type: application/json" -d "{\"content\": \"$DISCORD_MESSAGE\"}" ${{ secrets.WEBHOOK_URL }}
+      - name: Send Failed Discord Notification
+        if: failure()
+        run: |
+          DISCORD_MESSAGE="Build for Rabbit Jump is failed! :smiling_face_with_tear:"
+          curl -X POST -H "Content-Type: application/json" -d "{\"content\": \"$DISCORD_MESSAGE\"}" ${{ secrets.WEBHOOK_URL }}
