@@ -46,7 +46,7 @@ jobs:
       - name: Upload Android Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: web
+          name: android
           path: build/android
       - name: Deploy Web
         uses: josephbmanley/butler-publish-itchio-action@v1.0.3
