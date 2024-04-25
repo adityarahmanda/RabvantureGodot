@@ -50,10 +50,10 @@ jobs:
           PACKAGE: build/web
       - name: Android Build
         run: |
-          echo ${{ secrets.SECRET_RELEASE_KEYSTORE_BASE64 }} | base64 --decode > /root/release.keystore
+          echo $SECRET_DEBUG_KEYSTORE_BASE64 | base64 --decode > /root/release.keystore
           sed 's@keystore/debug=".*"@keystore/debug="'/root/debug.keystore'"@g' -i export_presets.cfg
-          sed 's@keystore/debug_user=".*"@keystore/release_user="'${{ secrets.SECRET_RELEASE_KEYSTORE_USER }}'"@g' -i export_presets.cfg
-          sed 's@keystore/debug_password=".*"@keystore/release_password="'${{ secrets.SECRET_RELEASE_KEYSTORE_PASSWORD }}'"@g' -i export_presets.cfg
+          sed 's@keystore/debug_user=".*"@keystore/release_user="'$SECRET_DEBUG_KEYSTORE_USER'"@g' -i export_presets.cfg
+          sed 's@keystore/debug_password=".*"@keystore/release_password="'$SECRET_DEBUG_KEYSTORE_PASSWORD'"@g' -i export_presets.cfg
           godot -v --headless --debug --export-debug "Android" ./build/android/index.apk
       - name: Upload Android Artifact
         uses: actions/upload-artifact@v3
