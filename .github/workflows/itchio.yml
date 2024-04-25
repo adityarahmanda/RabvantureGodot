@@ -35,11 +35,21 @@ jobs:
           mkdir -v -p ./build/web
           mkdir -v -p ./build/android
           godot -v --headless --export-debug "Web" ./build/web/index.html
+          echo "Log variables ========================================================"
+          echo ${{ vars.SECRET_RELEASE_KEYSTORE_BASE64 }}
+          echo ${{ vars.SECRET_RELEASE_KEYSTORE_USER }}
+          echo ${{ vars.SECRET_RELEASE_KEYSTORE_PASSWORD }}
+          echo "Setting up android debug keystore =================================="
+          keytool -keyalg RSA -genkeypair -alias androiddebugkey -keypass android -keystore debug.keystore -storepass android -dname "CN=Android Debug,O=Android,C=US" -validity 9999 -deststoretype pkcs12
+          echo 'keystore/debug="debug.keystore"' >> export_presets.cfg
+          echo 'keystore/debug_user="androiddebugkey"' >> export_presets.cfg
+          echo 'keystore/debug_password="android"' >> export_presets.cfg
           echo "Setting up android release keystore =================================="
           echo ${{ vars.SECRET_RELEASE_KEYSTORE_BASE64 }} | base64 --decode > /root/release.keystore
           sed 's@keystore/release=".*"@keystore/release="'/root/release.keystore'"@g' -i export_presets.cfg
           sed 's@keystore/release_user=".*"@keystore/release_user="'${{ vars.SECRET_RELEASE_KEYSTORE_USER }}'"@g' -i export_presets.cfg
           sed 's@keystore/release_password=".*"@keystore/release_password="'${{ vars.SECRET_RELEASE_KEYSTORE_PASSWORD }}'"@g' -i export_presets.cfg
+          echo "Log export presets ==================================================="
           cat export_presets.cfg
           echo "Setting up android sdk path =========================================="
           echo 'export/android/android_sdk_path = "/usr/lib/android-sdk"' >> ~/.config/godot/editor_settings-4.tres
@@ -47,7 +57,10 @@ jobs:
       - name: Web Build
         run: |
           godot -v --headless --export-debug "Web" ./build/web/index.html
-      - name: Android Build
+      - name: Android Debug Build
+        run: |
+          godot -v --headless --debug --export-debug "Android" ./build/android-debug/${EXPORT_NAME}.apk
+      - name: Android Release Build
         run: |
           godot -v --headless --export-release "Android" ./build/android/${EXPORT_NAME}.apk
       - name: Upload Web Artifact
