@@ -2,8 +2,8 @@ name: Itch.io Deploy Workflow
 
 env:
   GODOT_VERSION: 4.1.3
-  ITCHIO_LINK: "https://adityarahmanda.itch.io/rabvanture-godot"
-  EXPORT_NAME: "rabbitjump"
+  ITCHIO_LINK: "https://adityarahmanda.itch.io/hop-up-bunny"
+  EXPORT_NAME: "hopupbunny"
 
 on:
   push:
@@ -40,6 +40,14 @@ jobs:
         with:
           name: web
           path: build/web
+      - name: Deploy Web
+        uses: josephbmanley/butler-publish-itchio-action@v1.0.3
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.ITCH_IO_API_KEY }}
+          CHANNEL: HTML
+          ITCH_GAME: hop-up-bunny
+          ITCH_USER: adityarahmanda
+          PACKAGE: build/web
       - name: Send Discord Notification
         run: |
           DISCORD_MESSAGE="Web Build for Rabbit Jump is now live! \nLink: ${ITCHIO_LINK}"
@@ -91,7 +99,7 @@ jobs:
         env:
           BUTLER_CREDENTIALS: ${{ secrets.ITCH_IO_API_KEY }}
           CHANNEL: android
-          ITCH_GAME: rabvanture-godot
+          ITCH_GAME: hop-up-bunny
           ITCH_USER: adityarahmanda
           PACKAGE: build/android/${{ env.EXPORT_NAME }}.apk
       - name: Send Discord Notification
