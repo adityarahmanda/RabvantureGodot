@@ -30,16 +30,25 @@ jobs:
       - name: Populate .godot/imported
         run: |
           mkdir -v -p ./build/web
-          godot -v --headless --export-release "Web" ./build/web/index.html
+          mkdir -v -p ./build/android
+          godot -v --headless --export-debug "Web" ./build/web/index.html
       - name: Web Build
         run: |
-          godot -v --headless --export-release "Web" ./build/web/index.html
-      - name: Upload Artifact
+          godot -v --headless --export-debug "Web" ./build/web/index.html
+      - name: Android Build
+        run: |
+          godot -v --headless --export-debug "Android" ./build/android/index.apk
+      - name: Upload Web Artifact
         uses: actions/upload-artifact@v3
         with:
           name: web
           path: build/web
-      - name: Deploy
+      - name: Upload Android Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: web
+          path: build/android
+      - name: Deploy Web
         uses: josephbmanley/butler-publish-itchio-action@v1.0.3
         env:
           BUTLER_CREDENTIALS: ${{ secrets.ITCH_IO_API_KEY }}
@@ -47,6 +56,14 @@ jobs:
           ITCH_GAME: rabvanture-godot
           ITCH_USER: adityarahmanda
           PACKAGE: build/web
+      - name: Deploy Android
+        uses: josephbmanley/butler-publish-itchio-action@v1.0.3
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.ITCH_IO_API_KEY }}
+          CHANNEL: android
+          ITCH_GAME: rabvanture-godot
+          ITCH_USER: adityarahmanda
+          PACKAGE: build/android
       - name: Send Discord Notification
         run: |
           DISCORD_MESSAGE="Build for Rabbit Jump is now live! \nLink: ${ITCHIO_LINK}"
