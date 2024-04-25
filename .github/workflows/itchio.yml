@@ -43,13 +43,13 @@ jobs:
       - name: Send Discord Notification
         run: |
           GITHUB_SHORT_SHA = $(git rev-parse --short "$GITHUB_SHA")
-          DISCORD_MESSAGE="Web Build for Rabbit Jump (${GITHUB_SHORT_SHA}) is now live! \nLink: ${ITCHIO_LINK}"
+          DISCORD_MESSAGE="Web Build for Rabbit Jump ($GITHUB_SHORT_SHA) is now live! \nLink: ${ITCHIO_LINK}"
           curl -X POST -H "Content-Type: application/json" -d "{\"content\": \"$DISCORD_MESSAGE\"}" ${{ secrets.WEBHOOK_URL }}
       - name: Send Failed Discord Notification
         if: failure()
         run: |
           GITHUB_SHORT_SHA = $(git rev-parse --short "$GITHUB_SHA")
-          DISCORD_MESSAGE="Web Build for Rabbit Jump (${GITHUB_SHORT_SHA}) is failed! :smiling_face_with_tear:"
+          DISCORD_MESSAGE="Web Build for Rabbit Jump ($GITHUB_SHORT_SHA) is failed! :smiling_face_with_tear:"
           curl -X POST -H "Content-Type: application/json" -d "{\"content\": \"$DISCORD_MESSAGE\"}" ${{ secrets.WEBHOOK_URL }}
   android:
     runs-on: ubuntu-latest
@@ -95,15 +95,15 @@ jobs:
           CHANNEL: android
           ITCH_GAME: rabvanture-godot
           ITCH_USER: adityarahmanda
-          PACKAGE: build/android/${EXPORT_NAME}.apk
+          PACKAGE: build/android/${{ env.EXPORT_NAME }}.apk
       - name: Send Discord Notification
         run: |
           GITHUB_SHORT_SHA = $(git rev-parse --short "$GITHUB_SHA")
-          DISCORD_MESSAGE="Android Build for Rabbit Jump (${GITHUB_SHORT_SHA}) is now live! \nLink: ${ITCHIO_LINK}"
+          DISCORD_MESSAGE="Android Build for Rabbit Jump ($GITHUB_SHORT_SHA) is now live! \nLink: ${ITCHIO_LINK}"
           curl -X POST -H "Content-Type: application/json" -d "{\"content\": \"$DISCORD_MESSAGE\"}" ${{ secrets.WEBHOOK_URL }}
       - name: Send Failed Discord Notification
         if: failure()
         run: |
           GITHUB_SHORT_SHA = $(git rev-parse --short "$GITHUB_SHA")
-          DISCORD_MESSAGE="Android Build for Rabbit Jump (${GITHUB_SHORT_SHA}) is failed! :smiling_face_with_tear:"
+          DISCORD_MESSAGE="Android Build for Rabbit Jump ($GITHUB_SHORT_SHA) is failed! :smiling_face_with_tear:"
           curl -X POST -H "Content-Type: application/json" -d "{\"content\": \"$DISCORD_MESSAGE\"}" ${{ secrets.WEBHOOK_URL }}
