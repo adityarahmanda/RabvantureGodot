@@ -36,7 +36,7 @@ jobs:
           mkdir -v -p ./build/android
           godot -v --headless --export-debug "Web" ./build/web/index.html
           echo "Setting up android release keystore =================================="
-          echo ${{ vars.SECRET_RELEASE_KEYSTORE_BASE64 }} $ | base64 --decode > /root/release.keystore
+          echo ${{ vars.SECRET_RELEASE_KEYSTORE_BASE64 }} | base64 --decode > /root/release.keystore
           sed 's@keystore/release=".*"@keystore/release="'/root/release.keystore'"@g' -i export_presets.cfg
           sed 's@keystore/release_user=".*"@keystore/release_user="'${{ vars.SECRET_RELEASE_KEYSTORE_USER }}'"@g' -i export_presets.cfg
           sed 's@keystore/release_password=".*"@keystore/release_password="'${{ vars.SECRET_RELEASE_KEYSTORE_PASSWORD }}'"@g' -i export_presets.cfg
