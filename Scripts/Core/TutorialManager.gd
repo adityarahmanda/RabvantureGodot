@@ -7,7 +7,6 @@ class_name TutorialManager
 @export var right_input_image : Texture2D
 @export var jump_input_image : Texture2D
 @export var space_input_image : Texture2D
-@export var locale_font_sizes : Dictionary
 
 var is_show_move_tutorial:bool = false
 var is_show_jump_tutorial:bool = false

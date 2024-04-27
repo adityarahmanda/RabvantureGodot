@@ -1,23 +1,22 @@
 extends Control
 class_name GameUIInput
 
-func _ready():
+@onready var game_manager : GameManager = $"/root/Game"
+@onready var left_button : TouchScreenButton = $BottomLeftContainer/LeftButton
+@onready var right_button : TouchScreenButton = $BottomLeftContainer/RightButton
+@onready var jump_button : TouchScreenButton = $BottomRightContainer/JumpButton
+
+func _ready() -> void:
+	register_signal_callbacks()
 	visible = DisplayServer.is_touchscreen_available()
 
-func _on_left_input_button_button_down():
-	Input.action_press("ui_left")
+func register_signal_callbacks() -> void:
+	game_manager.on_paused.connect(on_paused.bind())
+	left_button.set_action("ui_left")
+	right_button.set_action("ui_right")
+	jump_button.set_action("ui_select")
 
-func _on_left_input_button_button_up():
-	Input.action_release("ui_left")
-
-func _on_right_input_button_button_down():
-	Input.action_press("ui_right")
-
-func _on_right_input_button_button_up():
-	Input.action_release("ui_right")
-
-func _on_jump_input_button_button_down():
-	Input.action_press("ui_select")
-
-func _on_jump_input_button_button_up():
-	Input.action_release("ui_select")
+func on_paused(is_paused:bool) -> void:
+	left_button.visible = !is_paused
+	right_button.visible = !is_paused
+	jump_button.visible = !is_paused

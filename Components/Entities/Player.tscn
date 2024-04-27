@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://8dxu3a8poib7"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerEntity.gd" id="1_7g2fw"]
-[ext_resource type="Texture2D" uid="uid://c7l726d4gavvb" path="res://Sprites/rabbit.png" id="2_jvgrc"]
+[ext_resource type="Texture2D" uid="uid://c7l726d4gavvb" path="res://Sprites/Entities/Rabbit.png" id="2_jvgrc"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerAnimation.gd" id="3_rpphb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r0e1a"]

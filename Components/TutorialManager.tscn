@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://b2ybqbou1we7y"]
 
 [ext_resource type="Script" path="res://Scripts/Core/TutorialManager.gd" id="1_otsab"]
-[ext_resource type="Texture2D" uid="uid://cstfx8xbjy1ce" path="res://Sprites/SpriteAtlas/LeftInputButton.tres" id="2_l3073"]
-[ext_resource type="Texture2D" uid="uid://l0gsbd8ud23h" path="res://Sprites/SpriteAtlas/RightInputButton.tres" id="3_4vkom"]
-[ext_resource type="Texture2D" uid="uid://b5ki4c688fvaf" path="res://Sprites/SpriteAtlas/JumpInputButton.tres" id="4_6dsrm"]
-[ext_resource type="Texture2D" uid="uid://cpjxuoq48pwpg" path="res://Sprites/space_input.png" id="5_levo2"]
+[ext_resource type="Texture2D" uid="uid://cstfx8xbjy1ce" path="res://Sprites/PackedSprite/LeftButton.tres" id="2_8kol5"]
+[ext_resource type="Texture2D" uid="uid://l0gsbd8ud23h" path="res://Sprites/PackedSprite/RightButton.tres" id="3_qaikb"]
+[ext_resource type="Texture2D" uid="uid://b5ki4c688fvaf" path="res://Sprites/PackedSprite/JumpButton.tres" id="4_02cjp"]
+[ext_resource type="Texture2D" uid="uid://bpo8cn6et21jh" path="res://Sprites/PackedSprite/SpaceButton.tres" id="5_7un10"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fs54y"]
 size = Vector2(112, 73)
@@ -14,10 +14,10 @@ size = Vector2(112, 73)
 
 [node name="TutorialManager" type="Node2D"]
 script = ExtResource("1_otsab")
-left_input_image = ExtResource("2_l3073")
-right_input_image = ExtResource("3_4vkom")
-jump_input_image = ExtResource("4_6dsrm")
-space_input_image = ExtResource("5_levo2")
+left_input_image = ExtResource("2_8kol5")
+right_input_image = ExtResource("3_qaikb")
+jump_input_image = ExtResource("4_02cjp")
+space_input_image = ExtResource("5_7un10")
 
 [node name="Move Tutorial Area" type="Area2D" parent="."]
 position = Vector2(-56.025, -26)

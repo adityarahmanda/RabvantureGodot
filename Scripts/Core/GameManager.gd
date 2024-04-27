@@ -14,8 +14,11 @@ var score : int = 0
 var is_game_ends : bool = false
 var is_paused : bool = false
 
+signal on_paused(is_paused : bool)
+
 func _ready() -> void:
 	SaveGame.load_json()
+	main_canvas.show_pause_panel(is_paused)
 	register_signal_callbacks()
 	initialize_locale()
 	start_game()
@@ -58,6 +61,7 @@ func on_toggle_paused() -> void:
 func set_game_paused(is_true:bool) -> void:
 	main_canvas.show_pause_panel(is_true)
 	is_paused = is_true
+	on_paused.emit(is_true)
 
 func on_player_die() -> void:
 	Global.death_count += 1

@@ -15,11 +15,10 @@ config/version="0.1"
 run/main_scene="res://Scenes/Game.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 boot_splash/bg_color=Color(0.0862745, 0.121569, 0.152941, 1)
-boot_splash/image="res://full-logo.png"
+boot_splash/show_image=false
 boot_splash/fullsize=false
 boot_splash/use_filter=false
-config/icon="res://Sprites/icon.png"
-boot_splash/minimum_display_time=3000
+config/icon="res://Sprites/AppIcon.png"
 
 [autoload]
 
@@ -36,7 +35,6 @@ window/size/window_width_override=1440
 window/size/window_height_override=810
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-mouse_cursor/custom_image="res://cursor.png"
 
 [editor_plugins]
 
@@ -88,6 +86,10 @@ ui_down={
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":1.0,"script":null)
 ]
 }
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
 
 [internationalization]
 

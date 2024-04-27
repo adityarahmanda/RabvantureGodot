@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://dplxuau61pgqk"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyEntity.gd" id="1_k5uxi"]
-[ext_resource type="Texture2D" uid="uid://dhw1s1dvbani0" path="res://Sprites/Rat.png" id="2_l0uqs"]
+[ext_resource type="Texture2D" uid="uid://dhw1s1dvbani0" path="res://Sprites/Entities/Rat.png" id="2_l0uqs"]
 [ext_resource type="Script" path="res://Scripts/Obstacle/Area2DObstacle.gd" id="3_kvbr8"]
 [ext_resource type="Script" path="res://Scripts/Enemy/SimplePath2D.gd" id="4_6xyth"]
 [ext_resource type="Script" path="res://Scripts/FSM/StateMachine.gd" id="5_uiau0"]
