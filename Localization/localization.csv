@@ -1,7 +1,7 @@
-﻿key,en,id,bug,es,fr,ko,ja
-move_tutorial,Press %s %s to Move,Pencet %s %s buat gerak,ᨈ ᨙᨀᨊᨛ %s %s ᨕᨘᨊᨛᨈᨘᨀᨛ ᨅ ᨙᨑᨛᨁ ᨙᨑᨀᨛ,Presione %s %s para moverse ,Appuyez sur %s %s pour vous déplacer,%s %s 를 눌러 이동하십시오,%s %s を押して移動
-jump_tutorial,Hold and Release %s to Jump\nHold it longer to Jump Higher,Tahan dan lepas %s buat lompat\nTahan lamaan buat lompat lebih tinggi,ᨈᨖᨊᨛᨉᨊᨛᨒ ᨙᨄᨔᨛ %s ᨕᨘᨊᨛᨈᨘᨀᨛᨒᨚᨇᨈᨛ\nᨈᨖᨊᨛᨒᨆᨕᨘᨊᨛᨈᨘᨀᨛᨒᨚᨇᨈᨛᨒ ᨙᨅᨗᨖᨛᨈᨗᨂᨛᨁᨗ,Mantén presionado y suelta %s para saltar\nMantenlo presionado más tiempo para saltar más alto,Maintenir et relâcher %s pour sauter\nMaintenez-le plus longtemps pour sauter plus haut,%s 를 눌렀다 놓으면 점프\n길게 누르면 더 높이 점프,%s を押して離すとジャンプ\n長押しで高くジャンプ
-paused,Paused,Jeda,ᨍ ᨙᨉ,En Pausa,En pause,일시 중지,ポーズ
-language_label,Language,Bahasa,ᨅᨖᨔ,Idioma,Langue,언어,言語
-language,English,Bahasa Indonesia,ᨕᨀᨛᨔᨑᨅᨘᨁᨗᨔᨛ,Español,Français,한국어,日本語
-return_to_game,Return to the game,Kembali ke permainan,ᨀ ᨙᨆᨛᨅᨒᨗᨀ ᨙᨄ ᨙᨑᨛᨆᨕᨗᨊᨊᨛ,Volver al juego,Revenir au jeu,게임으로 돌아가기,ゲームに戻る
+﻿key,en,id,es,fr,ko,ja
+move_tutorial,Press %s %s to Move,Pencet %s %s buat gerak,Presione %s %s para moverse ,Appuyez sur %s %s pour vous déplacer,%s %s 를 눌러 이동하십시오,%s %s を押して移動
+jump_tutorial,Hold and Release %s to Jump\nHold it longer to Jump Higher,Tahan dan lepas %s buat lompat\nTahan lamaan buat lompat lebih tinggi,Mantén presionado y suelta %s para saltar\nMantenlo presionado más tiempo para saltar más alto,Maintenir et relâcher %s pour sauter\nMaintenez-le plus longtemps pour sauter plus haut,%s 를 눌렀다 놓으면 점프\n길게 누르면 더 높이 점프,%s を押して離すとジャンプ\n長押しで高くジャンプ
+paused,Paused,Jeda,En Pausa,En pause,일시 중지,ポーズ
+language_label,Language,Bahasa,Idioma,Langue,언어,言語
+language,English,Bahasa Indonesia,Español,Français,한국어,日本語
+return_to_game,Return to the game,Kembali ke permainan,Volver al juego,Revenir au jeu,게임으로 돌아가기,ゲームに戻る
