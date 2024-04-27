@@ -1,14 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://0r8n88s6vpf"]
+[gd_scene load_steps=13 format=3 uid="uid://0r8n88s6vpf"]
 
 [ext_resource type="Script" path="res://Scripts/_Core/GameManager.gd" id="1_a6ent"]
-[ext_resource type="Script" path="res://Scripts/Services/LevelSetup.gd" id="2_d7xif"]
 [ext_resource type="PackedScene" uid="uid://cn8jvk4udikk5" path="res://Scenes/WorldTest.tscn" id="2_kj4xq"]
 [ext_resource type="Script" path="res://Scripts/_Core/GameCamera.gd" id="3_lbwio"]
 [ext_resource type="PackedScene" uid="uid://do70gvk84lf4u" path="res://Components/UI/MainCanvas.tscn" id="3_pp1ww"]
 [ext_resource type="PackedScene" uid="uid://8dxu3a8poib7" path="res://Components/Entities/Player.tscn" id="3_qlgy4"]
+[ext_resource type="Script" path="res://Scripts/_Core/LevelSetup.gd" id="4_eec1q"]
 [ext_resource type="PackedScene" uid="uid://dplxuau61pgqk" path="res://Components/Entities/EnemyRat.tscn" id="4_wt5pl"]
 [ext_resource type="PackedScene" uid="uid://co68gj4myluc8" path="res://Components/AudioManager.tscn" id="5_hcdug"]
 [ext_resource type="PackedScene" uid="uid://b2ybqbou1we7y" path="res://Components/TutorialManager.tscn" id="6_3uky4"]
+[ext_resource type="Script" path="res://Scripts/_Core/GameAnalyticsManager.gd" id="7_k1ksd"]
 [ext_resource type="PackedScene" uid="uid://r4665fd8w4ud" path="res://Components/Entities/EnemyBat.tscn" id="12_nfxt6"]
 
 [sub_resource type="Curve2D" id="Curve2D_ivlso"]
@@ -43,12 +44,24 @@ script = ExtResource("3_lbwio")
 [node name="MainCanvas" parent="Services" instance=ExtResource("3_pp1ww")]
 
 [node name="LevelSetup" type="Node2D" parent="Services"]
-script = ExtResource("2_d7xif")
+script = ExtResource("4_eec1q")
 pit_y_level = 80
+top_y_level = 900
 
 [node name="AudioManager" parent="Services" instance=ExtResource("5_hcdug")]
 
 [node name="TutorialManager" parent="Services" instance=ExtResource("6_3uky4")]
+
+[node name="GameAnalyticsManager" type="Node2D" parent="Services"]
+script = ExtResource("7_k1ksd")
+game_keys = {
+"Android": "e8398f7ffc8f809224f5df98308fa7ff",
+"HTML5": "3882c95a20b19250c9a763c9f179ea26"
+}
+secret_keys = {
+"Android": "1e77050b3e7c0e668c7093f48d8d060fd8c2dd80",
+"HTML5": "a7657950306fd585d48941f1d713cecf93269edb"
+}
 
 [node name="World" parent="." instance=ExtResource("2_kj4xq")]
 

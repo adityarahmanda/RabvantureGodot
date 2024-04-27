@@ -22,3 +22,4 @@ func load_json() -> void:
 	
 	var data: Dictionary = JSON.parse_string(json_data)
 	Global.death_count = data.death_count
+	Global.locale = data.locale

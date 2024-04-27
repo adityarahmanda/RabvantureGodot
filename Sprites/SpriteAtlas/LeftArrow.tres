@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://d20diwvw32cps"]
+
+[ext_resource type="Texture2D" uid="uid://dkgcbwiws8qd8" path="res://Sprites/Arrow_Icons.png" id="1_07euy"]
+
+[resource]
+atlas = ExtResource("1_07euy")
+region = Rect2(16, 0, 5, 8)

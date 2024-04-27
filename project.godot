@@ -10,24 +10,22 @@ config_version=5
 
 [application]
 
-config/name="Rabbit Jump"
-config/name_localized={
-"id": "Kelinci Loncat"
-}
+config/name="Hop Up Bunny"
+config/version="0.1"
 run/main_scene="res://Scenes/Game.tscn"
-config/features=PackedStringArray("4.1", "GL Compatibility")
+config/features=PackedStringArray("4.2", "GL Compatibility")
 boot_splash/bg_color=Color(0.0862745, 0.121569, 0.152941, 1)
 boot_splash/image="res://full-logo.png"
 boot_splash/fullsize=false
 boot_splash/use_filter=false
 config/icon="res://Sprites/icon.png"
 boot_splash/minimum_display_time=5000
-config/version="0.1"
 
 [autoload]
 
 Global="*res://Scripts/_Core/Global.gd"
 SaveGame="*res://Scripts/_Core/SaveGame.gd"
+Localization="*res://Scripts/_Core/Localization.gd"
 
 [display]
 
@@ -39,6 +37,10 @@ window/size/window_height_override=810
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 mouse_cursor/custom_image="res://cursor.png"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/safe_area_rect/plugin.cfg")
 
 [gui]
 
@@ -87,18 +89,14 @@ ui_down={
 ]
 }
 
-[input_devices]
-
-pointing/emulate_touch_from_mouse=true
-
 [internationalization]
 
-locale/translations=PackedStringArray("res://Localization/localization.en.translation", "res://Localization/localization.id.translation")
+locale/translations=PackedStringArray("res://Localization/localization.en.translation", "res://Localization/localization.id.translation", "res://Localization/localization.es.translation", "res://Localization/localization.ko.translation", "res://Localization/localization.ja.translation", "res://Localization/localization.fr.translation", "res://Localization/localization.bug.translation")
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.web="mobile"
+renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
 environment/defaults/default_clear_color=Color(0.0862745, 0.121569, 0.152941, 1)
