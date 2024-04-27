@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://do70gvk84lf4u"]
 
-[ext_resource type="Script" path="res://Scripts/_Core/GameUI.gd" id="1_8jltk"]
+[ext_resource type="Script" path="res://Scripts/Core/GameUI.gd" id="1_8jltk"]
 [ext_resource type="Script" path="res://addons/safe_area_rect/safe_area_rect.gd" id="2_clctp"]
 [ext_resource type="Texture2D" uid="uid://ck25jqs26eslb" path="res://Sprites/Death_Icon.png" id="2_yaxwb"]
 [ext_resource type="Texture2D" uid="uid://dmx047q2aay1r" path="res://Sprites/Pause_Icon.png" id="3_af4s3"]

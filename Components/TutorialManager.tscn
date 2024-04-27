@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://b2ybqbou1we7y"]
 
-[ext_resource type="Script" path="res://Scripts/_Core/TutorialManager.gd" id="1_otsab"]
+[ext_resource type="Script" path="res://Scripts/Core/TutorialManager.gd" id="1_otsab"]
 [ext_resource type="Texture2D" uid="uid://cstfx8xbjy1ce" path="res://Sprites/SpriteAtlas/LeftInputButton.tres" id="2_l3073"]
 [ext_resource type="Texture2D" uid="uid://l0gsbd8ud23h" path="res://Sprites/SpriteAtlas/RightInputButton.tres" id="3_4vkom"]
 [ext_resource type="Texture2D" uid="uid://b5ki4c688fvaf" path="res://Sprites/SpriteAtlas/JumpInputButton.tres" id="4_6dsrm"]

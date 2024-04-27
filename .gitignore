@@ -1,14 +1,18 @@
 # Godot 4+ specific ignores
 .godot/
+.import/
+*.import
+export.cfg
+export_presets.cfg
+
+# Godot generated .tmp files
+*.tmp
 
 # Imported translations (automatically generated from CSV files)
 *.translation
 
-# Mono-specific ignores
-.mono/
-data_*/
-mono_crash.*.json
-*.tmp
-
 # build ignore
-[Bb]uild/
+build/
+
+# Android build ignore
+android/build/*

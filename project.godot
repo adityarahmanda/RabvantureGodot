@@ -19,13 +19,13 @@ boot_splash/image="res://full-logo.png"
 boot_splash/fullsize=false
 boot_splash/use_filter=false
 config/icon="res://Sprites/icon.png"
-boot_splash/minimum_display_time=5000
+boot_splash/minimum_display_time=3000
 
 [autoload]
 
-Global="*res://Scripts/_Core/Global.gd"
-SaveGame="*res://Scripts/_Core/SaveGame.gd"
-Localization="*res://Scripts/_Core/Localization.gd"
+Global="*res://Scripts/Core/Global.gd"
+SaveGame="*res://Scripts/Core/SaveGame.gd"
+Localization="*res://Scripts/Core/Localization.gd"
 
 [display]
 
@@ -91,7 +91,7 @@ ui_down={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://Localization/localization.en.translation", "res://Localization/localization.id.translation", "res://Localization/localization.es.translation", "res://Localization/localization.ko.translation", "res://Localization/localization.ja.translation", "res://Localization/localization.fr.translation", "res://Localization/localization.bug.translation")
+locale/translations=PackedStringArray("res://Localization/localization.en.translation", "res://Localization/localization.id.translation", "res://Localization/localization.es.translation", "res://Localization/localization.ko.translation", "res://Localization/localization.ja.translation", "res://Localization/localization.fr.translation")
 
 [rendering]
 
