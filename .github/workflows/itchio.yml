@@ -1,7 +1,7 @@
 name: Itch.io Deploy Workflow
 
 env:
-  GODOT_VERSION: 4.1.3
+  GODOT_VERSION: 4.2.2
   ITCHIO_LINK: "https://adityarahmanda.itch.io/hop-up-bunny"
   EXPORT_NAME: "hopupbunny"
 
@@ -15,7 +15,7 @@ jobs:
   itchio:
     runs-on: ubuntu-latest
     container:
-      image: barichello/godot-ci:4.1.3
+      image: barichello/godot-ci:4.2.2
     steps:
       - name: Install Packages
         run: |          
@@ -31,7 +31,7 @@ jobs:
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
           echo "Reimporting godot and creating build folder..."
           mkdir -v -p ./build/web
-          godot -v --headless --export-debug "Web" ./build/web/index.html
+          godot --headless --import
       - name: Web Build
         run: |
           godot -v --headless --export-debug "Web" ./build/web/index.html
@@ -78,7 +78,7 @@ jobs:
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
           echo "Reimporting godot and creating build folder..."
           mkdir -v -p ./build/android
-          godot -v --headless --debug --export-debug "Android" ./build/android/${EXPORT_NAME}.apk
+          godot --headless --import
           echo "Setting up android keystores..."
           keytool -keyalg RSA -genkeypair -alias androiddebugkey -keypass android -keystore debug.keystore -storepass android -dname "CN=Android Debug,O=Android,C=US" -validity 9999 -deststoretype pkcs12
           echo 'keystore/debug="debug.keystore"' >> export_presets.cfg
