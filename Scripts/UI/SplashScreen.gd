@@ -1,0 +1,31 @@
+extends CanvasLayer
+
+@export var fade_in_duration : float = 1
+@export var fade_out_duration : float = 1
+@export var splash_duration : float = 3
+@export var game_scene : Resource
+
+@onready var logo : TextureRect = $SafeAreaRect/Logo
+@onready var logo_animation : AnimationPlayer = $SafeAreaRect/Logo/AnimationPlayer
+
+var status : ResourceLoader.ThreadLoadStatus
+
+func _ready():
+	ResourceLoader.load_threaded_request(game_scene.resource_path)
+	play_splash_screen_sequence()
+	
+func _process(_delta) -> void:
+	handle_game_scene_loading()
+
+func handle_game_scene_loading():
+	if (status == ResourceLoader.THREAD_LOAD_LOADED): return
+	status = ResourceLoader.load_threaded_get_status(game_scene.resource_path)
+
+func play_splash_screen_sequence() -> void:
+	logo.modulate = Color.TRANSPARENT
+	logo_animation.play("SplashScreen")
+	await create_tween().tween_property(logo, "modulate", Color.WHITE, fade_in_duration).set_ease(Tween.EASE_IN).finished
+	await get_tree().create_timer(splash_duration).timeout
+	await status == ResourceLoader.THREAD_LOAD_LOADED
+	await create_tween().tween_property(logo, "modulate", Color.TRANSPARENT, fade_out_duration).finished
+	get_tree().change_scene_to_packed(ResourceLoader.load_threaded_get(game_scene.resource_path))
