@@ -24,8 +24,9 @@ func handle_game_scene_loading():
 func play_splash_screen_sequence() -> void:
 	logo.modulate = Color.TRANSPARENT
 	logo_animation.play("SplashScreen")
-	await create_tween().tween_property(logo, "modulate", Color.WHITE, fade_in_duration).set_ease(Tween.EASE_IN).finished
+	await create_tween().tween_property(logo, "modulate", Color.WHITE, fade_in_duration).set_ease(Tween.EASE_IN_OUT).finished
 	await get_tree().create_timer(splash_duration).timeout
-	await status == ResourceLoader.THREAD_LOAD_LOADED
-	await create_tween().tween_property(logo, "modulate", Color.TRANSPARENT, fade_out_duration).finished
+	while status != ResourceLoader.THREAD_LOAD_LOADED:
+		await get_tree().process_frame
+	await create_tween().tween_property(logo, "modulate", Color.TRANSPARENT, fade_out_duration).set_ease(Tween.EASE_OUT_IN).finished
 	get_tree().change_scene_to_packed(ResourceLoader.load_threaded_get(game_scene.resource_path))

@@ -6,6 +6,21 @@
 [ext_resource type="PackedScene" uid="uid://0r8n88s6vpf" path="res://Scenes/Game.tscn" id="2_x0ugk"]
 [ext_resource type="Texture2D" uid="uid://hjkvfqgvdfgk" path="res://Sprites/PackedSprite/Logo_1.tres" id="3_nd7x1"]
 
+[sub_resource type="Animation" id="Animation_ppibu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_pyv7o")]
+}
+
 [sub_resource type="Animation" id="Animation_vf3eg"]
 resource_name = "SplashScreen"
 length = 0.8
@@ -23,21 +38,6 @@ tracks/0/keys = {
 "values": [ExtResource("2_pyv7o"), ExtResource("3_nd7x1")]
 }
 
-[sub_resource type="Animation" id="Animation_ppibu"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("2_pyv7o")]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6fu06"]
 _data = {
 "RESET": SubResource("Animation_ppibu"),
@@ -46,8 +46,6 @@ _data = {
 
 [node name="SplashScreen" type="CanvasLayer"]
 script = ExtResource("1_es3nu")
-fade_out_duration = 3.0
-splash_duration = 1.0
 game_scene = ExtResource("2_x0ugk")
 
 [node name="SafeAreaRect" type="Control" parent="."]
