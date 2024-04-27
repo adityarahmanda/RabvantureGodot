@@ -1,6 +1,6 @@
 ﻿key,en,id,es,fr,ko,ja
-move_tutorial,Press %s %s to Move,Pencet %s %s buat gerak,Presione %s %s para moverse ,Appuyez sur %s %s pour vous déplacer,%s %s 를 눌러 이동하십시오,%s %s を押して移動
-jump_tutorial,Hold and Release %s to Jump\nHold it longer to Jump Higher,Tahan dan lepas %s buat lompat\nTahan lamaan buat lompat lebih tinggi,Mantén presionado y suelta %s para saltar\nMantenlo presionado más tiempo para saltar más alto,Maintenir et relâcher %s pour sauter\nMaintenez-le plus longtemps pour sauter plus haut,%s 를 눌렀다 놓으면 점프\n길게 누르면 더 높이 점프,%s を押して離すとジャンプ\n長押しで高くジャンプ
+move_tutorial,Press %s %s to Move,Pencet %s %s buat gerak,Pulsa %s %s para moverte,Appuyez sur %s %s pour bouger,%s %s 를 눌러서 이동하세요,%s %sを押して移動
+jump_tutorial,Hold and Release %s to Jump\nHold it longer to jump higher,Tahan dan lepas %s buat lompat\nTahan lamaan biar lompatnya lebih tinggi,Mantener y suelta %s para saltar\nMantenlo mas tiempo para saltar mas alto,Maintenez et relâchez %s pour sauter\nMaintenez le plus longtemps pour sauter plus haut,%s 를 누르고 있다가 놓으면 점프하세요\n더 오래 누르면 더 높게 점프하세요,%sを押し続けて離すとジャンプ\n長く押し続けるとより高くジャンプ
 paused,Paused,Jeda,En Pausa,En pause,일시 중지,ポーズ
 language_label,Language,Bahasa,Idioma,Langue,언어,言語
 language,English,Bahasa Indonesia,Español,Français,한국어,日本語
