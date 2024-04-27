@@ -11,6 +11,7 @@ extends CanvasLayer
 var status : ResourceLoader.ThreadLoadStatus
 
 func _ready():
+	SaveGame.load_json()
 	ResourceLoader.load_threaded_request(game_scene.resource_path)
 	play_splash_screen_sequence()
 	

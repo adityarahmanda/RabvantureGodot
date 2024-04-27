@@ -17,7 +17,7 @@ var is_paused : bool = false
 signal on_paused(is_paused : bool)
 
 func _ready() -> void:
-	SaveGame.load_json()
+	main_canvas.refresh_ui()
 	main_canvas.show_pause_panel(is_paused)
 	register_signal_callbacks()
 	initialize_locale()
