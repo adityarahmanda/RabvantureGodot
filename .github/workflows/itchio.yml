@@ -80,7 +80,10 @@ jobs:
           echo 'keystore/debug_user="androiddebugkey"' >> export_presets.cfg
           echo 'keystore/debug_password="android"' >> export_presets.cfg
           echo "Setting up android sdk path..."
-          tree ~/
+          tree -a ~/
+          tree -a ~/.config/
+          tree -a ~/.local/
+          tree -a /root
           echo 'export/android/android_sdk_path = "/usr/lib/android-sdk"' >> ~/.config/godot/editor_settings-4.tres
       - name: Android Build
         run: |
