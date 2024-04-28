@@ -1,7 +1,7 @@
 name: Itch.io Deploy Workflow
 
 env:
-  GODOT_VERSION: 4.2.2
+  GODOT_VERSION: 4.2
   ITCHIO_LINK: "https://adityarahmanda.itch.io/hop-up-bunny"
   EXPORT_NAME: "hopupbunny"
 
@@ -15,7 +15,7 @@ jobs:
   itchio:
     runs-on: ubuntu-latest
     container:
-      image: barichello/godot-ci:4.2.2
+      image: barichello/godot-ci:4.2
     steps:
       - name: Install Packages
         run: |          
@@ -24,6 +24,10 @@ jobs:
           apt-get install -y curl
       - name: Checkout
         uses: actions/checkout@v3
+      # Open the editor to import assets in case the cache was empty or outdated
+      - name: Import Godot Assets
+        run: |
+          godot --headless --verbose --editor --quit
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates
@@ -57,7 +61,7 @@ jobs:
   android:
     runs-on: ubuntu-latest
     container:
-      image: barichello/godot-ci:4.2.2
+      image: barichello/godot-ci:4.2
     steps:
       - name: Install Packages
         run: |          
@@ -73,6 +77,10 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: '17.0.11+9'
+        # Open the editor to import assets in case the cache was empty or outdated
+      - name: Import Godot Assets
+        run: |
+          godot --headless --verbose --editor --quit
       - name: Setup
         run: |
           echo "Setting up godot export template..."
