@@ -64,7 +64,8 @@ jobs:
           apt-get update -y
           apt-get install -y rsync
           apt-get install -y curl
-          apt-get install -y tree
+          apt-get install -y android-sdk
+          sdkmanager --sdk_root="/usr/lib/android-sdk" "platform-tools" "build-tools;33.0.2" "platforms;android-33" "cmdline-tools;latest" "cmake;3.10.2.4988404" "ndk;23.2.8568313"
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup
@@ -78,9 +79,7 @@ jobs:
           echo 'keystore/debug_user="androiddebugkey"' >> export_presets.cfg
           echo 'keystore/debug_password="android"' >> export_presets.cfg
           echo "Setting up android sdk path..."
-          tree -a ~/
-          tree -a /root
-          echo 'export/android/android_sdk_path = "/usr/lib/android-sdk"' >> ~/.config/godot/editor_settings-4.tres
+          echo 'export/android/android_sdk_path = "/usr/lib/android-sdk"' >> /root/.config/godot/editor_settings-4.tres
       - name: Android Build
         run: |
           mkdir -v -p ./build/android
