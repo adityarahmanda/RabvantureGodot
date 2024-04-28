@@ -38,7 +38,7 @@ func ends_game() -> void:
 	main_camera.follow_target = null
 	main_canvas.refresh_ui()
 	if (!is_game_ends):
-		AnalyticsManager.log_game_ends("fail", score)
+		FirebaseManager.log_game_ends("fail", score)
 		is_game_ends = true
 	SaveGame.save_json()
 	await get_tree().create_timer(reset_scene_delay).timeout
@@ -58,7 +58,7 @@ func set_game_paused(is_true:bool) -> void:
 
 func on_player_die() -> void:
 	Global.death_count += 1
-	AnalyticsManager.log_death(Global.death_count)
+	FirebaseManager.log_death(Global.death_count)
 	ends_game()
 	
 func handle_score() -> void:
@@ -66,5 +66,5 @@ func handle_score() -> void:
 	score = maxi(0, -player.position.y as int)
 	main_canvas.set_score(score)
 	if (!is_game_ends and score >= level_setup.top_y_level):
-		AnalyticsManager.log_game_ends("complete", score)
+		FirebaseManager.log_game_ends("complete", score)
 		is_game_ends = true
