@@ -25,6 +25,8 @@ config/icon="res://Sprites/AppIcon.png"
 Global="*res://Scripts/Core/Global.gd"
 SaveGame="*res://Scripts/Core/SaveGame.gd"
 Localization="*res://Scripts/Core/Localization.gd"
+FirebaseAnalytics="*res://addons/FirebaseAnalyticsGodotPlugin/plugin.gd"
+AnalyticsManager="*res://Scripts/Core/AnalyticsManager.gd"
 
 [display]
 
@@ -39,7 +41,7 @@ mouse_cursor/custom_image="res://Sprites/CursorIconExport.png"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/safe_area_rect/plugin.cfg")
+enabled=PackedStringArray("res://addons/FirebaseAnalyticsGodotPlugin/plugin.cfg", "res://addons/safe_area_rect/plugin.cfg")
 
 [game_config]
 

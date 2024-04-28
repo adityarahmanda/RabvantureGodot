@@ -6,7 +6,6 @@ class_name GameManager
 @onready var main_canvas : GameUI = %Services/MainCanvas
 @onready var audio_manager : AudioManager = %Services/AudioManager
 @onready var level_setup : LevelSetup = %Services/LevelSetup
-@onready var game_analytics_manager : GameAnalyticsManager = %Services/GameAnalyticsManager
 
 @export var reset_scene_delay : float = 1.0
 
@@ -31,7 +30,6 @@ func register_signal_callbacks() -> void:
 	main_canvas.connect_pause_button(on_toggle_paused.bind())
 
 func start_game() -> void:
-	game_analytics_manager.log_game_start()
 	main_camera.follow_target = player
 	player.respawn()
 	is_game_ends = false
@@ -40,7 +38,7 @@ func ends_game() -> void:
 	main_camera.follow_target = null
 	main_canvas.refresh_ui()
 	if (!is_game_ends):
-		game_analytics_manager.log_game_ends("Fail", score)
+		AnalyticsManager.log_game_ends("fail", score)
 		is_game_ends = true
 	SaveGame.save_json()
 	await get_tree().create_timer(reset_scene_delay).timeout
@@ -60,7 +58,7 @@ func set_game_paused(is_true:bool) -> void:
 
 func on_player_die() -> void:
 	Global.death_count += 1
-	game_analytics_manager.log_death_count(Global.death_count)
+	AnalyticsManager.log_death(Global.death_count)
 	ends_game()
 	
 func handle_score() -> void:
@@ -68,5 +66,5 @@ func handle_score() -> void:
 	score = maxi(0, -player.position.y as int)
 	main_canvas.set_score(score)
 	if (!is_game_ends and score >= level_setup.top_y_level):
-		game_analytics_manager.log_game_ends("Complete", score)
+		AnalyticsManager.log_game_ends("complete", score)
 		is_game_ends = true

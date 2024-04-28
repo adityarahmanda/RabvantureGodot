@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://0r8n88s6vpf"]
+[gd_scene load_steps=12 format=3 uid="uid://0r8n88s6vpf"]
 
 [ext_resource type="Script" path="res://Scripts/Core/GameManager.gd" id="1_a6ent"]
 [ext_resource type="PackedScene" uid="uid://cn8jvk4udikk5" path="res://Scenes/WorldTest.tscn" id="2_kj4xq"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://dplxuau61pgqk" path="res://Components/Entities/EnemyRat.tscn" id="4_wt5pl"]
 [ext_resource type="PackedScene" uid="uid://co68gj4myluc8" path="res://Components/AudioManager.tscn" id="5_hcdug"]
 [ext_resource type="PackedScene" uid="uid://b2ybqbou1we7y" path="res://Components/TutorialManager.tscn" id="6_3uky4"]
-[ext_resource type="Script" path="res://Scripts/Core/GameAnalyticsManager.gd" id="7_k1ksd"]
 [ext_resource type="PackedScene" uid="uid://r4665fd8w4ud" path="res://Components/Entities/EnemyBat.tscn" id="12_nfxt6"]
 
 [sub_resource type="Curve2D" id="Curve2D_ivlso"]
@@ -51,17 +50,6 @@ top_y_level = 900
 [node name="AudioManager" parent="Services" instance=ExtResource("5_hcdug")]
 
 [node name="TutorialManager" parent="Services" instance=ExtResource("6_3uky4")]
-
-[node name="GameAnalyticsManager" type="Node2D" parent="Services"]
-script = ExtResource("7_k1ksd")
-game_keys = {
-"Android": "e8398f7ffc8f809224f5df98308fa7ff",
-"HTML5": "3882c95a20b19250c9a763c9f179ea26"
-}
-secret_keys = {
-"Android": "1e77050b3e7c0e668c7093f48d8d060fd8c2dd80",
-"HTML5": "a7657950306fd585d48941f1d713cecf93269edb"
-}
 
 [node name="World" parent="." instance=ExtResource("2_kj4xq")]
 

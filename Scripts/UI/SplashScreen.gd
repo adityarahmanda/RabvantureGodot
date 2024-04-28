@@ -11,6 +11,7 @@ extends CanvasLayer
 var status : ResourceLoader.ThreadLoadStatus
 
 func _ready():
+	AnalyticsManager.log_open_apps()
 	SaveGame.load_json()
 	ResourceLoader.load_threaded_request(game_scene.resource_path)
 	initialize_locale()
