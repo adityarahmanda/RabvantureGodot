@@ -72,7 +72,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: 'adopt'
-          java-version: '17.0.11.9'
+          java-version: '17.0.11+9'
       - name: Setup
         run: |
           echo "Setting up godot export template..."
@@ -84,8 +84,7 @@ jobs:
           echo 'keystore/debug_user="androiddebugkey"' >> export_presets.cfg
           echo 'keystore/debug_password="android"' >> export_presets.cfg
           echo "Setting up android sdk path..."
-          tree -a /usr
-          echo 'export/android/java_sdk_path = "/usr/lib/Eclipse Adoptium/jdk-17.0.11.9-hotspot"' >> /root/.config/godot/editor_settings-4.tres
+          tree -a /usr/lib
           echo 'export/android/android_sdk_path = "/usr/lib/android-sdk"' >> /root/.config/godot/editor_settings-4.tres
       - name: Android Build
         run: |
