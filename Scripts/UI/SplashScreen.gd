@@ -13,10 +13,15 @@ var status : ResourceLoader.ThreadLoadStatus
 func _ready():
 	SaveGame.load_json()
 	ResourceLoader.load_threaded_request(game_scene.resource_path)
+	initialize_locale()
 	play_splash_screen_sequence()
 	
 func _process(_delta) -> void:
 	handle_game_scene_loading()
+
+func initialize_locale() -> void:
+	var locale = Global.locale if Global.locale != "" else OS.get_locale()
+	Localization.set_locale(locale)
 
 func handle_game_scene_loading():
 	if (status == ResourceLoader.THREAD_LOAD_LOADED): return

@@ -153,7 +153,6 @@ script = ExtResource("6_tftdd")
 left_button = NodePath("HBoxContainer/Left Arrow")
 right_button = NodePath("HBoxContainer/Right Arrow")
 selected_item_label = NodePath("HBoxContainer/LanguageValueLabel")
-selection_list = ["en", "id", "es", "fr", "ko", "ja"]
 
 [node name="LanguageLabel" type="Label" parent="PausePanel/Layout/LanguageSelectorContainer"]
 custom_minimum_size = Vector2(30, 0)

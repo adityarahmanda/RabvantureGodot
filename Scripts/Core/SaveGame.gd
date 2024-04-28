@@ -8,7 +8,6 @@ func save_json() -> void:
 		locale = Global.locale
 	}
 	var json_data := JSON.stringify(data)
-	print_debug("save" + json_data)
 	var file_access := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	file_access.store_line(json_data)
 	file_access.close()
@@ -19,7 +18,6 @@ func load_json() -> void:
 	
 	var file_access := FileAccess.open(SAVE_PATH, FileAccess.READ)
 	var json_data := file_access.get_line()
-	print_debug("load" + json_data)
 	file_access.close()
 	
 	var data: Dictionary = JSON.parse_string(json_data)

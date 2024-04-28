@@ -4,7 +4,7 @@ class_name UISelector
 @export var left_button : TextureButton
 @export var right_button : TextureButton
 @export var selected_item_label : Label
-@export var selection_list : Array
+@export var selection_list : Array = []
 
 var selected_item : String
 var selected_index : int = 0
@@ -21,7 +21,7 @@ func _on_initialize_label() -> void:
 	refresh_label()
 
 func refresh_label() -> void:
-	selected_item = selection_list[selected_index] if selection_list != null else null
+	selected_item = selection_list[selected_index] if selection_list.size() != 0 else selected_item_label.text
 	_on_refresh_label()
 
 func _on_refresh_label() -> void:

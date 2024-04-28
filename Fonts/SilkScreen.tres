@@ -1,7 +1,7 @@
 [gd_resource type="FontVariation" load_steps=3 format=3 uid="uid://c46yw2qrsmjj4"]
 
-[ext_resource type="FontFile" uid="uid://jmlkf1hswfmw" path="res://Fonts/Silkscreen.ttf" id="3_q1310"]
-[ext_resource type="FontFile" uid="uid://bsh47pjy0feq3" path="res://Fonts/GalmuriMono7.ttf" id="3_x348o"]
+[ext_resource type="FontFile" uid="uid://c7a5hhdnu5dhu" path="res://Fonts/Silkscreen.ttf" id="3_q1310"]
+[ext_resource type="FontFile" uid="uid://d4m8ywkkbf1pa" path="res://Fonts/GalmuriMono7.ttf" id="3_x348o"]
 
 [resource]
 fallbacks = Array[Font]([ExtResource("3_x348o")])

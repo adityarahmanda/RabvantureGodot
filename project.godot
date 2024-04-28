@@ -41,6 +41,10 @@ mouse_cursor/custom_image="res://Sprites/CursorIconExport.png"
 
 enabled=PackedStringArray("res://addons/safe_area_rect/plugin.cfg")
 
+[game_config]
+
+locales=["en", "id", "es", "fr", "ko", "ja"]
+
 [gui]
 
 theme/custom_font="res://Fonts/SilkScreen.tres"

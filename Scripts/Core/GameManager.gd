@@ -20,7 +20,6 @@ func _ready() -> void:
 	main_canvas.refresh_ui()
 	main_canvas.show_pause_panel(is_paused)
 	register_signal_callbacks()
-	initialize_locale()
 	start_game()
 
 func _process(_delta) -> void:
@@ -30,10 +29,6 @@ func _process(_delta) -> void:
 func register_signal_callbacks() -> void:
 	player.on_dead.connect(on_player_die.bind())
 	main_canvas.connect_pause_button(on_toggle_paused.bind())
-
-func initialize_locale() -> void:
-	var locale = Global.locale if Global.locale != "" else OS.get_locale()
-	Localization.set_locale(locale)
 
 func start_game() -> void:
 	game_analytics_manager.log_game_start()
