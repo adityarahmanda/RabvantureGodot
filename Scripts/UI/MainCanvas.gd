@@ -28,13 +28,16 @@ func set_score(score : int) -> void:
 		score_label.text = "%.fm" % score
 
 func load_respawn_checkpoint_ad() -> void:
-	if (!FirebaseManager.is_admob_initialized): return
 	var firebase_api = FirebaseAPI.new()
-	firebase_api.load_rewarded_ad(FirebaseManager.RESPAWN_CHECKPOINT_AD_ID, 
+	var can_load = firebase_api.load_rewarded_ad(FirebaseManager.RESPAWN_CHECKPOINT_AD_ID, 
 		on_respawn_checkpoint_ad_loaded,
 		on_respawn_checkpoint_ad_failed,
 		on_respawn_checkpoint_ad_rewarded)
-	respawn_checkpoint_button.disabled = true
+	if (can_load):
+		print_debug("Loading Respawn Checkpoint Ad...")
+		respawn_checkpoint_button.disabled = true
+	else:
+		print_debug("Respawn Checkpoint Ad failed to load")
 
 func on_respawn_checkpoint_ad_loaded() -> void:
 	respawn_checkpoint_ad_loaded.emit()
