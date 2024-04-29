@@ -6,26 +6,36 @@ var pilum
 func _init() -> void:
 	if Engine.has_singleton("Pilum"):
 		pilum = Engine.get_singleton("Pilum")
+
+func load_native_tools(test_mode:bool, test_device_id:String, on_admob_initialized:Callable) -> void:
+	if pilum:
+		pilum.loadNativeTools(test_mode, test_device_id)
+		pilum.connect("AdmobInicializationComplete", on_admob_initialized)
 	else:
 		printerr("Firebase API initialization error : Pilum singleton not found!")
 
-func load_native_tools(test_mode:bool, test_device_id:String) -> void:
+func is_admob_initialized()->bool:
+	var is_loaded = true;
 	if pilum:
-		pilum.loadNativeTools(test_mode, test_device_id)
-
-func set_signal_callback(firebase_error: Callable, admob_initialization_complete: Callable, gdpr_consent_error: Callable) -> void:
-	if pilum:
-		pilum.connect("FirebaseAnalyticsError", firebase_error)
-		pilum.connect("AdmobInicializationComplete", admob_initialization_complete)
-		pilum.connect("AdmobErrorGdprConsent", gdpr_consent_error)
-
-func is_admob_loaded() -> bool:
-	var loaded = true;
-	if pilum:
-		loaded = pilum.isAdmobLoaded()
+		is_loaded = pilum.isAdmobLoaded()
 	else:
-		loaded = false
-	return loaded
+		is_loaded = false
+	return is_loaded
+
+func load_rewarded_ad(ad_unit_id:String, on_loaded:Callable, on_failed:Callable, on_rewarded:Callable)->bool:
+	var success = true;
+	if pilum:
+		pilum.loadRewarded(ad_unit_id)
+		pilum.connect("AdmobRewardedLoaded", on_loaded)
+		pilum.connect("AdmobRewardedFailToLoad", on_failed)
+		pilum.connect("AdmobRewarded", on_rewarded)
+	else:
+		success = false
+	return success
+
+func showAdRewardedLoaded() -> void:
+	if pilum:
+		pilum.showLoadedRewadedAd()
 
 func log_event(event_name:String, params:Dictionary = {}) -> void:
 	if pilum:

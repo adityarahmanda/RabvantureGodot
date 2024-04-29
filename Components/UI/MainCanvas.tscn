@@ -1,25 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://do70gvk84lf4u"]
+[gd_scene load_steps=6 format=3 uid="uid://do70gvk84lf4u"]
 
-[ext_resource type="Script" path="res://Scripts/Core/GameUI.gd" id="1_8jltk"]
+[ext_resource type="Script" path="res://Scripts/UI/MainCanvas.gd" id="1_v8aiq"]
 [ext_resource type="Script" path="res://addons/safe_area_rect/safe_area_rect.gd" id="2_clctp"]
 [ext_resource type="Texture2D" uid="uid://bexagtavx26xy" path="res://Sprites/PackedSprite/DeathIcon.tres" id="4_dwbis"]
 [ext_resource type="PackedScene" uid="uid://uc1b4mri88y4" path="res://Components/UI/GameUIInput.tscn" id="4_wb8iq"]
 [ext_resource type="Texture2D" uid="uid://c7xmvm7dy5nda" path="res://Sprites/PackedSprite/PauseButton.tres" id="5_jwqci"]
-[ext_resource type="Texture2D" uid="uid://d20diwvw32cps" path="res://Sprites/PackedSprite/LeftArrow.tres" id="5_l5nhv"]
-[ext_resource type="Texture2D" uid="uid://vng65svty7m8" path="res://Sprites/PackedSprite/RightArrow.tres" id="6_rr25e"]
-[ext_resource type="Script" path="res://Scripts/UI/LanguageUISelector.gd" id="6_tftdd"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5g6l8"]
-bg_color = Color(0, 0, 0, 0.701961)
-
-[sub_resource type="LabelSettings" id="LabelSettings_60pf0"]
-font_size = 8
-
-[sub_resource type="LabelSettings" id="LabelSettings_d3bk1"]
-font_size = 7
 
 [node name="MainCanvas" type="CanvasLayer"]
-script = ExtResource("1_8jltk")
+script = ExtResource("1_v8aiq")
 
 [node name="SafeAreaRect" type="Control" parent="."]
 layout_mode = 3
@@ -93,127 +81,16 @@ size_flags_horizontal = 8
 size_flags_vertical = 0
 theme_override_constants/separation = 4
 
+[node name="RespawnCheckpointButton" type="TextureButton" parent="SafeAreaRect/RightTopContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(18, 14)
+layout_mode = 2
+texture_normal = ExtResource("4_dwbis")
+stretch_mode = 4
+
 [node name="PauseButton" type="TextureButton" parent="SafeAreaRect/RightTopContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(18, 14)
 layout_mode = 2
 texture_normal = ExtResource("5_jwqci")
 stretch_mode = 4
-
-[node name="PausePanel" type="Panel" parent="."]
-unique_name_in_owner = true
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_5g6l8")
-
-[node name="Layout" type="Control" parent="PausePanel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -55.0
-offset_top = -30.0
-offset_right = 55.0
-offset_bottom = 30.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="PauseLabel" type="Label" parent="PausePanel/Layout"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 10.0
-grow_horizontal = 2
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 6
-text = "paused"
-label_settings = SubResource("LabelSettings_60pf0")
-horizontal_alignment = 1
-vertical_alignment = 1
-uppercase = true
-
-[node name="LanguageSelectorContainer" type="Control" parent="PausePanel/Layout" node_paths=PackedStringArray("left_button", "right_button", "selected_item_label")]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -12.0
-offset_bottom = 16.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 4
-script = ExtResource("6_tftdd")
-left_button = NodePath("HBoxContainer/Left Arrow")
-right_button = NodePath("HBoxContainer/Right Arrow")
-selected_item_label = NodePath("HBoxContainer/LanguageValueLabel")
-
-[node name="LanguageLabel" type="Label" parent="PausePanel/Layout/LanguageSelectorContainer"]
-custom_minimum_size = Vector2(30, 0)
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 11.0
-grow_horizontal = 2
-text = "language_label"
-label_settings = SubResource("LabelSettings_60pf0")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PausePanel/Layout/LanguageSelectorContainer"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = 14.0
-offset_bottom = 23.0
-grow_horizontal = 2
-alignment = 1
-
-[node name="Left Arrow" type="TextureButton" parent="PausePanel/Layout/LanguageSelectorContainer/HBoxContainer"]
-layout_mode = 2
-texture_normal = ExtResource("5_l5nhv")
-stretch_mode = 5
-
-[node name="LanguageValueLabel" type="Label" parent="PausePanel/Layout/LanguageSelectorContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "language"
-label_settings = SubResource("LabelSettings_d3bk1")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Right Arrow" type="TextureButton" parent="PausePanel/Layout/LanguageSelectorContainer/HBoxContainer"]
-layout_mode = 2
-texture_normal = ExtResource("6_rr25e")
-stretch_mode = 4
-
-[node name="ReturnButton" type="TextureButton" parent="PausePanel/Layout"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -8.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="ReturnLabel" type="Label" parent="PausePanel/Layout/ReturnButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 6
-text = "return_to_game"
-label_settings = SubResource("LabelSettings_60pf0")
-horizontal_alignment = 1
-vertical_alignment = 1
-uppercase = true

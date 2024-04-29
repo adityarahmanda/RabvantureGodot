@@ -1,0 +1,136 @@
+[gd_scene load_steps=8 format=3 uid="uid://bsnj2k0e4cb4o"]
+
+[ext_resource type="Script" path="res://Scripts/UI/PauseCanvas.gd" id="1_p7nfk"]
+[ext_resource type="Script" path="res://Scripts/UI/LanguageUISelector.gd" id="2_58s0s"]
+[ext_resource type="Texture2D" uid="uid://d20diwvw32cps" path="res://Sprites/PackedSprite/LeftArrow.tres" id="3_esujx"]
+[ext_resource type="Texture2D" uid="uid://vng65svty7m8" path="res://Sprites/PackedSprite/RightArrow.tres" id="4_bew40"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7o461"]
+bg_color = Color(0, 0, 0, 0.701961)
+
+[sub_resource type="LabelSettings" id="LabelSettings_j15kq"]
+font_size = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_35p87"]
+font_size = 7
+
+[node name="RespawnPanel" type="CanvasLayer"]
+script = ExtResource("1_p7nfk")
+
+[node name="Panel" type="Panel" parent="."]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7o461")
+
+[node name="Layout" type="Control" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.0
+offset_top = -30.0
+offset_right = 55.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseLabel" type="Label" parent="Panel/Layout"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 10.0
+grow_horizontal = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 6
+text = "paused"
+label_settings = SubResource("LabelSettings_j15kq")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="LanguageSelectorContainer" type="Control" parent="Panel/Layout" node_paths=PackedStringArray("left_button", "right_button", "selected_item_label")]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -12.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+script = ExtResource("2_58s0s")
+left_button = NodePath("HBoxContainer/Left Arrow")
+right_button = NodePath("HBoxContainer/Right Arrow")
+selected_item_label = NodePath("HBoxContainer/LanguageValueLabel")
+
+[node name="LanguageLabel" type="Label" parent="Panel/Layout/LanguageSelectorContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 11.0
+grow_horizontal = 2
+text = "language_label"
+label_settings = SubResource("LabelSettings_j15kq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Layout/LanguageSelectorContainer"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 14.0
+offset_bottom = 23.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="Left Arrow" type="TextureButton" parent="Panel/Layout/LanguageSelectorContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_esujx")
+stretch_mode = 5
+
+[node name="LanguageValueLabel" type="Label" parent="Panel/Layout/LanguageSelectorContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "language"
+label_settings = SubResource("LabelSettings_35p87")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Right Arrow" type="TextureButton" parent="Panel/Layout/LanguageSelectorContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("4_bew40")
+stretch_mode = 4
+
+[node name="ReturnButton" type="TextureButton" parent="Panel/Layout"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ReturnLabel" type="Label" parent="Panel/Layout/ReturnButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 6
+text = "return_to_game"
+label_settings = SubResource("LabelSettings_j15kq")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
