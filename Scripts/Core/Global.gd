@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 var locales_settings : String = "game_config/locales"
 var locale : String = ""

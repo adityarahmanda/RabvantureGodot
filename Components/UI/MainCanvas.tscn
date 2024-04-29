@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://do70gvk84lf4u"]
+[gd_scene load_steps=7 format=3 uid="uid://do70gvk84lf4u"]
 
 [ext_resource type="Script" path="res://Scripts/UI/MainCanvas.gd" id="1_v8aiq"]
 [ext_resource type="Script" path="res://addons/safe_area_rect/safe_area_rect.gd" id="2_clctp"]
 [ext_resource type="Texture2D" uid="uid://bexagtavx26xy" path="res://Sprites/PackedSprite/DeathIcon.tres" id="4_dwbis"]
 [ext_resource type="PackedScene" uid="uid://uc1b4mri88y4" path="res://Components/UI/GameUIInput.tscn" id="4_wb8iq"]
+[ext_resource type="Texture2D" uid="uid://d1sbgkkrj2yb4" path="res://Sprites/PackedSprite/RespawnCheckpointIcon.tres" id="5_dm2sp"]
 [ext_resource type="Texture2D" uid="uid://c7xmvm7dy5nda" path="res://Sprites/PackedSprite/PauseButton.tres" id="5_jwqci"]
 
 [node name="MainCanvas" type="CanvasLayer"]
@@ -67,7 +68,6 @@ vertical_alignment = 1
 uppercase = true
 
 [node name="RightTopContainer" type="HBoxContainer" parent="SafeAreaRect"]
-custom_minimum_size = Vector2(0, 8)
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -85,12 +85,12 @@ theme_override_constants/separation = 4
 unique_name_in_owner = true
 custom_minimum_size = Vector2(18, 14)
 layout_mode = 2
-texture_normal = ExtResource("4_dwbis")
-stretch_mode = 4
+texture_normal = ExtResource("5_dm2sp")
+stretch_mode = 5
 
 [node name="PauseButton" type="TextureButton" parent="SafeAreaRect/RightTopContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(18, 14)
 layout_mode = 2
 texture_normal = ExtResource("5_jwqci")
-stretch_mode = 4
+stretch_mode = 5

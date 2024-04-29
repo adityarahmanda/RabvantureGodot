@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://uc1b4mri88y4"]
 
-[ext_resource type="Script" path="res://Scripts/Core/GameUIInput.gd" id="1_3o5e0"]
+[ext_resource type="Script" path="res://Scripts/UI/GameUIInput.gd" id="1_3o5e0"]
 [ext_resource type="Texture2D" uid="uid://cstfx8xbjy1ce" path="res://Sprites/PackedSprite/LeftButton.tres" id="2_8yoyq"]
 [ext_resource type="Texture2D" uid="uid://c34dsctgexd4o" path="res://Sprites/PackedSprite/LeftButtonPressed.tres" id="3_pdqeg"]
 [ext_resource type="Texture2D" uid="uid://l0gsbd8ud23h" path="res://Sprites/PackedSprite/RightButton.tres" id="4_qhte6"]

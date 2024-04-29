@@ -10,7 +10,7 @@ func _ready() -> void:
 	var firebase_api = FirebaseAPI.new()
 	firebase_api.load_native_tools(false, "", on_admob_initialized)
 
-func on_admob_initialized(error_code, message) -> void:
+func on_admob_initialized(_error_code, _message) -> void:
 	is_admob_initialized = true
 	
 func log_open_apps() -> void:

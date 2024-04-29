@@ -1,7 +1,6 @@
 class_name PlayerEntity
 extends Entity
 
-@onready var level_setup : LevelSetup = %Services/LevelSetup
 @onready var audio_manager : AudioManager = %Services/AudioManager
 @onready var sprite_2d : Sprite2D = $Sprite2D
 
@@ -100,7 +99,7 @@ func handle_collision() -> void:
 			die(Global.DeathType.HIT)
 
 func handle_fall_into_pit() -> void:
-	if position.y > level_setup.pit_y_level:
+	if position.y > game_manager.level_setup.pit_y_level:
 		die(Global.DeathType.FALL)
 
 func die(death_type : Global.DeathType) -> void:

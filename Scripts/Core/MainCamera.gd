@@ -1,4 +1,4 @@
-class_name GameCamera
+class_name MainCamera
 extends Camera2D
 
 @export var followSpeed := 5

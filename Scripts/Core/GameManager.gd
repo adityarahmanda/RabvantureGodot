@@ -1,15 +1,14 @@
 extends Node2D
 class_name GameManager
 
-@onready var player : PlayerEntity = $Player
-@onready var main_camera : GameCamera = %Services/MainCamera
+@onready var main_camera : MainCamera = %Services/MainCamera
 @onready var audio_manager : AudioManager = %Services/AudioManager
-@onready var level_setup : LevelSetup = %Services/LevelSetup
-
 @onready var main_canvas : MainCanvas = %Canvases/MainCanvas
 @onready var pause_canvas : PauseCanvas = %Canvases/PauseCanvas
+@onready var level_setup : LevelSetup = $LevelSetup
 
-@export var respawn_delay : float = 3.0
+@export var player : PlayerEntity
+@export var respawn_delay : float = 1.0
 
 var score : int = 0
 var is_game_ends : bool = false
@@ -34,7 +33,7 @@ func register_signal_callbacks() -> void:
 	main_canvas.respawn_checkpoint_ad_loaded.connect(on_respawn_checkpoint_ad_loaded.bind())
 	main_canvas.respawn_checkpoint_ad_failed.connect(on_respawn_checkpoint_ad_failed.bind())
 	main_canvas.respawn_checkpoint_ad_rewarded.connect(on_respawn_checkpoint_ad_rewarded.bind())
-	
+
 func start_game() -> void:
 	main_camera.follow_target = player
 	player.respawn()
