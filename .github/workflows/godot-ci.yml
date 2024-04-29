@@ -90,7 +90,8 @@ jobs:
           echo 'keystore/debug_user="androiddebugkey"' >> export_presets.cfg
           echo 'keystore/debug_password="android"' >> export_presets.cfg
           sed -i 's/gradle_build\/use_gradle_build=true/gradle_build\/use_gradle_build=false/g' export_presets.cfg
-          sed -1 's/enabled=PackedStringArray("res:\/\/addons\/pilum_plugin\/plugin.cfg", "res:\/\/addons\/safe_area_rect\/plugin.cfg")/enabled=PackedStringArray("res:\/\/addons\/safe_area_rect\/plugin.cfg")/g' project.godot
+          sed -1 's/"res:\/\/addons\/pilum_plugin\/plugin.cfg",\ //g' project.godot
+          sed -1 's/,\ "res:\/\/addons\/pilum_plugin\/plugin.cfg"//g' project.godot
           echo 'export/android/android_sdk_path = "/usr/lib/android-sdk"' >> /root/.config/godot/editor_settings-4.tres
       - name: Android Build
         run: |
