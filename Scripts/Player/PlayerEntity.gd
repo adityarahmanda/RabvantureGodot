@@ -73,8 +73,11 @@ func handle_movement(delta) -> void:
 	
 	if ungrounded_time <= jump_forgiveness and elapsed_jump_time <= jump_forgiveness and !is_jumping and !is_prepare_jump:
 		velocity.y = -jump_velocity
+		if (jump_velocity > max_jump_velocity * .8):
+			audio_manager.play_sfx_with_custom_pitch("jump", 1)
+		else:
+			audio_manager.play_sfx_with_custom_pitch("jump", .95)
 		is_jumping = true
-		audio_manager.play_sfx("jump")
 		
 	# Handle Movement
 	direction = clamp(Input.get_axis("ui_left", "ui_right"), -1, 1)
