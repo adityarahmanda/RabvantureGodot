@@ -36,7 +36,7 @@ window/size/window_width_override=1440
 window/size/window_height_override=810
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-mouse_cursor/custom_image="res://Sprites/CursorIconExport.png"
+mouse_cursor/custom_image="res://Sprites/CursorIcon3x.png"
 
 [editor_plugins]
 
