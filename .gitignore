@@ -10,8 +10,8 @@ export_presets.cfg
 # Imported translations (automatically generated from CSV files)
 *.translation
 
-# build ignore
-build/
-
-# Android build ignore
+# build
+build/*
 android/build/*
+!android/build/AndroidManifest.xml
+!android/build/build.gradle
