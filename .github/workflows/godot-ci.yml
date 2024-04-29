@@ -24,17 +24,16 @@ jobs:
           apt-get install -y curl
       - name: Checkout
         uses: actions/checkout@v3
-      # Open the editor to import assets in case the cache was empty or outdated
       - name: Import Godot Assets
         run: |
-          godot --headless --verbose --editor --quit
+          mkdir -v -p ./build/web
+          godot -v --headless --export-debug "Web" ./build/web/index.html
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
       - name: Web Build
         run: |
-          mkdir -v -p ./build/web
           godot -v --headless --export-debug "Web" ./build/web/index.html
       - name: Upload Web Artifact
         uses: actions/upload-artifact@v3
@@ -70,7 +69,6 @@ jobs:
           apt-get install -y curl
           apt-get install -y android-sdk
           apt-get install -y unzip
-          apt-get install -y tree
           sdkmanager --sdk_root="/usr/lib/android-sdk" "platform-tools" "build-tools;33.0.2" "platforms;android-33" "cmdline-tools;latest" "cmake;3.10.2.4988404" "ndk;23.2.8568313"
       - name: Checkout
         uses: actions/checkout@v3
@@ -80,7 +78,8 @@ jobs:
           java-version: '17.0.11+9'
       - name: Import Godot Assets
         run: |
-          godot --headless --verbose --editor --quit
+          mkdir -v -p ./build/android
+          godot -v --headless --debug --export-debug "Android" ./build/android/${EXPORT_NAME}.apk
       - name: Setup Export Template
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates
@@ -92,7 +91,6 @@ jobs:
           mv -f ./android/build/AndroidManifest.xml /root/android/build
           mv -f ./android/build/build.gradle /root/android/build
           mv /root/android/build ./android/build
-          tree -a ./
       - name: Setup Debug Keystore
         run: |
           echo ${{ vars.SECRET_DEBUG_KEYSTORE_BASE64 }} | base64 --decode > /root/debug.keystore
@@ -104,7 +102,6 @@ jobs:
           echo 'export/android/android_sdk_path = "/usr/lib/android-sdk"' >> /root/.config/godot/editor_settings-4.tres
       - name: Android Build
         run: |
-          mkdir -v -p ./build/android
           godot -v --headless --debug --export-debug "Android" ./build/android/${EXPORT_NAME}.apk
       - name: Upload Android Artifact
         uses: actions/upload-artifact@v3
