@@ -70,6 +70,7 @@ jobs:
           apt-get install -y curl
           apt-get install -y android-sdk
           apt-get install -y unzip
+          apt-get install -y tree
           sdkmanager --sdk_root="/usr/lib/android-sdk" "platform-tools" "build-tools;33.0.2" "platforms;android-33" "cmdline-tools;latest" "cmake;3.10.2.4988404" "ndk;23.2.8568313"
       - name: Checkout
         uses: actions/checkout@v3
@@ -91,6 +92,7 @@ jobs:
           mv -f ./android/build/AndroidManifest.xml /root/android/build
           mv -f ./android/build/build.gradle /root/android/build
           mv /root/android/build ./android/build
+          tree -a ./
       - name: Setup Debug Keystore
         run: |
           echo ${{ vars.SECRET_DEBUG_KEYSTORE_BASE64 }} | base64 --decode > /root/debug.keystore
