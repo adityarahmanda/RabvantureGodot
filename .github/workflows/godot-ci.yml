@@ -35,6 +35,10 @@ jobs:
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
           tree -a /root
           tree -a ~/
+          tree -a ./
+          echo tree -a /root
+          echo tree -a ~/
+          echo tree -a ./
       - name: Web Build
         run: |
           mkdir -v -p ./build/web
