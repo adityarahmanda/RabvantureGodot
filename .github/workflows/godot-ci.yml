@@ -26,14 +26,14 @@ jobs:
         uses: actions/checkout@v3
       - name: Import Godot Assets
         run: |
-          mkdir -v -p ./build/web
-          godot -v --headless --export-debug "Web" ./build/web/index.html
+          godot --headless --verbose --editor --quit
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
       - name: Web Build
         run: |
+          mkdir -v -p ./build/web
           godot -v --headless --export-debug "Web" ./build/web/index.html
       - name: Upload Web Artifact
         uses: actions/upload-artifact@v3
@@ -78,8 +78,7 @@ jobs:
           java-version: '17.0.11+9'
       - name: Import Godot Assets
         run: |
-          mkdir -v -p ./build/android
-          godot -v --headless --debug --export-debug "Android" ./build/android/${EXPORT_NAME}.apk
+          godot --headless --verbose --editor --quit
       - name: Setup Export Template
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates
@@ -90,7 +89,7 @@ jobs:
           unzip ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable/android_source.zip -d /root/android/build
           mv -f ./android/build/AndroidManifest.xml /root/android/build
           mv -f ./android/build/build.gradle /root/android/build
-          mv /root/android/build ./android/build
+          mv /root/android/build ./android
       - name: Setup Debug Keystore
         run: |
           echo ${{ vars.SECRET_DEBUG_KEYSTORE_BASE64 }} | base64 --decode > /root/debug.keystore
@@ -102,6 +101,7 @@ jobs:
           echo 'export/android/android_sdk_path = "/usr/lib/android-sdk"' >> /root/.config/godot/editor_settings-4.tres
       - name: Android Build
         run: |
+          mkdir -v -p ./build/android
           godot -v --headless --debug --export-debug "Android" ./build/android/${EXPORT_NAME}.apk
       - name: Upload Android Artifact
         uses: actions/upload-artifact@v3
