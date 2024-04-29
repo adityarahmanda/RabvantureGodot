@@ -15,3 +15,4 @@ build/*
 android/build/*
 !android/build/AndroidManifest.xml
 !android/build/build.gradle
+!android/build/google-services.json

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "253838907532",
+    "project_id": "hop-up-bunny-dev",
+    "storage_bucket": "hop-up-bunny-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:253838907532:android:6f7d2e5cd1cbf8bd9e03a9",
+        "android_client_info": {
+          "package_name": "com.adityarahmanda.hopupbunny"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkAG-ASFIN2yTVXPQ8xR4PHMYY_UhzVmc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
