@@ -104,6 +104,7 @@ jobs:
         run: |
           mkdir -v -p ./build/android
           godot -v --headless --debug --export-debug "Android" ./build/android/${EXPORT_NAME}.apk
+          godot -v --headless --debug --export-debug "Android" ./build/android/${EXPORT_NAME}.apk
       - name: Upload Android Artifact
         uses: actions/upload-artifact@v3
         with:
