@@ -22,6 +22,7 @@ jobs:
           apt-get update -y
           apt-get install -y rsync
           apt-get install -y curl
+          apt-get install -y tree
       - name: Checkout
         uses: actions/checkout@v3
       # Open the editor to import assets in case the cache was empty or outdated
@@ -32,6 +33,8 @@ jobs:
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+          tree -a /root
+          tree -a ~/
       - name: Web Build
         run: |
           mkdir -v -p ./build/web
