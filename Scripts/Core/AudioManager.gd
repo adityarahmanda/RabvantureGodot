@@ -11,6 +11,11 @@ func _ready() -> void:
 	bgm_player.stream = BGM_RESOURCE
 	bgm_player.play()
 
-func play_sfx(audio_name : String) -> void:
-	sfx_player.stream = SFX_RESOURCES.audios.get(audio_name)
-	sfx_player.play()
+func play_sfx(audio_name : String, randomize_pitch : bool = true) -> void:
+	var stream : AudioStream = SFX_RESOURCES.get_audio(audio_name)
+	if (stream != null):
+		sfx_player.stream = stream
+		if (randomize_pitch):
+			var pitch_setting = SFX_RESOURCES.get_random_audio_pitch(audio_name)
+			sfx_player.pitch_scale = pitch_setting.pitch_scale if pitch_setting != null else 1
+		sfx_player.play()
