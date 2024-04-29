@@ -83,16 +83,14 @@ jobs:
           godot --headless --verbose --editor --quit
       - name: Setup
         run: |
-          echo "Setting up godot export template..."
           mkdir -v -p ~/.local/share/godot/export_templates
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
-          echo "Setting up android keystores..."
           keytool -keyalg RSA -genkeypair -alias androiddebugkey -keypass android -keystore debug.keystore -storepass android -dname "CN=Android Debug,O=Android,C=US" -validity 9999 -deststoretype pkcs12
           echo 'keystore/debug="debug.keystore"' >> export_presets.cfg
           echo 'keystore/debug_user="androiddebugkey"' >> export_presets.cfg
           echo 'keystore/debug_password="android"' >> export_presets.cfg
           sed -i 's/gradle_build\/use_gradle_build=true/gradle_build\/use_gradle_build=false/g' export_presets.cfg
-          echo "Setting up android sdk path..."
+          sed -1 's/enabled=PackedStringArray("res:\/\/addons\/pilum_plugin\/plugin.cfg", "res:\/\/addons\/safe_area_rect\/plugin.cfg")/enabled=PackedStringArray("res:\/\/addons\/safe_area_rect\/plugin.cfg")/g' project.godot
           echo 'export/android/android_sdk_path = "/usr/lib/android-sdk"' >> /root/.config/godot/editor_settings-4.tres
       - name: Android Build
         run: |
