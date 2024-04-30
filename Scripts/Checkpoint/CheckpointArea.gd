@@ -21,12 +21,17 @@ var label_tween : Tween
 signal on_enter_area(area : CheckpointArea)
 
 func _ready():
+	Localization.on_locale_changed.connect(refresh_ui.bind())
+	refresh_ui()
 	checkpoint_label.visible = false
 	set_area_active(false)
 
 func _on_body_entered(body) -> void:
 	if body.is_in_group("Player"):
 		on_enter_area.emit(self)
+
+func refresh_ui() -> void:
+	checkpoint_label.text = "[center][font_size=4]%s[/font_size][/center]" % tr("checkpoint")
 
 func set_area_active(_is_active : bool) -> void:
 	is_active = _is_active

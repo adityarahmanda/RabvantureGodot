@@ -33,6 +33,9 @@ func load_respawn_checkpoint_ad() -> void:
 	if (game_manager.is_game_ends): return
 	
 	respawn_checkpoint_ad_load.emit()
+
+	await get_tree().create_timer(2).timeout
+	
 	var firebase_api = FirebaseAPI.new()
 	var can_load = firebase_api.load_rewarded_ad(FirebaseManager.RESPAWN_CHECKPOINT_AD_ID, 
 		on_respawn_checkpoint_ad_failed,

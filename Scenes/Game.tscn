@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Core/GameManager.gd" id="1_a6ent"]
 [ext_resource type="Script" path="res://Scripts/Core/MainCamera.gd" id="2_0xfg4"]
-[ext_resource type="PackedScene" uid="uid://cn8jvk4udikk5" path="res://Scenes/WorldTest.tscn" id="2_kj4xq"]
+[ext_resource type="PackedScene" uid="uid://cn8jvk4udikk5" path="res://Scenes/World.tscn" id="2_kj4xq"]
 [ext_resource type="PackedScene" uid="uid://do70gvk84lf4u" path="res://Components/UI/MainCanvas.tscn" id="3_pp1ww"]
 [ext_resource type="PackedScene" uid="uid://8dxu3a8poib7" path="res://Components/Entities/Player.tscn" id="3_qlgy4"]
 [ext_resource type="Script" path="res://Scripts/Core/LevelSetup.gd" id="4_eec1q"]
@@ -77,6 +77,7 @@ pause_canvas = NodePath("../PauseCanvas")
 visible = false
 
 [node name="LoadAdCanvas" parent="Canvases" instance=ExtResource("9_40c6p")]
+visible = false
 
 [node name="World" parent="." instance=ExtResource("2_kj4xq")]
 

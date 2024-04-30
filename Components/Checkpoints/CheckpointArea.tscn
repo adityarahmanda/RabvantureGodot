@@ -12,7 +12,7 @@ script = ExtResource("1_vrws3")
 active_frame_coords = Vector2(1, 7)
 inactive_frame_coords = Vector2(0, 7)
 tween_duration = 0.1
-stay_duration = 2.0
+stay_duration = 3.0
 position_offset = Vector2(0, -5)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -57,7 +57,7 @@ offset_right = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 bbcode_enabled = true
-text = "[center][font_size=4]Checkpoint![/font_size][/center]"
+text = "[center][font_size=4]Checkpoint[/font_size][/center]"
 scroll_active = false
 
 [connection signal="body_entered" from="CollisionArea2D" to="." method="_on_body_entered"]
