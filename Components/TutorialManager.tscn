@@ -21,12 +21,16 @@ space_input_image = ExtResource("5_7un10")
 
 [node name="Move Tutorial Area" type="Area2D" parent="."]
 position = Vector2(-56.025, -26)
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Move Tutorial Area"]
 shape = SubResource("RectangleShape2D_fs54y")
 
 [node name="Jump Tutorial Area" type="Area2D" parent="."]
 position = Vector2(57, -26)
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Jump Tutorial Area"]
 shape = SubResource("RectangleShape2D_p7tmq")
