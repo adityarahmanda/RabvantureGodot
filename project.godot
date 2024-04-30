@@ -26,6 +26,7 @@ Global="*res://Scripts/Core/Global.gd"
 SaveGame="*res://Scripts/Core/SaveGame.gd"
 Localization="*res://Scripts/Core/Localization.gd"
 FirebaseManager="*res://Scripts/Firebase/FirebaseManager.gd"
+AudioManager="*res://Components/AudioManager.tscn"
 
 [display]
 

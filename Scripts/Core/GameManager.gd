@@ -2,6 +2,7 @@ extends Node2D
 class_name GameManager
 
 @onready var main_camera : MainCamera = %Services/MainCamera
+@onready var checkpoint_manager : CheckpointManager = %Services/CheckpointManager
 @onready var main_canvas : MainCanvas = %Canvases/MainCanvas
 @onready var pause_canvas : PauseCanvas = %Canvases/PauseCanvas
 @onready var level_setup : LevelSetup = $LevelSetup
@@ -86,7 +87,10 @@ func cache_spawn_position() -> void:
 		spawn_position = spawn_transform.global_position
 
 func set_player_at_spawn_position() -> void:
-	player.global_position = spawn_position
+	if(checkpoint_manager.has_checkpoint()):
+		player.global_position = checkpoint_manager.get_checkpoint()
+	else:
+		player.global_position = spawn_position
 
 func on_respawn_checkpoint_ad_loaded() -> void:
 	pass

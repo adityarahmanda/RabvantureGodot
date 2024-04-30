@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://0r8n88s6vpf"]
+[gd_scene load_steps=14 format=3 uid="uid://0r8n88s6vpf"]
 
 [ext_resource type="Script" path="res://Scripts/Core/GameManager.gd" id="1_a6ent"]
 [ext_resource type="Script" path="res://Scripts/Core/MainCamera.gd" id="2_0xfg4"]
@@ -7,8 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://8dxu3a8poib7" path="res://Components/Entities/Player.tscn" id="3_qlgy4"]
 [ext_resource type="Script" path="res://Scripts/Core/LevelSetup.gd" id="4_eec1q"]
 [ext_resource type="PackedScene" uid="uid://dplxuau61pgqk" path="res://Components/Entities/EnemyRat.tscn" id="4_wt5pl"]
-[ext_resource type="PackedScene" uid="uid://co68gj4myluc8" path="res://Components/AudioManager.tscn" id="5_hcdug"]
+[ext_resource type="Script" path="res://Scripts/Checkpoint/CheckpointManager.gd" id="6_0myb3"]
 [ext_resource type="PackedScene" uid="uid://b2ybqbou1we7y" path="res://Components/TutorialManager.tscn" id="6_3uky4"]
+[ext_resource type="PackedScene" uid="uid://obqch70q8c4u" path="res://Components/Checkpoints/CheckpointArea.tscn" id="6_gg7yh"]
 [ext_resource type="PackedScene" uid="uid://bsnj2k0e4cb4o" path="res://Components/UI/PauseCanvas.tscn" id="7_f8xse"]
 [ext_resource type="PackedScene" uid="uid://r4665fd8w4ud" path="res://Components/Entities/EnemyBat.tscn" id="12_nfxt6"]
 
@@ -30,7 +31,7 @@ pit_y_level = 80
 top_y_level = 900
 
 [node name="Spawn Position" type="Node2D" parent="."]
-position = Vector2(-70, 1)
+position = Vector2(-70, 8)
 
 [node name="Services" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -51,9 +52,19 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 script = ExtResource("2_0xfg4")
 
-[node name="AudioManager" parent="Services" instance=ExtResource("5_hcdug")]
-
 [node name="TutorialManager" parent="Services" instance=ExtResource("6_3uky4")]
+
+[node name="CheckpointManager" type="Node2D" parent="Services"]
+script = ExtResource("6_0myb3")
+
+[node name="CheckpointArea" parent="Services/CheckpointManager" instance=ExtResource("6_gg7yh")]
+position = Vector2(188, -312)
+
+[node name="CheckpointArea3" parent="Services/CheckpointManager" instance=ExtResource("6_gg7yh")]
+position = Vector2(52, -680)
+
+[node name="CheckpointArea2" parent="Services/CheckpointManager" instance=ExtResource("6_gg7yh")]
+position = Vector2(20, -992)
 
 [node name="Canvases" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -67,7 +78,7 @@ visible = false
 [node name="World" parent="." instance=ExtResource("2_kj4xq")]
 
 [node name="Player" parent="." instance=ExtResource("3_qlgy4")]
-position = Vector2(-70, 1)
+position = Vector2(-70, 8)
 
 [node name="EnemyRat" parent="." instance=ExtResource("4_wt5pl")]
 position = Vector2(61, -339)
