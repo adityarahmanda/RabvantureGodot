@@ -2,7 +2,6 @@ extends Node2D
 class_name GameManager
 
 @onready var main_camera : MainCamera = %Services/MainCamera
-@onready var audio_manager : AudioManager = %Services/AudioManager
 @onready var main_canvas : MainCanvas = %Canvases/MainCanvas
 @onready var pause_canvas : PauseCanvas = %Canvases/PauseCanvas
 @onready var level_setup : LevelSetup = $LevelSetup
@@ -20,6 +19,7 @@ signal on_paused(is_paused : bool)
 
 func _ready() -> void:
 	register_signal_callbacks()
+	AudioManager.play_bgm()
 	main_canvas.refresh_ui()
 	main_canvas.show_pause_panel(is_paused)
 	cache_spawn_position()

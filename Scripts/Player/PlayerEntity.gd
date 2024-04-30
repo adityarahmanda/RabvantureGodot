@@ -1,7 +1,6 @@
 class_name PlayerEntity
 extends Entity
 
-@onready var audio_manager : AudioManager = %Services/AudioManager
 @onready var sprite_2d : Sprite2D = $Sprite2D
 
 @export var min_jump_velocity := 150.0
@@ -70,9 +69,9 @@ func handle_movement(delta) -> void:
 	if ungrounded_time <= jump_forgiveness and elapsed_jump_time <= jump_forgiveness and !is_jumping and !is_prepare_jump:
 		velocity.y = -jump_velocity
 		if (jump_velocity > max_jump_velocity * .8):
-			audio_manager.play_sfx_with_custom_pitch("jump", 1)
+			AudioManager.play_sfx_with_custom_pitch("jump", 1)
 		else:
-			audio_manager.play_sfx_with_custom_pitch("jump", .95)
+			AudioManager.play_sfx_with_custom_pitch("jump", .95)
 		is_jumping = true
 		
 	# Handle Movement
@@ -105,13 +104,13 @@ func die(death_type : Global.DeathType) -> void:
 	if (is_dead): return
 	
 	if (death_type == Global.DeathType.FALL):
-		audio_manager.play_sfx("fall")
+		AudioManager.play_sfx("fall")
 	if (death_type == Global.DeathType.HIT):
 		var die_particle = DIE_PARTICLE.instantiate()
 		get_tree().current_scene.add_child(die_particle)
 		die_particle.position = position
 		die_particle.emitting = true
-		audio_manager.play_sfx("hit")
+		AudioManager.play_sfx("hit")
 	
 	set_die()
 	emit_signal("on_dead")

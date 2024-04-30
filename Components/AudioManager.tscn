@@ -9,5 +9,3 @@ script = ExtResource("1_bcodf")
 current = true
 
 [node name="BGMPlayer" type="AudioStreamPlayer2D" parent="."]
-
-[node name="SFXPlayer" type="AudioStreamPlayer2D" parent="."]
