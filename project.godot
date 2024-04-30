@@ -97,6 +97,11 @@ ui_down={
 
 locale/translations=PackedStringArray("res://Localization/localization.en.translation", "res://Localization/localization.id.translation", "res://Localization/localization.es.translation", "res://Localization/localization.ko.translation", "res://Localization/localization.ja.translation", "res://Localization/localization.fr.translation")
 
+[layer_names]
+
+2d_physics/layer_1="ENVIRONMENT"
+2d_physics/layer_2="ENTITY"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

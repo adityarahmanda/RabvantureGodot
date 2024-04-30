@@ -8,9 +8,7 @@ extends Entity
 @export var max_jump_velocity := 300.0
 @export var charge_jump_time := 1.0
 @export var jump_forgiveness := 0.2
-@export var spawn_transform : Node2D
 
-var spawn_position : Vector2
 var direction := 0.0
 var is_prepare_jump := false
 var is_jumping := false
@@ -25,19 +23,17 @@ signal on_dead
 const DIE_PARTICLE = preload("res://Particles/DieParticle.tscn")
 
 func _ready() -> void:
-	cache_spawn_position()
-	respawn()
+	set_alive()
 
-func cache_spawn_position() -> void:
-	if (spawn_transform != null):
-		spawn_position = spawn_transform.global_position
-	else:
-		spawn_position = global_position
-
-func respawn() -> void:
-	global_position = spawn_position
-	visible = true
+func set_alive() -> void:
+	set_collision_layer_value(2, true)
 	is_dead = false
+	visible = true
+
+func set_die() -> void:
+	set_collision_layer_value(2, false)
+	is_dead = true
+	visible = false
 	
 func on_physics_process(delta) -> void:
 	handle_movement(delta)
@@ -117,6 +113,5 @@ func die(death_type : Global.DeathType) -> void:
 		die_particle.emitting = true
 		audio_manager.play_sfx("hit")
 	
-	visible = false
-	is_dead = true
+	set_die()
 	emit_signal("on_dead")

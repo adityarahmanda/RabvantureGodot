@@ -7,9 +7,11 @@ class_name GameManager
 @onready var pause_canvas : PauseCanvas = %Canvases/PauseCanvas
 @onready var level_setup : LevelSetup = $LevelSetup
 
-@export var player : PlayerEntity
 @export var respawn_delay : float = 1.0
+@export var spawn_transform : Node2D
+@export var player : PlayerEntity
 
+var spawn_position : Vector2
 var score : int = 0
 var is_game_ends : bool = false
 var is_paused : bool = false
@@ -17,9 +19,11 @@ var is_paused : bool = false
 signal on_paused(is_paused : bool)
 
 func _ready() -> void:
+	register_signal_callbacks()
 	main_canvas.refresh_ui()
 	main_canvas.show_pause_panel(is_paused)
-	register_signal_callbacks()
+	cache_spawn_position()
+	set_player_at_spawn_position()
 	start_game()
 
 func _process(_delta) -> void:
@@ -35,8 +39,8 @@ func register_signal_callbacks() -> void:
 	main_canvas.respawn_checkpoint_ad_rewarded.connect(on_respawn_checkpoint_ad_rewarded.bind())
 
 func start_game() -> void:
+	player.set_alive()
 	main_camera.follow_target = player
-	player.respawn()
 	is_game_ends = false
 
 func ends_game() -> void:
@@ -45,6 +49,7 @@ func ends_game() -> void:
 	if (!is_game_ends):
 		FirebaseManager.log_game_ends("fail", score)
 		is_game_ends = true
+	set_player_at_spawn_position()
 	SaveGame.save_json()
 	await get_tree().create_timer(respawn_delay).timeout
 	start_game()
@@ -73,6 +78,15 @@ func handle_score() -> void:
 	if (!is_game_ends and score >= level_setup.top_y_level):
 		FirebaseManager.log_game_ends("complete", score)
 		is_game_ends = true
+
+func cache_spawn_position() -> void:
+	if (spawn_transform == null):
+		spawn_position = player.global_position
+	else:
+		spawn_position = spawn_transform.global_position
+
+func set_player_at_spawn_position() -> void:
+	player.global_position = spawn_position
 
 func on_respawn_checkpoint_ad_loaded() -> void:
 	pass

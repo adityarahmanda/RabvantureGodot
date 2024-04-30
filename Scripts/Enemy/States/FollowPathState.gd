@@ -6,6 +6,8 @@ class_name FollowPathState
 @export var follow_animation : String = "Walk"
 @export var is_vertical : bool = false
 
+var current_speed : float
+
 func _ready() -> void:
 	set_physics_process(false)
 
@@ -19,17 +21,19 @@ func _exit_state() -> void:
 func on_physics_process(_delta) -> void:
 	if (is_vertical):
 		if(actor.position.y <= simple_path_2d.end_pos.y):
-			actor.velocity.y = actor.speed
+			current_speed = actor.speed
 		elif (actor.position.y >= simple_path_2d.start_pos.y):
-			actor.velocity.y = -actor.speed
+			current_speed = -actor.speed
+		actor.velocity.y = current_speed
 	else:
 		if(actor.position.x <= simple_path_2d.start_pos.x):
-			actor.velocity.x = actor.speed
+			current_speed = actor.speed
 			actor.is_facing_right = true
 		elif (actor.position.x >= simple_path_2d.end_pos.x):
-			actor.velocity.x = -actor.speed
+			current_speed = -actor.speed
 			actor.is_facing_right = false
-		
+		actor.velocity.x = current_speed
+	
 	actor.move_and_slide()
 	
 func handle_animation() -> void:

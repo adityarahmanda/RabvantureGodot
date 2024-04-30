@@ -59,6 +59,8 @@ _data = {
 point_count = 2
 
 [node name="EnemyRat" type="CharacterBody2D" node_paths=PackedStringArray("animator", "sprite_2d")]
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_k5uxi")
 animator = NodePath("AnimationPlayer")
 sprite_2d = NodePath("Sprite2D")
@@ -80,6 +82,8 @@ position = Vector2(-0.00770652, 0.490773)
 shape = SubResource("RectangleShape2D_rst5e")
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("3_kvbr8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
