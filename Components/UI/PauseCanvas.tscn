@@ -14,11 +14,10 @@ font_size = 8
 [sub_resource type="LabelSettings" id="LabelSettings_35p87"]
 font_size = 7
 
-[node name="RespawnPanel" type="CanvasLayer"]
+[node name="PauseCanvas" type="CanvasLayer"]
 script = ExtResource("1_p7nfk")
 
 [node name="Panel" type="Panel" parent="."]
-unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

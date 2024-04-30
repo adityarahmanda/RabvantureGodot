@@ -36,8 +36,10 @@ func get_sfx_player() -> AudioStreamPlayer2D:
 	return instantiate_sfx_player()
 
 func play_sfx(audio_name : String, randomize_pitch : bool = true) -> void:
-	var pitch_setting = SFX_RESOURCES.get_random_audio_pitch(audio_name)
-	var pitch_scale = pitch_setting.pitch_scale if pitch_setting != null else 1
+	var pitch_scale = 1
+	if (randomize_pitch):
+		var pitch_setting = SFX_RESOURCES.get_random_audio_pitch(audio_name)
+		pitch_scale = pitch_setting.pitch_scale if pitch_setting != null else pitch_scale
 	play_sfx_with_custom_pitch(audio_name, pitch_scale)
 
 func play_sfx_with_custom_pitch(audio_name : String, pitch_scale : float = 1) -> void:

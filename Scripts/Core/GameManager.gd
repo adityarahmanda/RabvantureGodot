@@ -5,6 +5,7 @@ class_name GameManager
 @onready var checkpoint_manager : CheckpointManager = %Services/CheckpointManager
 @onready var main_canvas : MainCanvas = %Canvases/MainCanvas
 @onready var pause_canvas : PauseCanvas = %Canvases/PauseCanvas
+@onready var load_ad_canvas : LoadAdCanvas = %Canvases/LoadAdCanvas
 @onready var level_setup : LevelSetup = $LevelSetup
 
 @export var respawn_delay : float = 1.0
@@ -33,9 +34,9 @@ func _process(_delta) -> void:
 	
 func register_signal_callbacks() -> void:
 	player.on_dead.connect(on_player_die.bind())
-	main_canvas.pause_button.button_up.connect(on_toggle_paused.bind())
-	pause_canvas.return_button.button_up.connect(on_toggle_paused.bind())
-	main_canvas.respawn_checkpoint_ad_loaded.connect(on_respawn_checkpoint_ad_loaded.bind())
+	main_canvas.pause_button.button_down.connect(on_pause_button_pressed.bind())
+	pause_canvas.return_button.button_down.connect(on_return_to_game_button_pressed.bind())
+	main_canvas.respawn_checkpoint_ad_load.connect(on_respawn_checkpoint_ad_load.bind())
 	main_canvas.respawn_checkpoint_ad_failed.connect(on_respawn_checkpoint_ad_failed.bind())
 	main_canvas.respawn_checkpoint_ad_rewarded.connect(on_respawn_checkpoint_ad_rewarded.bind())
 
@@ -60,10 +61,18 @@ func handle_pause_input() -> void:
 		on_toggle_paused()
 
 func on_toggle_paused() -> void:
+	main_canvas.show_pause_panel(!is_paused)
 	set_game_paused(!is_paused)
 
+func on_pause_button_pressed() -> void:
+	if (is_paused): return
+	on_toggle_paused()
+
+func on_return_to_game_button_pressed() -> void:
+	if (!is_paused): return
+	on_toggle_paused()
+
 func set_game_paused(is_true:bool) -> void:
-	main_canvas.show_pause_panel(is_true)
 	is_paused = is_true
 	on_paused.emit(is_true)
 
@@ -87,16 +96,24 @@ func cache_spawn_position() -> void:
 		spawn_position = spawn_transform.global_position
 
 func set_player_at_spawn_position() -> void:
+	player.global_position = spawn_position
+
+func set_player_at_checkpoint_position() -> void:
 	if(checkpoint_manager.has_checkpoint()):
 		player.global_position = checkpoint_manager.get_checkpoint()
 	else:
-		player.global_position = spawn_position
+		print_debug("Unable to set player at checkpoint, checkpoint not found")
 
-func on_respawn_checkpoint_ad_loaded() -> void:
-	pass
+func on_respawn_checkpoint_ad_load() -> void:
+	load_ad_canvas.visible = true
+	set_game_paused(true)
 	
 func on_respawn_checkpoint_ad_failed() -> void:
-	pass
+	load_ad_canvas.visible = false
+	set_game_paused(false)
 	
 func on_respawn_checkpoint_ad_rewarded() -> void:
+	load_ad_canvas.visible = false
+	set_game_paused(false)
+	set_player_at_checkpoint_position()
 	start_game()

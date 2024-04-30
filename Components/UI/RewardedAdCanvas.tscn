@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbwlumq6sd64n"]
+
+[ext_resource type="Script" path="res://Scripts/UI/LoadAdCanvas.gd" id="1_ufgh6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7o461"]
+bg_color = Color(0, 0, 0, 0.701961)
+
+[sub_resource type="LabelSettings" id="LabelSettings_j15kq"]
+font_size = 8
+
+[node name="LoadAdCanvas" type="CanvasLayer"]
+script = ExtResource("1_ufgh6")
+
+[node name="Panel" type="Panel" parent="."]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7o461")
+
+[node name="LoadingAdLabel" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 6
+text = "loading_ad"
+label_settings = SubResource("LabelSettings_j15kq")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true

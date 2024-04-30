@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://0r8n88s6vpf"]
+[gd_scene load_steps=15 format=3 uid="uid://0r8n88s6vpf"]
 
 [ext_resource type="Script" path="res://Scripts/Core/GameManager.gd" id="1_a6ent"]
 [ext_resource type="Script" path="res://Scripts/Core/MainCamera.gd" id="2_0xfg4"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b2ybqbou1we7y" path="res://Components/TutorialManager.tscn" id="6_3uky4"]
 [ext_resource type="PackedScene" uid="uid://obqch70q8c4u" path="res://Components/Checkpoints/CheckpointArea.tscn" id="6_gg7yh"]
 [ext_resource type="PackedScene" uid="uid://bsnj2k0e4cb4o" path="res://Components/UI/PauseCanvas.tscn" id="7_f8xse"]
+[ext_resource type="PackedScene" uid="uid://bbwlumq6sd64n" path="res://Components/UI/RewardedAdCanvas.tscn" id="9_40c6p"]
 [ext_resource type="PackedScene" uid="uid://r4665fd8w4ud" path="res://Components/Entities/EnemyBat.tscn" id="12_nfxt6"]
 
 [sub_resource type="Curve2D" id="Curve2D_ivlso"]
@@ -74,6 +75,8 @@ pause_canvas = NodePath("../PauseCanvas")
 
 [node name="PauseCanvas" parent="Canvases" instance=ExtResource("7_f8xse")]
 visible = false
+
+[node name="LoadAdCanvas" parent="Canvases" instance=ExtResource("9_40c6p")]
 
 [node name="World" parent="." instance=ExtResource("2_kj4xq")]
 
