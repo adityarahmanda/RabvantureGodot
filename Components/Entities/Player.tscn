@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://8dxu3a8poib7"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerEntity.gd" id="1_7g2fw"]
-[ext_resource type="Texture2D" uid="uid://c7l726d4gavvb" path="res://Sprites/Entities/Rabbit.png" id="2_jvgrc"]
+[ext_resource type="Texture2D" uid="uid://c3bg38m4nnhnw" path="res://Sprites/Entities/RabbitWhite.png" id="2_6hxct"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerAnimation.gd" id="3_rpphb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r0e1a"]
@@ -145,7 +145,7 @@ script = ExtResource("1_7g2fw")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, -1)
-texture = ExtResource("2_jvgrc")
+texture = ExtResource("2_6hxct")
 offset = Vector2(0, -7)
 hframes = 4
 vframes = 3
