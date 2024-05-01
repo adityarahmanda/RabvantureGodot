@@ -16,7 +16,6 @@ func on_enter_checkpoint_area(checkpoint_area : CheckpointArea) -> void:
 		return
 		
 	if (checkpoint_area.global_position.y < current_checkpoint_area.global_position.y):
-		current_checkpoint_area.set_area_active(false)
 		current_checkpoint_area = checkpoint_area
 		current_checkpoint_area.set_area_active(true)
 
