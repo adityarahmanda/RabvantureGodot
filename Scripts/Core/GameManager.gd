@@ -116,10 +116,12 @@ func cache_spawn_position() -> void:
 
 func set_player_at_spawn_position() -> void:
 	player.global_position = spawn_position
+	player.set_facing_right(true)
 
 func set_player_at_checkpoint_position() -> void:
 	if(has_checkpoint):
 		player.global_position = checkpoint_manager.get_checkpoint()
+		player.set_facing_right(checkpoint_manager.get_checkpoint_face_direction())
 	else:
 		print_debug("Unable to set player at checkpoint, checkpoint not found")
 

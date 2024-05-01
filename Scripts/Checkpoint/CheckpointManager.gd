@@ -25,3 +25,6 @@ func has_checkpoint() -> bool:
 
 func get_checkpoint() -> Vector2:
 	return current_checkpoint_area.global_position if has_checkpoint() else Vector2.ZERO
+
+func get_checkpoint_face_direction() -> bool:
+	return current_checkpoint_area.is_facing_right

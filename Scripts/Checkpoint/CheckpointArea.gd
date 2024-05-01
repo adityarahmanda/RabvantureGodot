@@ -4,7 +4,7 @@ class_name CheckpointArea
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var checkpoint_label : RichTextLabel = %CheckpointLabel
 
-@export var checkpoint_offset : Vector2 
+@export var is_facing_right : bool = true
 
 @export_group("Sprite Settings")
 @export var active_frame_coords : Vector2

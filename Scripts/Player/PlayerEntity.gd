@@ -85,9 +85,12 @@ func handle_movement(delta) -> void:
 
 func handle_facing() -> void:
 	if direction > 0:
-		sprite_2d.scale.x = 1
+		set_facing_right(true)
 	elif direction < 0:
-		sprite_2d.scale.x = -1
+		set_facing_right(false)
+
+func set_facing_right(is_facing_right : bool) -> void:
+	sprite_2d.scale.x = 1 if is_facing_right else -1
 
 func handle_collision() -> void:
 	var collision_count = get_slide_collision_count()
