@@ -6,5 +6,6 @@ language_label,Language,Bahasa,Idioma,Langue,언어,言語
 language,English,Bahasa Indonesia,Español,Français,한국어,日本語
 return_to_game,Return to the game,Kembali ke permainan,Volver al juego,Revenir au jeu,게임으로 돌아가기,ゲームに戻る
 checkpoint,Checkpoint!,Checkpoint!,¡Punto de control!,Point de contrôle!,체크포인트!,チェックポイント！
+watch_ad_respawn,Watch ad to respawn at checkpoint,Tonton iklan buat pindah ke checkpoint,Revive en el punto de control viendo el anuncio,Renaître au point de contrôle en regardant la pub,광고 보고 체크포인트에서 부활하기,チェックポイントで復活するために広告を見る
 loading_ad,Loading Ad...,Iklannya lagi dimuat nih…,Cargando anuncio...,Chargement de la publicité…,광고 로딩 중..,広告読み込み中・・・
-watch_ad_respawn,Watch ad to respawn at checkpoint,Tonton iklan buat pindah ke checkpoint,Mira el anuncio para reaparecer en el punto de control,Regardez la publicité pour réapparaître au point de contrôle,광고 보고 체크포인트에서 부활하기,チェックポイントで復活するために広告を見る
+failed_ad,Ad failed to load,Iklannya gagal dimuat nih,El anuncio no se pudo cargar,La pub n'a pas pu être chargée,광고를 못 불러왔어,広告が読み込めなかった

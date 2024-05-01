@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://do70gvk84lf4u"]
+[gd_scene load_steps=10 format=3 uid="uid://do70gvk84lf4u"]
 
 [ext_resource type="Script" path="res://Scripts/UI/MainCanvas.gd" id="1_v8aiq"]
 [ext_resource type="Script" path="res://addons/safe_area_rect/safe_area_rect.gd" id="2_clctp"]
@@ -6,6 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://uc1b4mri88y4" path="res://Components/UI/GameUIInput.tscn" id="4_wb8iq"]
 [ext_resource type="Texture2D" uid="uid://d1sbgkkrj2yb4" path="res://Sprites/PackedSprite/RespawnCheckpointIcon.tres" id="5_dm2sp"]
 [ext_resource type="Texture2D" uid="uid://c7xmvm7dy5nda" path="res://Sprites/PackedSprite/PauseButton.tres" id="5_jwqci"]
+[ext_resource type="Texture2D" uid="uid://b5hsfv6suqe43" path="res://Sprites/PackedSprite/TextBox.tres" id="5_wp2xs"]
+[ext_resource type="Script" path="res://Scripts/UI/LocaleMarginController.gd" id="6_dnjp7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7ti8v"]
+line_spacing = 0.0
+font_size = 4
 
 [node name="MainCanvas" type="CanvasLayer"]
 script = ExtResource("1_v8aiq")
@@ -23,17 +29,23 @@ script = ExtResource("2_clctp")
 [node name="GameUIInput" parent="SafeAreaRect" instance=ExtResource("4_wb8iq")]
 layout_mode = 1
 
-[node name="LeftTopContainer" type="HBoxContainer" parent="SafeAreaRect"]
-custom_minimum_size = Vector2(0, 8)
+[node name="MarginContainer3" type="MarginContainer" parent="SafeAreaRect"]
 layout_mode = 1
-offset_left = 8.0
-offset_top = 4.0
-offset_right = 28.0
+anchors_preset = 10
+anchor_right = 1.0
 offset_bottom = 18.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+
+[node name="LeftTopContainer" type="HBoxContainer" parent="SafeAreaRect/MarginContainer3"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="ScoreLabel" type="Label" parent="SafeAreaRect/LeftTopContainer"]
+[node name="ScoreLabel" type="Label" parent="SafeAreaRect/MarginContainer3/LeftTopContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
@@ -44,12 +56,12 @@ text = "0m"
 vertical_alignment = 1
 uppercase = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SafeAreaRect/LeftTopContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeAreaRect/MarginContainer3/LeftTopContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="TextureRect" type="TextureRect" parent="SafeAreaRect/LeftTopContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="SafeAreaRect/MarginContainer3/LeftTopContainer/HBoxContainer"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_vertical = 0
@@ -57,7 +69,7 @@ texture = ExtResource("4_dwbis")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="DeathCountLabel" type="Label" parent="SafeAreaRect/LeftTopContainer/HBoxContainer"]
+[node name="DeathCountLabel" type="Label" parent="SafeAreaRect/MarginContainer3/LeftTopContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
@@ -67,30 +79,58 @@ text = "0"
 vertical_alignment = 1
 uppercase = true
 
-[node name="RightTopContainer" type="HBoxContainer" parent="SafeAreaRect"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -22.0
-offset_top = 4.0
-offset_right = -8.0
-offset_bottom = 18.0
-grow_horizontal = 0
+[node name="RightTopContainer" type="HBoxContainer" parent="SafeAreaRect/MarginContainer3"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
-theme_override_constants/separation = 4
+theme_override_constants/separation = 0
 
-[node name="RespawnCheckpointButton" type="TextureButton" parent="SafeAreaRect/RightTopContainer"]
+[node name="RespawnCheckPointInstruction" type="MarginContainer" parent="SafeAreaRect/MarginContainer3/RightTopContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(18, 14)
 layout_mode = 2
-texture_normal = ExtResource("5_dm2sp")
-stretch_mode = 5
+size_flags_vertical = 4
+theme_override_constants/margin_right = 2
 
-[node name="PauseButton" type="TextureButton" parent="SafeAreaRect/RightTopContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="SafeAreaRect/MarginContainer3/RightTopContainer/RespawnCheckPointInstruction"]
+layout_mode = 2
+texture = ExtResource("5_wp2xs")
+patch_margin_left = 4
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="SafeAreaRect/MarginContainer3/RightTopContainer/RespawnCheckPointInstruction"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 2
+script = ExtResource("6_dnjp7")
+locale_margins = {
+"ja": Vector4i(5, 5, 3, 1)
+}
+
+[node name="Label" type="Label" parent="SafeAreaRect/MarginContainer3/RightTopContainer/RespawnCheckPointInstruction/MarginContainer"]
+layout_mode = 2
+text = "watch_ad_respawn"
+label_settings = SubResource("LabelSettings_7ti8v")
+
+[node name="MarginContainer2" type="MarginContainer" parent="SafeAreaRect/MarginContainer3/RightTopContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 6
+
+[node name="RespawnCheckpointButton" type="TextureButton" parent="SafeAreaRect/MarginContainer3/RightTopContainer/MarginContainer2"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(18, 14)
+layout_mode = 2
+size_flags_vertical = 0
+texture_normal = ExtResource("5_dm2sp")
+stretch_mode = 4
+
+[node name="PauseButton" type="TextureButton" parent="SafeAreaRect/MarginContainer3/RightTopContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(22, 18)
 layout_mode = 2
 texture_normal = ExtResource("5_jwqci")
-stretch_mode = 5
+stretch_mode = 4

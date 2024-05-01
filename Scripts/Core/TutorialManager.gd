@@ -8,8 +8,11 @@ class_name TutorialManager
 @export var jump_input_image : Texture2D
 @export var space_input_image : Texture2D
 
-var is_show_move_tutorial:bool = false
-var is_show_jump_tutorial:bool = false
+var is_in_tutorial_area : bool = false
+var is_show_move_tutorial : bool = false
+var is_show_jump_tutorial : bool = false
+
+signal on_tutorial_area_entered_or_exited
 
 func _ready():
 	Localization.on_locale_changed.connect(on_player_entered_or_exited.bind())
@@ -22,6 +25,8 @@ func on_player_entered_or_exited():
 		set_tutorial_label_text(tr("jump_tutorial") % get_image_text(image))
 	elif (is_show_move_tutorial):
 		set_tutorial_label_text(tr("move_tutorial") % [get_image_text(left_input_image), get_image_text(right_input_image)])
+	is_in_tutorial_area = is_show_jump_tutorial || is_show_move_tutorial
+	on_tutorial_area_entered_or_exited.emit(is_in_tutorial_area)
 	
 func get_image_text(image:Texture2D) -> String:
 	if (image == null): return ""

@@ -1,11 +1,12 @@
 extends Node2D
 class_name GameManager
 
-@onready var main_camera : MainCamera = %Services/MainCamera
-@onready var checkpoint_manager : CheckpointManager = %Services/CheckpointManager
-@onready var main_canvas : MainCanvas = %Canvases/MainCanvas
-@onready var pause_canvas : PauseCanvas = %Canvases/PauseCanvas
-@onready var load_ad_canvas : LoadAdCanvas = %Canvases/LoadAdCanvas
+@onready var main_camera : MainCamera = $Services/MainCamera
+@onready var checkpoint_manager : CheckpointManager = $Services/CheckpointManager
+@onready var tutorial_manager : TutorialManager = $Services/TutorialManager
+@onready var main_canvas : MainCanvas = $Canvases/MainCanvas
+@onready var pause_canvas : PauseCanvas = $Canvases/PauseCanvas
+@onready var load_ad_canvas : LoadAdCanvas = $Canvases/LoadAdCanvas
 @onready var level_setup : LevelSetup = $LevelSetup
 
 @export var respawn_delay : float = 1.0
@@ -16,13 +17,16 @@ var spawn_position : Vector2
 var score : int = 0
 var is_game_ends : bool = false
 var is_paused : bool = false
+var has_watch_respawn_checkpoint_ad : bool = false
 
 signal on_paused(is_paused : bool)
 
 func _ready() -> void:
 	register_signal_callbacks()
 	AudioManager.play_bgm()
-	main_canvas.refresh_ui()
+	main_canvas.respawn_checkpoint_button.visible = false
+	main_canvas.respawn_checkpoint_instruction.visible = false
+	main_canvas.refresh_death_count_text()
 	main_canvas.show_pause_panel(is_paused)
 	cache_spawn_position()
 	set_player_at_spawn_position()
@@ -39,15 +43,18 @@ func register_signal_callbacks() -> void:
 	main_canvas.respawn_checkpoint_ad_load.connect(on_respawn_checkpoint_ad_load.bind())
 	main_canvas.respawn_checkpoint_ad_failed.connect(on_respawn_checkpoint_ad_failed.bind())
 	main_canvas.respawn_checkpoint_ad_rewarded.connect(on_respawn_checkpoint_ad_rewarded.bind())
+	tutorial_manager.on_tutorial_area_entered_or_exited.connect(on_tutorial_area_entered_or_exited.bind())
 
 func start_game() -> void:
 	player.set_alive()
 	main_camera.follow_target = player
+	main_canvas.respawn_checkpoint_button.visible = checkpoint_manager.has_checkpoint()
+	main_canvas.respawn_checkpoint_instruction.visible = checkpoint_manager.has_checkpoint() and !has_watch_respawn_checkpoint_ad
 	is_game_ends = false
 
 func ends_game() -> void:
 	main_camera.follow_target = null
-	main_canvas.refresh_ui()
+	main_canvas.refresh_death_count_text()
 	if (!is_game_ends):
 		FirebaseManager.log_game_ends("fail", score)
 		is_game_ends = true
@@ -72,15 +79,22 @@ func on_return_to_game_button_pressed() -> void:
 	if (!is_paused): return
 	on_toggle_paused()
 
-func set_game_paused(is_true:bool) -> void:
-	is_paused = is_true
-	on_paused.emit(is_true)
-
+func on_tutorial_area_entered_or_exited(is_in_area : bool) -> void:
+	if (has_watch_respawn_checkpoint_ad): return
+	
+	if (checkpoint_manager.has_checkpoint() && !is_in_area):
+		main_canvas.respawn_checkpoint_instruction.visible = false
+		has_watch_respawn_checkpoint_ad = true
+	
 func on_player_die() -> void:
 	Global.death_count += 1
 	FirebaseManager.log_death(Global.death_count)
 	ends_game()
 	
+func set_game_paused(is_true:bool) -> void:
+	is_paused = is_true
+	on_paused.emit(is_true)
+
 func handle_score() -> void:
 	if (player == null): return
 	score = maxi(0, -player.position.y as int)
@@ -105,6 +119,8 @@ func set_player_at_checkpoint_position() -> void:
 		print_debug("Unable to set player at checkpoint, checkpoint not found")
 
 func on_respawn_checkpoint_ad_load() -> void:
+	main_canvas.respawn_checkpoint_instruction.visible = false
+	has_watch_respawn_checkpoint_ad = true
 	load_ad_canvas.visible = true
 	set_game_paused(true)
 	

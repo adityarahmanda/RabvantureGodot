@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b2ybqbou1we7y" path="res://Components/TutorialManager.tscn" id="6_3uky4"]
 [ext_resource type="PackedScene" uid="uid://obqch70q8c4u" path="res://Components/Checkpoints/CheckpointArea.tscn" id="6_gg7yh"]
 [ext_resource type="PackedScene" uid="uid://bsnj2k0e4cb4o" path="res://Components/UI/PauseCanvas.tscn" id="7_f8xse"]
-[ext_resource type="PackedScene" uid="uid://bbwlumq6sd64n" path="res://Components/UI/RewardedAdCanvas.tscn" id="9_40c6p"]
+[ext_resource type="PackedScene" uid="uid://bbwlumq6sd64n" path="res://Components/UI/LoadAdCanvas.tscn" id="9_40c6p"]
 [ext_resource type="PackedScene" uid="uid://r4665fd8w4ud" path="res://Components/Entities/EnemyBat.tscn" id="12_nfxt6"]
 
 [sub_resource type="Curve2D" id="Curve2D_ivlso"]
@@ -35,7 +35,6 @@ top_y_level = 900
 position = Vector2(-70, 8)
 
 [node name="Services" type="Node2D" parent="."]
-unique_name_in_owner = true
 
 [node name="MainCamera" type="Camera2D" parent="Services"]
 offset = Vector2(0, -20)
@@ -68,10 +67,10 @@ position = Vector2(52, -680)
 position = Vector2(20, -992)
 
 [node name="Canvases" type="Node2D" parent="."]
-unique_name_in_owner = true
 
-[node name="MainCanvas" parent="Canvases" node_paths=PackedStringArray("pause_canvas") instance=ExtResource("3_pp1ww")]
+[node name="MainCanvas" parent="Canvases" node_paths=PackedStringArray("pause_canvas", "load_ad_canvas") instance=ExtResource("3_pp1ww")]
 pause_canvas = NodePath("../PauseCanvas")
+load_ad_canvas = NodePath("../LoadAdCanvas")
 
 [node name="PauseCanvas" parent="Canvases" instance=ExtResource("7_f8xse")]
 visible = false
