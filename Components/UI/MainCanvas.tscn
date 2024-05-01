@@ -15,6 +15,7 @@ font_size = 4
 
 [node name="MainCanvas" type="CanvasLayer"]
 script = ExtResource("1_v8aiq")
+respawn_checkpoint_button_disabled_color = Color(0.364706, 0.364706, 0.364706, 1)
 
 [node name="SafeAreaRect" type="Control" parent="."]
 layout_mode = 3

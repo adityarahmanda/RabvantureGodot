@@ -8,12 +8,12 @@ class_name MainCanvas
 @onready var respawn_checkpoint_button : TextureButton = %RespawnCheckpointButton
 @onready var respawn_checkpoint_instruction : MarginContainer = %RespawnCheckPointInstruction
 
+@export var respawn_checkpoint_button_disabled_color : Color
 @export var pause_canvas : PauseCanvas
-@export var load_ad_canvas : LoadAdCanvas
 
 signal respawn_checkpoint_ad_load
-signal respawn_checkpoint_ad_failed
-signal respawn_checkpoint_ad_rewarded
+signal respawn_checkpoint_ad_failed(error_code : int, message : String)
+signal respawn_checkpoint_ad_rewarded(type : String, amount : int)
 
 func _ready() -> void:
 	respawn_checkpoint_button.button_down.connect(load_respawn_checkpoint_ad.bind())
@@ -23,6 +23,10 @@ func refresh_death_count_text() -> void:
 	
 func show_pause_panel(is_show:bool):
 	pause_canvas.visible = is_show
+
+func set_respawn_checkpoint_button_disabled(is_true : bool) -> void:
+	respawn_checkpoint_button.modulate = respawn_checkpoint_button_disabled_color if is_true else Color.WHITE
+	respawn_checkpoint_button.disabled = is_true
 
 func set_score(score : int) -> void:
 	if (score > 1000):
@@ -35,25 +39,22 @@ func load_respawn_checkpoint_ad() -> void:
 	if (game_manager.is_game_ends): return
 	
 	respawn_checkpoint_ad_load.emit()
-	
 	var firebase_api = FirebaseAPI.new()
 	var can_load = firebase_api.load_rewarded_ad(FirebaseManager.RESPAWN_CHECKPOINT_AD_ID, 
 		on_respawn_checkpoint_ad_failed,
 		on_respawn_checkpoint_ad_success)
 	if (can_load):
 		print_debug("Loading Respawn Checkpoint Ad...")
-		load_ad_canvas.set_status_load()
-		respawn_checkpoint_button.disabled = true
+		set_respawn_checkpoint_button_disabled(true)
 	else:
-		print_debug("Failed load Respawn Checkpoint Ad, error : Pilum singleton not found!")
-		load_ad_canvas.set_status_failed()
-		await get_tree().create_timer(2).timeout
-		respawn_checkpoint_ad_failed.emit()
+		on_respawn_checkpoint_ad_failed(-1, "Pilum singleton not found")
 	
-func on_respawn_checkpoint_ad_failed(error_code, message) -> void:
+func on_respawn_checkpoint_ad_failed(error_code : int, message : String) -> void:
 	print_debug("Failed load Respawn Checkpoint Ad, error %s: %s" % [error_code, message])
-	respawn_checkpoint_ad_failed.emit()
+	set_respawn_checkpoint_button_disabled(false)
+	respawn_checkpoint_ad_failed.emit(error_code, message)
 	
-func on_respawn_checkpoint_ad_success(_type, _amount) -> void:
-	respawn_checkpoint_button.disabled = false
-	respawn_checkpoint_ad_rewarded.emit()
+func on_respawn_checkpoint_ad_success(type : String, amount : int) -> void:
+	print_debug("Get reward from Respawn Checkpoint Ad success, reward : %s, %s" % [type, amount])
+	set_respawn_checkpoint_button_disabled(false)
+	respawn_checkpoint_ad_rewarded.emit(type, amount)
