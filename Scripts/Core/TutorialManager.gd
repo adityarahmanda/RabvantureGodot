@@ -12,8 +12,6 @@ var is_in_tutorial_area : bool = false
 var is_show_move_tutorial : bool = false
 var is_show_jump_tutorial : bool = false
 
-signal on_tutorial_area_entered_or_exited
-
 func _ready():
 	Localization.on_locale_changed.connect(on_player_entered_or_exited.bind())
 	is_show_move_tutorial = true
@@ -26,7 +24,6 @@ func on_player_entered_or_exited():
 	elif (is_show_move_tutorial):
 		set_tutorial_label_text(tr("move_tutorial") % [get_image_text(left_input_image), get_image_text(right_input_image)])
 	is_in_tutorial_area = is_show_jump_tutorial || is_show_move_tutorial
-	on_tutorial_area_entered_or_exited.emit(is_in_tutorial_area)
 	
 func get_image_text(image:Texture2D) -> String:
 	if (image == null): return ""

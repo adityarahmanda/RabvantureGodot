@@ -20,7 +20,7 @@ var is_paused : bool = false
 
 var death_count_after_first_time_watch_checkpoint_ad : int = -1
 var has_first_time_watch_respawn_checkpoint_ad : bool = false
-var show_respawn_checkpoint_ad_instruction : bool = false
+var is_show_respawn_checkpoint_ad_instruction : bool = false
 var has_checkpoint : bool = false
 
 signal on_paused(is_paused : bool)
@@ -30,6 +30,7 @@ func _ready() -> void:
 	AudioManager.play_bgm()
 	main_canvas.refresh_death_count_text()
 	main_canvas.show_pause_panel(is_paused)
+	main_canvas.respawn_checkpoint_instruction.visible = false
 	cache_spawn_position()
 	set_player_at_spawn_position()
 	start_game()
@@ -45,14 +46,14 @@ func register_signal_callbacks() -> void:
 	main_canvas.respawn_checkpoint_ad_load.connect(on_respawn_checkpoint_ad_load.bind())
 	main_canvas.respawn_checkpoint_ad_failed.connect(on_respawn_checkpoint_ad_failed.bind())
 	main_canvas.respawn_checkpoint_ad_rewarded.connect(on_respawn_checkpoint_ad_rewarded.bind())
-	tutorial_manager.on_tutorial_area_entered_or_exited.connect(on_tutorial_area_entered_or_exited.bind())
 
 func start_game() -> void:
 	player.set_alive()
 	main_camera.follow_target = player
 	main_canvas.set_respawn_checkpoint_button_disabled(!has_checkpoint)
-	show_respawn_checkpoint_ad_instruction = !has_first_time_watch_respawn_checkpoint_ad or (Global.death_count - death_count_after_first_time_watch_checkpoint_ad) % 5 == 0
-	main_canvas.respawn_checkpoint_instruction.visible = has_checkpoint and show_respawn_checkpoint_ad_instruction
+	is_show_respawn_checkpoint_ad_instruction = !has_first_time_watch_respawn_checkpoint_ad or (Global.death_count - death_count_after_first_time_watch_checkpoint_ad) % 5 == 0
+	if (has_checkpoint and is_show_respawn_checkpoint_ad_instruction):
+		show_checkpoint_respawn_ad_instruction(3)
 	is_game_ends = false
 
 func ends_game() -> void:
@@ -82,14 +83,6 @@ func on_pause_button_pressed() -> void:
 func on_return_to_game_button_pressed() -> void:
 	if (!is_paused): return
 	on_toggle_paused()
-
-func on_tutorial_area_entered_or_exited(is_in_area : bool) -> void:
-	if (!show_respawn_checkpoint_ad_instruction): return
-	
-	if (has_checkpoint && !is_in_area):
-		set_first_time_watch_respawn_checkpoint_ad(true)
-		main_canvas.respawn_checkpoint_instruction.visible = false
-		show_respawn_checkpoint_ad_instruction = false
 
 func on_player_die() -> void:
 	Global.death_count += 1
@@ -125,6 +118,15 @@ func set_player_at_checkpoint_position() -> void:
 	else:
 		print_debug("Unable to set player at checkpoint, checkpoint not found")
 
+func show_checkpoint_respawn_ad_instruction(duration : float) -> void:
+	main_canvas.respawn_checkpoint_instruction.visible = true
+	
+	await get_tree().create_timer(duration).timeout
+	
+	set_first_time_watch_respawn_checkpoint_ad(true)
+	main_canvas.respawn_checkpoint_instruction.visible = false
+	is_show_respawn_checkpoint_ad_instruction = false
+
 func set_first_time_watch_respawn_checkpoint_ad(has_watch:bool) -> void:
 	if (has_watch):
 		if (!has_first_time_watch_respawn_checkpoint_ad):
@@ -135,9 +137,9 @@ func set_first_time_watch_respawn_checkpoint_ad(has_watch:bool) -> void:
 		has_first_time_watch_respawn_checkpoint_ad = false
 
 func on_respawn_checkpoint_ad_load() -> void:
-	main_canvas.respawn_checkpoint_instruction.visible = false
-	show_respawn_checkpoint_ad_instruction = false
 	set_first_time_watch_respawn_checkpoint_ad(true)
+	main_canvas.respawn_checkpoint_instruction.visible = false
+	is_show_respawn_checkpoint_ad_instruction = false
 	load_ad_canvas.set_status_load()
 	load_ad_canvas.visible = true
 	set_game_paused(true)
