@@ -45,7 +45,7 @@ enabled=PackedStringArray("res://addons/pilum_plugin/plugin.cfg", "res://addons/
 
 [game_config]
 
-locales=["en", "id", "es", "fr", "ko", "ja"]
+locales=["en", "id", "jv", "es", "fr", "ko", "ja"]
 
 [gui]
 
@@ -96,7 +96,7 @@ ui_down={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://Localization/localization.en.translation", "res://Localization/localization.id.translation", "res://Localization/localization.es.translation", "res://Localization/localization.ko.translation", "res://Localization/localization.ja.translation", "res://Localization/localization.fr.translation")
+locale/translations=PackedStringArray("res://Localization/localization.en.translation", "res://Localization/localization.id.translation", "res://Localization/localization.es.translation", "res://Localization/localization.ko.translation", "res://Localization/localization.ja.translation", "res://Localization/localization.fr.translation", "res://Localization/localization.jv.translation")
 
 [layer_names]
 
