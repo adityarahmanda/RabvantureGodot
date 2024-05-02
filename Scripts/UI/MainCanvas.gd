@@ -38,22 +38,22 @@ func load_respawn_checkpoint_ad() -> void:
 	if (game_manager.is_paused): return
 	
 	respawn_checkpoint_ad_load.emit()
-	var firebase_api = FirebaseAPI.new()
-	var can_load = firebase_api.load_rewarded_ad(FirebaseManager.RESPAWN_CHECKPOINT_AD_ID, 
+	var google_services = GoogleServicesAPI.new()
+	var can_load = google_services.load_rewarded_ad(GoogleServicesManager.RESPAWN_CHECKPOINT_AD_ID, 
 		on_respawn_checkpoint_ad_failed,
-		on_respawn_checkpoint_ad_success)
+		on_respawn_checkpoint_ad_rewarded)
 	if (can_load):
 		print_debug("Loading Respawn Checkpoint Ad...")
 		set_respawn_checkpoint_button_disabled(true)
 	else:
-		on_respawn_checkpoint_ad_failed(-1, "Pilum singleton not found")
+		on_respawn_checkpoint_ad_failed(-1, "Google Services singleton not found")
 	
 func on_respawn_checkpoint_ad_failed(error_code : int, message : String) -> void:
 	print_debug("Failed load Respawn Checkpoint Ad, error %s: %s" % [error_code, message])
 	set_respawn_checkpoint_button_disabled(false)
 	respawn_checkpoint_ad_failed.emit(error_code, message)
 	
-func on_respawn_checkpoint_ad_success(type : String, amount : int) -> void:
+func on_respawn_checkpoint_ad_rewarded(type : String, amount : int) -> void:
 	print_debug("Get reward from Respawn Checkpoint Ad success, reward : %s, %s" % [type, amount])
 	set_respawn_checkpoint_button_disabled(false)
 	respawn_checkpoint_ad_rewarded.emit(type, amount)

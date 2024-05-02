@@ -12,7 +12,7 @@ var status : ResourceLoader.ThreadLoadStatus
 
 func _ready():
 	SaveGame.load_json()
-	FirebaseManager.log_open_apps()
+	GoogleServicesManager.log_open_apps()
 	ResourceLoader.load_threaded_request(game_scene.resource_path)
 	initialize_locale()
 	play_splash_screen_sequence()

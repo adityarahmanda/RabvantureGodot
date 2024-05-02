@@ -16,6 +16,7 @@ class_name GameManager
 var spawn_position : Vector2
 var score : int = 0
 var is_level_completed : bool = false
+var is_use_respawn : bool = false
 var is_paused : bool = false
 var death_count_after_watch_ad : int = -1
 var has_first_time_watch_ad : bool = false
@@ -53,6 +54,7 @@ func start_game() -> void:
 	is_show_ad_instruction = !has_first_time_watch_ad or (Global.death_count - death_count_after_watch_ad) % 5 == 0
 	if (has_checkpoint and is_show_ad_instruction):
 		show_checkpoint_respawn_ad_instruction(5)
+	is_use_respawn = false
 	is_level_completed = false
 
 func ends_game() -> void:
@@ -60,7 +62,7 @@ func ends_game() -> void:
 	main_canvas.refresh_death_count_text()
 	has_checkpoint = checkpoint_manager.has_checkpoint()
 	if (!is_level_completed):
-		FirebaseManager.log_game_ends("fail", score)
+		GoogleServicesManager.log_game_ends("fail", score)
 		is_level_completed = true
 	set_player_at_spawn_position()
 	SaveGame.save_json()
@@ -85,7 +87,7 @@ func on_return_to_game_button_pressed() -> void:
 
 func on_player_die() -> void:
 	Global.death_count += 1
-	FirebaseManager.log_death(Global.death_count)
+	GoogleServicesManager.log_death(Global.death_count)
 	ends_game()
 
 func set_game_paused(is_true:bool) -> void:
@@ -96,8 +98,9 @@ func handle_score() -> void:
 	if (player == null): return
 	score = maxi(0, -player.position.y as int)
 	main_canvas.set_score(score)
+	GoogleServicesManager.check_unlock_achievement(score, is_use_respawn)
 	if (!is_level_completed and score >= level_setup.top_y_level):
-		FirebaseManager.log_game_ends("complete", score)
+		GoogleServicesManager.log_game_ends("complete", score)
 		is_level_completed = true
 
 func cache_spawn_position() -> void:
@@ -149,6 +152,7 @@ func on_respawn_checkpoint_ad_failed(error_code : int, message : String) -> void
 	set_game_paused(false)
 	
 func on_respawn_checkpoint_ad_rewarded(type : String, amount : int) -> void:
+	is_use_respawn = true
 	load_ad_canvas.visible = false
 	set_game_paused(false)
 	set_player_at_checkpoint_position()

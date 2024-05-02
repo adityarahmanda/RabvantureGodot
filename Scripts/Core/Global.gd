@@ -1,6 +1,7 @@
 extends Node
 
-var locales_settings : String = "game_config/locales"
+const LOCALES_SETTINGS : String = "game_config/locales"
+
 var locale : String = ""
 var death_count : int = 0
 

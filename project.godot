@@ -25,7 +25,7 @@ config/icon="res://Sprites/AppIcon.png"
 Global="*res://Scripts/Core/Global.gd"
 SaveGame="*res://Scripts/Core/SaveGame.gd"
 Localization="*res://Scripts/Core/Localization.gd"
-FirebaseManager="*res://Scripts/Firebase/FirebaseManager.gd"
+GoogleServicesManager="*res://Scripts/Firebase/GoogleServicesManager.gd"
 AudioManager="*res://Components/AudioManager.tscn"
 
 [display]
@@ -41,7 +41,7 @@ mouse_cursor/custom_image="res://Sprites/CursorIcon3x.png"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/pilum_plugin/plugin.cfg", "res://addons/safe_area_rect/plugin.cfg")
+enabled=PackedStringArray("res://addons/googleservices/plugin.cfg", "res://addons/safe_area_rect/plugin.cfg")
 
 [game_config]
 

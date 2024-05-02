@@ -37,6 +37,11 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-7764262309445081~8324461897"/>
 
+        <!--  Play Games App ID. -->
+        <meta-data 
+            android:name="com.google.android.gms.games.APP_ID" 
+            android:value="@string/game_services_project_id"/>     
+
         <!-- Records the version of the Godot editor used for building -->
         <meta-data
             android:name="org.godotengine.editor.version"
