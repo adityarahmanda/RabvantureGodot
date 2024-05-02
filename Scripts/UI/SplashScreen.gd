@@ -21,7 +21,10 @@ func _process(_delta) -> void:
 	handle_game_scene_loading()
 
 func initialize_locale() -> void:
-	var locale = Global.locale if Global.locale != "" else OS.get_locale()
+	var regex = RegEx.new()
+	regex.compile("^[a-zA-Z]*(?=_)")
+	var result = regex.search(OS.get_locale())
+	var locale = Global.locale if Global.locale != "" else result.get_string()
 	Localization.set_locale(locale)
 
 func handle_game_scene_loading():

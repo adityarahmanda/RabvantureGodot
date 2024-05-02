@@ -1,12 +1,12 @@
-﻿key,en,id,es,fr,ko,ja
-move_tutorial,Press %s %s to Move,Pencet %s %s buat gerak,Pulsa %s %s para moverte,Appuyez sur %s %s pour bouger,%s %s 를 눌러서 이동하세요,%s %sを押して移動
-jump_tutorial,Hold and Release %s to Jump\nHold it longer to jump higher,Tahan dan lepas %s buat lompat\nTahan lamaan biar lompatnya lebih tinggi,Mantener y suelta %s para saltar\nMantenlo mas tiempo para saltar mas alto,Maintenez et relâchez %s pour sauter\nMaintenez le plus longtemps pour sauter plus haut,%s 를 누르고 있다가 놓으면 점프하세요\n더 오래 누르면 더 높게 점프하세요,%sを押し続けて離すとジャンプ\n長く押し続けるとより高くジャンプ
-paused,Paused,Jeda,En Pausa,En pause,일시 중지,ポーズ
-language_label,Language,Bahasa,Idioma,Langue,언어,言語
-language,English,Bahasa Indonesia,Español,Français,한국어,日本語
-return_to_game,Return to the game,Kembali ke permainan,Volver al juego,Revenir au jeu,게임으로 돌아가기,ゲームに戻る
-checkpoint,Checkpoint!,Checkpoint!,¡Punto de control!,Point de contrôle!,체크포인트!,チェックポイント！
-watch_ad_respawn,Watch ad to respawn at checkpoint,Tonton iklan buat pindah ke checkpoint,Revive en el punto de control viendo el anuncio,Renaître au point de contrôle en regardant la pub,광고 보고 체크포인트에서 부활하기,チェックポイントで復活するために広告を見る
-loading_ad,Loading Ad...,Iklannya lagi dimuat nih…,Cargando anuncio...,Chargement de la publicité…,광고 로딩 중..,広告読み込み中・・・
-failed_ad,Ad failed to load,Iklannya gagal dimuat nih,El anuncio no se pudo cargar,La pub n'a pas pu être chargée,광고를 못 불러왔어,広告が読み込めなかった
-failed_ad_no_internet,Ad failed to load \nNo Internet Connection,Iklannya gagal dimuat nih\nInternetnya mati sih,El anuncio no se pudo cargar\nSin conexión a internet,La pub n'a pas pu être chargée\nPas de connexion Internet,광고를 못 불러왔어\n인터넷 연결 없음,広告が読み込めなかった\nインターネット繋がってない
+﻿key,en,id,jv,es,fr,ko,ja
+move_tutorial,Press %s %s to Move,Pencet %s %s buat gerak,Penet %s %s gawe gerak,Pulsa %s %s para moverte,Appuyez sur %s %s pour bouger,%s %s 를 눌러서 이동하세요,%s %sを押して移動
+jump_tutorial,Hold and Release %s to Jump\nHold it longer to jump higher,Tahan dan lepas %s buat lompat\nTahan lamaan biar lompatnya lebih tinggi,Tahan dan culna %s gawe mencolot\nTahan rodo suwi ben mencolot e tambah dhuwur,Mantener y suelta %s para saltar\nMantenlo mas tiempo para saltar mas alto,Maintenez et relâchez %s pour sauter\nMaintenez le plus longtemps pour sauter plus haut,%s 를 누르고 있다가 놓으면 점프하세요\n더 오래 누르면 더 높게 점프하세요,%sを押し続けて離すとジャンプ\n長く押し続けるとより高くジャンプ
+paused,Paused,Jeda,Jeda,En Pausa,En pause,일시 중지,ポーズ
+language_label,Language,Bahasa,Basa,Idioma,Langue,언어,言語
+language,English,Bahasa Indonesia,Basa Jawa,Español,Français,한국어,日本語
+return_to_game,Return to the game,Balik ke permainan,Balik ning dolanan,Volver al juego,Revenir au jeu,게임으로 돌아가기,ゲームに戻る
+checkpoint,Checkpoint!,Checkpoint!,Checkpoint!,¡Punto de control!,Point de contrôle!,체크포인트!,チェックポイント！
+watch_ad_respawn,Watch ad to respawn at checkpoint,Tonton iklan buat pindah ke checkpoint,Tonton pariwara kanggo pindah ning checkpoint,Revive en el punto de control viendo el anuncio,Renaître au point de contrôle en regardant la pub,광고 보고 체크포인트에서 부활하기,チェックポイントで復活するために広告を見る
+loading_ad,Loading Ad...,Iklannya lagi dimuat nih…,Pariwara e lagi diamot iki…,Cargando anuncio...,Chargement de la publicité…,광고 로딩 중..,広告読み込み中・・・
+failed_ad,Ad failed to load,Iklannya gagal dimuat nih,Pariwara e ra kenek diamot iki,El anuncio no se pudo cargar,La pub n'a pas pu être chargée,광고를 못 불러왔어,広告が読み込めなかった
+failed_ad_no_internet,Ad failed to load \nNo Internet Connection,Iklannya gagal dimuat nih\nInternetnya mati,Pariwara e ra kenek diamot iki\nInternet e mati,El anuncio no se pudo cargar\nSin conexión a internet,La pub n'a pas pu être chargée\nPas de connexion Internet,광고를 못 불러왔어\n인터넷 연결 없음,広告が読み込めなかった\nインターネット繋がってない
