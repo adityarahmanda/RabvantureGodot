@@ -3,19 +3,20 @@ extends Entity
 
 @onready var sprite_2d : Sprite2D = $Sprite2D
 
-@export var min_jump_velocity := 150.0
-@export var max_jump_velocity := 300.0
-@export var charge_jump_time := 1.0
-@export var jump_forgiveness := 0.2
+@export var min_jump_velocity : float = 150.0
+@export var max_jump_velocity : float = 300.0
+@export var charge_jump_time : float = 1.0
+@export var jump_forgiveness : float = 0.2
 
-var direction := 0.0
-var is_prepare_jump := false
-var is_jumping := false
-var elapsed_charge_jump_time := 0.0
-var elapsed_jump_time := jump_forgiveness
-var jump_velocity := 0.0
-var ungrounded_time := 0.0
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var direction : float = 0.0
+var jump_buffer_count : int = 1
+var is_prepare_jump : bool = false
+var is_jumping : bool = false
+var elapsed_charge_jump_time : float = 0.0
+var elapsed_jump_time : float = jump_forgiveness
+var jump_velocity : float = 0.0
+var ungrounded_time : float = 0.0
+var gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 signal on_dead
 
@@ -46,6 +47,7 @@ func handle_movement(delta) -> void:
 		jump_velocity = min_jump_velocity
 		is_prepare_jump = true
 	if Input.is_action_just_released("ui_select"):
+		jump_buffer_count += 1
 		is_prepare_jump = false
 	
 	if is_prepare_jump:
@@ -66,13 +68,18 @@ func handle_movement(delta) -> void:
 	if ungrounded_time > jump_forgiveness:
 		jump_velocity = min_jump_velocity
 	
-	if ungrounded_time <= jump_forgiveness and elapsed_jump_time <= jump_forgiveness and !is_jumping and !is_prepare_jump:
-		velocity.y = -jump_velocity
-		if (jump_velocity > max_jump_velocity * .8):
-			AudioManager.play_sfx_with_custom_pitch("jump", 1)
+	var can_jump = ungrounded_time <= jump_forgiveness and elapsed_jump_time <= jump_forgiveness and !is_prepare_jump
+	if can_jump and jump_buffer_count > 0:
+		if !is_jumping:
+			velocity.y = -jump_velocity
+			if (jump_velocity > max_jump_velocity * .8):
+				AudioManager.play_sfx_with_custom_pitch("jump", 1)
+			else:
+				AudioManager.play_sfx_with_custom_pitch("jump", .95)
+			jump_buffer_count -= 1
+			is_jumping = true
 		else:
-			AudioManager.play_sfx_with_custom_pitch("jump", .95)
-		is_jumping = true
+			jump_buffer_count -= 1
 		
 	# Handle Movement
 	direction = clamp(Input.get_axis("ui_left", "ui_right"), -1, 1)
