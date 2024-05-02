@@ -36,7 +36,6 @@ func set_score(score : int) -> void:
 
 func load_respawn_checkpoint_ad() -> void:
 	if (game_manager.is_paused): return
-	if (game_manager.is_game_ends): return
 	
 	respawn_checkpoint_ad_load.emit()
 	var firebase_api = FirebaseAPI.new()

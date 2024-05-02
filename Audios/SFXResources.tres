@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="AudioResource" load_steps=8 format=3 uid="uid://b3aacntbkmbb5"]
+[gd_resource type="Resource" script_class="AudioResource" load_steps=9 format=3 uid="uid://b3aacntbkmbb5"]
 
 [ext_resource type="Script" path="res://Scripts/Core/AudioResources.gd" id="1_cdowc"]
 [ext_resource type="AudioStream" uid="uid://bxjbim7c32au6" path="res://Audios/SFX/jump.wav" id="1_e38td"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://d07fr3pu8ibvg" path="res://Audios/SFX/hit.wav" id="3_0ru55"]
 [ext_resource type="AudioStream" uid="uid://can104wqglreg" path="res://Audios/SFX/checkpoint.wav" id="4_hnp1i"]
 [ext_resource type="AudioEffectPitchShift" uid="uid://dl8rqiwqdpu1l" path="res://Audios/pitch_1.tres" id="4_twno2"]
+[ext_resource type="AudioStream" uid="uid://rh1a4uianwr0" path="res://Audios/SFX/notification.wav" id="5_cki3r"]
 [ext_resource type="AudioEffectPitchShift" uid="uid://dmo5b4v7pt5n6" path="res://Audios/pitch_09.tres" id="6_ryiu4"]
 
 [resource]
@@ -14,7 +15,8 @@ audios = {
 "checkpoint": ExtResource("4_hnp1i"),
 "fall": ExtResource("2_0ewfp"),
 "hit": ExtResource("3_0ru55"),
-"jump": ExtResource("1_e38td")
+"jump": ExtResource("1_e38td"),
+"notification": ExtResource("5_cki3r")
 }
 audios_pitch = {
 "fall": [ExtResource("4_twno2"), ExtResource("6_ryiu4")],
