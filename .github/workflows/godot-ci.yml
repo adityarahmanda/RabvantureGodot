@@ -88,7 +88,7 @@ jobs:
           mkdir -v -p /root/android/build
           unzip ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable/android_source.zip -d /root/android/build
           yes | cp -rf ./android/build/* /root/android/build && rm -R ./android/build/*
-          mv /root/android/build ./android
+          mv /root/android/build ./android/build
       - name: Setup Debug Keystore
         run: |
           echo ${{ vars.SECRET_DEBUG_KEYSTORE_BASE64 }} | base64 --decode > /root/debug.keystore
