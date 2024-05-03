@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://brgs1ruh648bb"]
+
+[ext_resource type="Shader" path="res://Shaders/grass_shader.gdshader" id="1_60bur"]
+
+[resource]
+shader = ExtResource("1_60bur")
+shader_parameter/speed = 0.5
+shader_parameter/minStrength = 0.01
+shader_parameter/maxStrength = 0.01
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/distortion = 0.8
+shader_parameter/skew = 80.0
+shader_parameter/player_pos = Vector2(0, 0)
+shader_parameter/player_radius = 12.0

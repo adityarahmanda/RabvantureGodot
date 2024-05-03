@@ -1,27 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://obqch70q8c4u"]
+[gd_scene load_steps=4 format=3 uid="uid://obqch70q8c4u"]
 
 [ext_resource type="Script" path="res://Scripts/Checkpoint/CheckpointArea.gd" id="1_vrws3"]
-[ext_resource type="Texture2D" uid="uid://csybpirr4aw6f" path="res://Sprites/Tileset/Tileset.png" id="2_0yiod"]
-[ext_resource type="Material" uid="uid://crxnft8at4gdw" path="res://Shaders/grass_sway.tres" id="2_wvvfs"]
+[ext_resource type="Texture2D" uid="uid://bom05fe5kqlub" path="res://Sprites/Tileset/Carrot.png" id="2_mlrrc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cp1ww"]
 size = Vector2(30, 30)
 
 [node name="Checkpoint" type="Node2D"]
 script = ExtResource("1_vrws3")
-active_frame_coords = Vector2(1, 7)
-inactive_frame_coords = Vector2(0, 7)
+active_frame_coords = Vector2(1, 0)
 tween_duration = 0.1
 stay_duration = 3.0
 position_offset = Vector2(0, -5)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-material = ExtResource("2_wvvfs")
-texture = ExtResource("2_0yiod")
+texture = ExtResource("2_mlrrc")
 offset = Vector2(0, -4)
-hframes = 12
-vframes = 8
-frame = 85
+hframes = 2
 
 [node name="CollisionArea2D" type="Area2D" parent="."]
 position = Vector2(0, -15)

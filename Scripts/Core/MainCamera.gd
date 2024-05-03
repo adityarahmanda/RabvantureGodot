@@ -7,4 +7,4 @@ var follow_target : Node2D
 
 func _process(delta) -> void:
 	if (follow_target != null):
-		position = lerp(position, follow_target.position, followSpeed * delta)
+		global_position = lerp(global_position, follow_target.global_position, followSpeed * delta)

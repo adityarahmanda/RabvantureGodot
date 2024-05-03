@@ -83,11 +83,7 @@ func handle_movement(delta) -> void:
 		
 	# Handle Movement
 	direction = clamp(Input.get_axis("ui_left", "ui_right"), -1, 1)
-	if direction:
-		velocity.x = direction * speed
-	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
-
+	velocity.x = direction * speed
 	move_and_slide()
 
 func handle_facing() -> void:

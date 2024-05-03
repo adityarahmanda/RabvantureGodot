@@ -151,7 +151,7 @@ func on_respawn_checkpoint_ad_failed(error_code : int, message : String) -> void
 	load_ad_canvas.visible = false
 	set_game_paused(false)
 	
-func on_respawn_checkpoint_ad_rewarded(type : String, amount : int) -> void:
+func on_respawn_checkpoint_ad_rewarded(_type : String, _amount : int) -> void:
 	is_use_respawn = true
 	load_ad_canvas.visible = false
 	set_game_paused(false)

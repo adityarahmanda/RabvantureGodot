@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Core/GameManager.gd" id="1_a6ent"]
 [ext_resource type="Script" path="res://Scripts/Core/MainCamera.gd" id="2_0xfg4"]
-[ext_resource type="PackedScene" uid="uid://cn8jvk4udikk5" path="res://Scenes/World.tscn" id="2_kj4xq"]
+[ext_resource type="PackedScene" uid="uid://cn8jvk4udikk5" path="res://Components/World.tscn" id="2_kj4xq"]
 [ext_resource type="PackedScene" uid="uid://do70gvk84lf4u" path="res://Components/UI/MainCanvas.tscn" id="3_pp1ww"]
 [ext_resource type="PackedScene" uid="uid://8dxu3a8poib7" path="res://Components/Entities/Player.tscn" id="3_qlgy4"]
 [ext_resource type="Script" path="res://Scripts/Core/LevelSetup.gd" id="4_eec1q"]
@@ -37,6 +37,7 @@ position = Vector2(-70, 8)
 [node name="Services" type="Node2D" parent="."]
 
 [node name="MainCamera" type="Camera2D" parent="Services"]
+position = Vector2(-70, 8)
 offset = Vector2(0, -20)
 process_callback = 0
 limit_left = -500
