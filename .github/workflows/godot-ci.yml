@@ -87,11 +87,7 @@ jobs:
         run: |
           mkdir -v -p /root/android/build
           unzip ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable/android_source.zip -d /root/android/build
-          mv -f ./android/build/AndroidManifest.xml /root/android/build
-          mv -f ./android/build/build.gradle /root/android/build
-          mv -f ./android/build/google-services.json /root/android/build
-          mv -f ./android/build/res/values/strings.xml /root/android/build/res/values
-          mv -f ./android/build/.gdignore /root/android/build
+          yes | cp -rf ./android/build/* /root/android/build && rm -R ~/android/build/*
           mv /root/android/build ./android
       - name: Setup Debug Keystore
         run: |
