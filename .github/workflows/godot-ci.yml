@@ -90,6 +90,7 @@ jobs:
           mv -f ./android/build/AndroidManifest.xml /root/android/build
           mv -f ./android/build/build.gradle /root/android/build
           mv -f ./android/build/google-services.json /root/android/build
+          mv -f ./android/build/res/values/strings.xml /root/android/build/res/values
           mv -f ./android/build/.gdignore /root/android/build
           mv /root/android/build ./android
       - name: Setup Debug Keystore
