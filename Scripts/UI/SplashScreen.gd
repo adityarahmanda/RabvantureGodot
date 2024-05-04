@@ -5,14 +5,13 @@ extends CanvasLayer
 @export var splash_duration : float = 3
 @export var game_scene : Resource
 
-@onready var logo : TextureRect = $SafeAreaRect/Logo
-@onready var logo_animation : AnimationPlayer = $SafeAreaRect/Logo/AnimationPlayer
+@onready var logo : TextureRect = $Logo
+@onready var logo_animation : AnimationPlayer = $Logo/AnimationPlayer
 
 var status : ResourceLoader.ThreadLoadStatus
 
 func _ready():
 	SaveGame.load_json()
-	GoogleServicesManager.log_open_apps()
 	ResourceLoader.load_threaded_request(game_scene.resource_path)
 	initialize_locale()
 	play_splash_screen_sequence()
@@ -23,9 +22,11 @@ func _process(_delta) -> void:
 func initialize_locale() -> void:
 	var regex = RegEx.new()
 	regex.compile("^[a-zA-Z]*(?=_)")
-	var result = regex.search(OS.get_locale())
-	var locale = Global.locale if Global.locale != "" else result.get_string()
+	var os_locale = regex.search(OS.get_locale()).get_string()
+	var locale = Global.locale if Global.locale != "" else os_locale
+	Localization.cache_locale_settings()
 	Localization.set_locale(locale)
+	print_debug("Localization set up! Current locale : %s, OS locale : %s" % [Global.locale, os_locale])
 
 func handle_game_scene_loading():
 	if (status == ResourceLoader.THREAD_LOAD_LOADED): return

@@ -84,7 +84,7 @@ motion_mode = 1
 script = ExtResource("1_dksvs")
 animator = NodePath("AnimationPlayer")
 sprite_2d = NodePath("Sprite2D")
-speed = 20.0
+speed = 30.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(-1, 1)

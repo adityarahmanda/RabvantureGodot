@@ -25,7 +25,7 @@ config/icon="res://Sprites/AppIcon.png"
 Global="*res://Scripts/Core/Global.gd"
 SaveGame="*res://Scripts/Core/SaveGame.gd"
 Localization="*res://Scripts/Core/Localization.gd"
-GoogleServicesManager="*res://Scripts/Firebase/GoogleServicesManager.gd"
+GoogleServicesManager="*res://Scripts/GoogleServices/GoogleServicesManager.gd"
 AudioManager="*res://Components/AudioManager.tscn"
 
 [display]
@@ -46,6 +46,9 @@ enabled=PackedStringArray("res://addons/googleservices/plugin.cfg", "res://addon
 [game_config]
 
 locales=["en", "id", "jv", "es", "fr", "ko", "ja"]
+deprecated_locales={
+"in": "id"
+}
 
 [gui]
 

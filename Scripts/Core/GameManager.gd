@@ -145,9 +145,11 @@ func on_respawn_checkpoint_ad_load() -> void:
 	load_ad_canvas.visible = true
 	set_game_paused(true)
 	
-func on_respawn_checkpoint_ad_failed(error_code : int, message : String) -> void:
-	load_ad_canvas.set_status_failed(error_code, message)
-	await get_tree().create_timer(2).timeout
+func on_respawn_checkpoint_ad_failed(error_code : int) -> void:
+	load_ad_canvas.set_status_failed(error_code)
+	await get_tree().create_timer(3).timeout
+	if error_code == LoadAdCanvas.FAILED_AD_NO_CONSENT_GDPR or error_code == LoadAdCanvas.FAILED_AD_NO_ADS_TO_LOAD:
+		GoogleServicesManager.show_privacy_options_form()
 	load_ad_canvas.visible = false
 	set_game_paused(false)
 	

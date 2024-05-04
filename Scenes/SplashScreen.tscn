@@ -1,6 +1,5 @@
-[gd_scene load_steps=9 format=3 uid="uid://caevlu073yd1v"]
+[gd_scene load_steps=8 format=3 uid="uid://caevlu073yd1v"]
 
-[ext_resource type="Script" path="res://addons/safe_area_rect/safe_area_rect.gd" id="1_8xxnx"]
 [ext_resource type="Script" path="res://Scripts/UI/SplashScreen.gd" id="1_es3nu"]
 [ext_resource type="Texture2D" uid="uid://bnuu1m4qk88oh" path="res://Sprites/PackedSprite/Logo_0.tres" id="2_pyv7o"]
 [ext_resource type="PackedScene" uid="uid://0r8n88s6vpf" path="res://Scenes/Game.tscn" id="2_x0ugk"]
@@ -48,28 +47,17 @@ _data = {
 script = ExtResource("1_es3nu")
 game_scene = ExtResource("2_x0ugk")
 
-[node name="SafeAreaRect" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-script = ExtResource("1_8xxnx")
-
-[node name="Logo" type="TextureRect" parent="SafeAreaRect"]
-custom_minimum_size = Vector2(84, 13)
-layout_mode = 1
+[node name="Logo" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(126, 19.5)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -50.0
-offset_top = -5.0
+offset_top = -6.5
 offset_right = 50.0
-offset_bottom = 5.0
+offset_bottom = 6.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 0
@@ -77,7 +65,7 @@ texture = ExtResource("2_pyv7o")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="SafeAreaRect/Logo"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Logo"]
 libraries = {
 "": SubResource("AnimationLibrary_6fu06")
 }
