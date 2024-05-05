@@ -17,7 +17,6 @@ const DEATH_EVENT = "death"
 var google_service : GoogleServicesAPI
 var has_reach_1000 : bool = false
 var has_challenge_1000 : bool = false
-var is_rewarded_ad_loaded : bool = false
 var any_ad_to_load : bool = true
 var is_network_available : bool = false
 
@@ -25,8 +24,8 @@ func _ready() -> void:
 	print_debug("Loading Google Services Tools...")
 	var is_test_mode = OS.is_debug_build()
 	google_service = GoogleServicesAPI.new()
-	google_service.initialize_analytics()
 	google_service.initialize_mobile_ads(is_test_mode, TEST_DEVICE_ID)
+	google_service.initialize_analytics()
 	google_service.initialize_play_games()
 	google_service.connect_signal(GoogleServicesAPI.SIGNAL_CONNECTIVITY_AVAILABLE, on_connectivity_available)
 	google_service.connect_signal(GoogleServicesAPI.SIGNAL_CONNECTIVITY_LOST, on_connectivity_lost)
@@ -52,26 +51,26 @@ func on_consent_form_dismissed() -> void:
 
 func on_rewarded_ad_loaded() -> void:
 	any_ad_to_load = true
-	is_rewarded_ad_loaded = true
 
 func on_rewarded_ad_fail_to_load(error_code:int, _message:String) -> void:
 	if error_code == AdmobError.ERROR_CODE_NO_FILL or error_code == AdmobError.ERROR_CODE_MEDIATION_NO_FILL:
 		any_ad_to_load = false
-	is_rewarded_ad_loaded = false
+	else:
+		any_ad_to_load = true
 
 func on_rewarded_ad_dismissed() -> void:
 	load_rewarded_ad()
 	
 func load_rewarded_ad() -> void:
-	if is_connected_to_network() and has_gdpr_consent_for_ads():
+	if !is_rewarded_ad_loaded() and has_gdpr_consent_for_ads():
 		google_service.load_rewarded_ad(RESPAWN_CHECKPOINT_AD_ID)
-		is_rewarded_ad_loaded = false
 
 func show_rewarded_ad() -> void:
-	if is_rewarded_ad_loaded:
+	if is_rewarded_ad_loaded() and has_gdpr_consent_for_ads():
 		google_service.show_loaded_rewarded_ad()
-	else:
-		load_rewarded_ad()
+
+func is_rewarded_ad_loaded() -> bool:
+	return google_service.is_rewarded_ad_loaded()
 
 func show_achievements() -> void:
 	google_service.show_achievements()

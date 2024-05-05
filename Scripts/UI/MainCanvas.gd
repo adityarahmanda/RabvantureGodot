@@ -25,6 +25,10 @@ func _ready() -> void:
 
 func _process(delta):
 	if !is_loading_respawn_ad: return
+	if GoogleServicesManager.is_rewarded_ad_loaded():
+		GoogleServicesManager.show_rewarded_ad()
+		is_loading_respawn_ad = false
+		return
 	if !GoogleServicesManager.is_connected_to_network():
 		on_respawn_checkpoint_ad_failed(LoadAdCanvas.FAILED_AD_NO_INTERNET)
 		is_loading_respawn_ad = false
@@ -35,10 +39,6 @@ func _process(delta):
 		return
 	if !GoogleServicesManager.any_ad_to_load:
 		on_respawn_checkpoint_ad_failed(LoadAdCanvas.FAILED_AD_NO_ADS_TO_LOAD)
-		is_loading_respawn_ad = false
-		return
-	if GoogleServicesManager.is_rewarded_ad_loaded:
-		GoogleServicesManager.show_rewarded_ad()
 		is_loading_respawn_ad = false
 		return
 	if respawn_checkpoint_ad_timer > 0:
@@ -68,6 +68,7 @@ func load_respawn_checkpoint_ad() -> void:
 	print_debug("Loading Respawn Checkpoint Ad...")
 	respawn_checkpoint_ad_load.emit()
 	if OS.get_name() == "Android":
+		GoogleServicesManager.load_rewarded_ad()
 		respawn_checkpoint_ad_timer = respawn_checkpoint_ad_timeout
 		is_loading_respawn_ad = true
 	else:
