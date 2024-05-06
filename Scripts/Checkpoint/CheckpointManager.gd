@@ -4,6 +4,8 @@ class_name CheckpointManager
 var checkpoint_areas : Array
 var current_checkpoint_area : CheckpointArea
 
+signal first_time_checkpoint
+
 func _ready() -> void:
 	checkpoint_areas = find_children("*", "CheckpointArea")
 	for checkpoint_area in checkpoint_areas:
@@ -13,6 +15,7 @@ func on_enter_checkpoint_area(checkpoint_area : CheckpointArea) -> void:
 	if (current_checkpoint_area == null):
 		current_checkpoint_area = checkpoint_area
 		current_checkpoint_area.set_area_active(true)
+		first_time_checkpoint.emit()
 		return
 		
 	if (checkpoint_area.global_position.y < current_checkpoint_area.global_position.y):
