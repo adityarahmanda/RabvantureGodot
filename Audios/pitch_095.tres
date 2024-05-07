@@ -1,0 +1,4 @@
+[gd_resource type="AudioEffectPitchShift" format=3 uid="uid://bo7pvwv53bl2x"]
+
+[resource]
+pitch_scale = 0.95

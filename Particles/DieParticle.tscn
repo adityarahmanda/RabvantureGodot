@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cnb6cpjqghoyd"]
+
+[node name="DieParticle" type="CPUParticles2D"]
+emitting = false
+amount = 12
+lifetime = 0.15
+one_shot = true
+explosiveness = 1.0
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 5.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 490)
+initial_velocity_min = 60.0
+initial_velocity_max = 80.0
+linear_accel_min = -28.0
+linear_accel_max = -16.0

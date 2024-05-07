@@ -1,7 +1,0 @@
-[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://cfmbpss6ruwv"]
-
-[ext_resource type="Texture2D" uid="uid://c6mnytjmksb2v" path="res://Sprites/Input_Buttons.png" id="1_oorpt"]
-
-[resource]
-atlas = ExtResource("1_oorpt")
-region = Rect2(16, 13, 16, 13)

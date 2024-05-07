@@ -1,37 +1,195 @@
-[gd_scene load_steps=7 format=3 uid="uid://0r8n88s6vpf"]
+[gd_scene load_steps=15 format=3 uid="uid://0r8n88s6vpf"]
 
-[ext_resource type="Script" path="res://Scripts/_Core/GameManager.gd" id="1_a6ent"]
-[ext_resource type="PackedScene" uid="uid://cn8jvk4udikk5" path="res://Scenes/WorldTest.tscn" id="2_kj4xq"]
-[ext_resource type="Script" path="res://Scripts/_Core/GameCamera.gd" id="3_lbwio"]
+[ext_resource type="Script" path="res://Scripts/Core/GameManager.gd" id="1_a6ent"]
+[ext_resource type="Script" path="res://Scripts/Core/MainCamera.gd" id="2_0xfg4"]
+[ext_resource type="PackedScene" uid="uid://cn8jvk4udikk5" path="res://Components/World.tscn" id="2_kj4xq"]
 [ext_resource type="PackedScene" uid="uid://do70gvk84lf4u" path="res://Components/UI/MainCanvas.tscn" id="3_pp1ww"]
 [ext_resource type="PackedScene" uid="uid://8dxu3a8poib7" path="res://Components/Entities/Player.tscn" id="3_qlgy4"]
-[ext_resource type="PackedScene" uid="uid://d0vxcbdepsvch" path="res://Components/Entities/EnemyRat.tscn" id="4_wt5pl"]
+[ext_resource type="Script" path="res://Scripts/Core/LevelSetup.gd" id="4_eec1q"]
+[ext_resource type="PackedScene" uid="uid://dplxuau61pgqk" path="res://Components/Entities/EnemyRat.tscn" id="4_wt5pl"]
+[ext_resource type="Script" path="res://Scripts/Checkpoint/CheckpointManager.gd" id="6_0myb3"]
+[ext_resource type="PackedScene" uid="uid://b2ybqbou1we7y" path="res://Components/TutorialManager.tscn" id="6_3uky4"]
+[ext_resource type="PackedScene" uid="uid://obqch70q8c4u" path="res://Components/Checkpoints/CheckpointArea.tscn" id="6_gg7yh"]
+[ext_resource type="PackedScene" uid="uid://bsnj2k0e4cb4o" path="res://Components/UI/PauseCanvas.tscn" id="7_f8xse"]
+[ext_resource type="PackedScene" uid="uid://bbwlumq6sd64n" path="res://Components/UI/LoadAdCanvas.tscn" id="9_40c6p"]
+[ext_resource type="PackedScene" uid="uid://r4665fd8w4ud" path="res://Components/Entities/EnemyBat.tscn" id="12_nfxt6"]
 
-[node name="Game" type="Node2D"]
+[sub_resource type="Curve2D" id="Curve2D_ivlso"]
+_data = {
+"points": PackedVector2Array(-18.7824, 32.9632, 0, 0, 0, 0, 0, 0, 0, 0, 33, 1)
+}
+point_count = 2
+
+[node name="Game" type="Node2D" node_paths=PackedStringArray("spawn_transform", "player")]
 script = ExtResource("1_a6ent")
+spawn_transform = NodePath("Spawn Position")
+player = NodePath("Player")
+metadata/_edit_horizontal_guides_ = [30.0]
 
-[node name="MainCamera" type="Camera2D" parent="."]
+[node name="LevelSetup" type="Node2D" parent="."]
+script = ExtResource("4_eec1q")
+pit_y_level = 80
+top_y_level = 900
+
+[node name="Spawn Position" type="Node2D" parent="."]
+position = Vector2(-70, 8)
+
+[node name="Services" type="Node2D" parent="."]
+
+[node name="MainCamera" type="Camera2D" parent="Services"]
+position = Vector2(-70, 8)
 offset = Vector2(0, -20)
 process_callback = 0
-limit_left = -200
-limit_top = -500
-limit_right = 200
-limit_bottom = 30
+limit_left = -500
+limit_top = -1500
+limit_right = 500
+limit_bottom = 80
 position_smoothing_enabled = true
-position_smoothing_speed = 8.0
+position_smoothing_speed = 12.0
 drag_horizontal_enabled = true
-drag_left_margin = 0.1
-drag_right_margin = 0.1
+drag_left_margin = 0.0
+drag_right_margin = 0.0
 editor_draw_limits = true
 editor_draw_drag_margin = true
-script = ExtResource("3_lbwio")
+script = ExtResource("2_0xfg4")
 
-[node name="MainCanvas" parent="." instance=ExtResource("3_pp1ww")]
+[node name="TutorialManager" parent="Services" instance=ExtResource("6_3uky4")]
+
+[node name="CheckpointManager" type="Node2D" parent="Services"]
+script = ExtResource("6_0myb3")
+
+[node name="CheckpointArea" parent="Services/CheckpointManager" instance=ExtResource("6_gg7yh")]
+position = Vector2(188, -312)
+is_facing_right = false
+
+[node name="CheckpointArea3" parent="Services/CheckpointManager" instance=ExtResource("6_gg7yh")]
+position = Vector2(284, -656)
+is_facing_right = false
+
+[node name="CheckpointArea2" parent="Services/CheckpointManager" instance=ExtResource("6_gg7yh")]
+position = Vector2(20, -992)
+
+[node name="Canvases" type="Node2D" parent="."]
+
+[node name="MainCanvas" parent="Canvases" node_paths=PackedStringArray("pause_canvas") instance=ExtResource("3_pp1ww")]
+pause_canvas = NodePath("../PauseCanvas")
+
+[node name="PauseCanvas" parent="Canvases" instance=ExtResource("7_f8xse")]
+visible = false
+
+[node name="LoadAdCanvas" parent="Canvases" instance=ExtResource("9_40c6p")]
+visible = false
 
 [node name="World" parent="." instance=ExtResource("2_kj4xq")]
 
 [node name="Player" parent="." instance=ExtResource("3_qlgy4")]
-position = Vector2(0, -24)
+position = Vector2(-70, 8)
 
 [node name="EnemyRat" parent="." instance=ExtResource("4_wt5pl")]
-position = Vector2(-35, -11)
+position = Vector2(61, -339)
+
+[node name="EnemyRat2" parent="." instance=ExtResource("4_wt5pl")]
+position = Vector2(-54, -339)
+
+[node name="EnemyRat3" parent="." instance=ExtResource("4_wt5pl")]
+position = Vector2(-67, -427)
+
+[node name="EnemyBat" parent="." instance=ExtResource("12_nfxt6")]
+position = Vector2(5, -525)
+is_facing_right = false
+
+[node name="EnemyBat2" parent="." instance=ExtResource("12_nfxt6")]
+position = Vector2(113, -525)
+is_facing_right = false
+
+[node name="EnemyBat3" parent="." instance=ExtResource("12_nfxt6")]
+position = Vector2(248, -716)
+is_facing_right = false
+
+[node name="StateMachine" parent="EnemyBat3" index="5" node_paths=PackedStringArray("state")]
+state = NodePath("IdleState")
+
+[node name="EnemyBat4" parent="." instance=ExtResource("12_nfxt6")]
+position = Vector2(257, -716)
+is_facing_right = false
+
+[node name="StateMachine" parent="EnemyBat4" index="5" node_paths=PackedStringArray("state")]
+state = NodePath("IdleState")
+
+[node name="EnemyBat5" parent="." instance=ExtResource("12_nfxt6")]
+position = Vector2(159, -708)
+is_facing_right = false
+
+[node name="StateMachine" parent="EnemyBat5" index="5" node_paths=PackedStringArray("state")]
+state = NodePath("IdleState")
+
+[node name="EnemyBat6" parent="." instance=ExtResource("12_nfxt6")]
+position = Vector2(150, -708)
+is_facing_right = false
+
+[node name="StateMachine" parent="EnemyBat6" index="5" node_paths=PackedStringArray("state")]
+state = NodePath("IdleState")
+
+[node name="EnemyBat7" parent="." instance=ExtResource("12_nfxt6")]
+position = Vector2(141, -708)
+is_facing_right = false
+
+[node name="StateMachine" parent="EnemyBat7" index="5" node_paths=PackedStringArray("state")]
+state = NodePath("IdleState")
+
+[node name="EnemyBat8" parent="." instance=ExtResource("12_nfxt6")]
+position = Vector2(284, -836)
+is_facing_right = false
+
+[node name="StateMachine" parent="EnemyBat8" index="5" node_paths=PackedStringArray("state")]
+state = NodePath("IdleState")
+
+[node name="EnemyBat9" parent="." instance=ExtResource("12_nfxt6")]
+position = Vector2(120, -812)
+is_facing_right = false
+
+[node name="StateMachine" parent="EnemyBat9" index="5" node_paths=PackedStringArray("state")]
+state = NodePath("IdleState")
+
+[node name="EnemyBat10" parent="." instance=ExtResource("12_nfxt6")]
+position = Vector2(-93, -844)
+is_facing_right = false
+
+[node name="StateMachine" parent="EnemyBat10" index="5" node_paths=PackedStringArray("state")]
+state = NodePath("IdleState")
+
+[node name="EnemyRat4" parent="." instance=ExtResource("4_wt5pl")]
+position = Vector2(-343, -826)
+
+[node name="Path2D" parent="EnemyRat4" index="4"]
+curve = SubResource("Curve2D_ivlso")
+
+[node name="EnemyBat11" parent="." instance=ExtResource("12_nfxt6")]
+position = Vector2(-180, -932)
+is_facing_right = false
+
+[node name="EnemyRat5" parent="." node_paths=PackedStringArray("animator") instance=ExtResource("4_wt5pl")]
+position = Vector2(-24, -923)
+animator = NodePath("../EnemyRat4/AnimationPlayer")
+
+[node name="EnemyBat12" parent="." instance=ExtResource("12_nfxt6")]
+position = Vector2(111, -972)
+is_facing_right = false
+
+[node name="Sprite2D" parent="EnemyBat12" index="0"]
+position = Vector2(0, -1)
+
+[node name="StateMachine" parent="EnemyBat12" index="5" node_paths=PackedStringArray("state")]
+state = NodePath("IdleState")
+
+[editable path="EnemyBat3"]
+[editable path="EnemyBat4"]
+[editable path="EnemyBat5"]
+[editable path="EnemyBat6"]
+[editable path="EnemyBat7"]
+[editable path="EnemyBat8"]
+[editable path="EnemyBat9"]
+[editable path="EnemyBat10"]
+[editable path="EnemyRat4"]
+[editable path="EnemyRat5"]
+[editable path="EnemyBat12"]

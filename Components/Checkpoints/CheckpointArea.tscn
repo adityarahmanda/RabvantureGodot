@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=3 uid="uid://obqch70q8c4u"]
+
+[ext_resource type="Script" path="res://Scripts/Checkpoint/CheckpointArea.gd" id="1_vrws3"]
+[ext_resource type="Texture2D" uid="uid://bom05fe5kqlub" path="res://Sprites/Tileset/Carrot.png" id="2_mlrrc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cp1ww"]
+size = Vector2(30, 30)
+
+[node name="Checkpoint" type="Node2D"]
+script = ExtResource("1_vrws3")
+active_frame_coords = Vector2(1, 0)
+tween_duration = 0.1
+stay_duration = 3.0
+position_offset = Vector2(0, -5)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_mlrrc")
+offset = Vector2(0, -4)
+hframes = 2
+
+[node name="CollisionArea2D" type="Area2D" parent="."]
+position = Vector2(0, -15)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea2D"]
+shape = SubResource("RectangleShape2D_cp1ww")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -9.0
+offset_right = 50.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(0, 8)
+
+[node name="CheckpointLabel" type="RichTextLabel" parent="Control"]
+unique_name_in_owner = true
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center][font_size=4]Checkpoint[/font_size][/center]"
+scroll_active = false
+
+[connection signal="body_entered" from="CollisionArea2D" to="." method="_on_body_entered"]

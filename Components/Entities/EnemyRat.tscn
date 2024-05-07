@@ -1,26 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://d0vxcbdepsvch"]
+[gd_scene load_steps=13 format=3 uid="uid://dplxuau61pgqk"]
 
-[ext_resource type="Script" path="res://Scripts/Enemy/EnemyRatEntity.gd" id="1_aa2fm"]
-[ext_resource type="Texture2D" uid="uid://dhw1s1dvbani0" path="res://Sprites/Rat.png" id="2_l0uqs"]
+[ext_resource type="Script" path="res://Scripts/Enemy/EnemyEntity.gd" id="1_k5uxi"]
+[ext_resource type="Texture2D" uid="uid://dhw1s1dvbani0" path="res://Sprites/Entities/Rat.png" id="2_l0uqs"]
 [ext_resource type="Script" path="res://Scripts/Obstacle/Area2DObstacle.gd" id="3_kvbr8"]
-
-[sub_resource type="Animation" id="Animation_xvcas"]
-resource_name = "Idle"
-length = 0.5
-loop_mode = 1
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 1]
-}
+[ext_resource type="Script" path="res://Scripts/Enemy/SimplePath2D.gd" id="4_6xyth"]
+[ext_resource type="Script" path="res://Scripts/FSM/StateMachine.gd" id="5_uiau0"]
+[ext_resource type="Script" path="res://Scripts/Enemy/States/FollowPathState.gd" id="6_usa10"]
 
 [sub_resource type="Animation" id="Animation_ei878"]
 length = 0.001
@@ -37,41 +22,86 @@ tracks/0/keys = {
 "values": [0]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_u8iwk"]
-_data = {
-"Idle": SubResource("Animation_xvcas"),
-"RESET": SubResource("Animation_ei878")
+[sub_resource type="Animation" id="Animation_xvcas"]
+resource_name = "Walk"
+length = 0.5
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_syfhm"]
-size = Vector2(6.96015, 5.00458)
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u8iwk"]
+_data = {
+"RESET": SubResource("Animation_ei878"),
+"Walk": SubResource("Animation_xvcas")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rst5e"]
+size = Vector2(8.96845, 5.01845)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hdlot"]
-size = Vector2(7.31324, 5.29569)
+size = Vector2(11.221, 6.9662)
 
-[node name="EnemyEntity" type="CharacterBody2D"]
-script = ExtResource("1_aa2fm")
+[sub_resource type="Curve2D" id="Curve2D_4qhah"]
+_data = {
+"points": PackedVector2Array(-18.7824, 32.9632, 0, 0, 0, 0, 0, 0, 0, 0, 60, 1)
+}
+point_count = 2
+
+[node name="EnemyRat" type="CharacterBody2D" node_paths=PackedStringArray("animator", "sprite_2d")]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_k5uxi")
+animator = NodePath("AnimationPlayer")
+sprite_2d = NodePath("Sprite2D")
+speed = 20.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(-1, 1)
 texture = ExtResource("2_l0uqs")
 hframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-playback_process_mode = 0
+callback_mode_process = 0
 libraries = {
 "": SubResource("AnimationLibrary_u8iwk")
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.01191, 0.50229)
-shape = SubResource("RectangleShape2D_syfhm")
+position = Vector2(-0.00770652, 0.490773)
+shape = SubResource("RectangleShape2D_rst5e")
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("3_kvbr8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0.991453, 0.462679)
+position = Vector2(-0.0494208, 0.468626)
 shape = SubResource("RectangleShape2D_hdlot")
 debug_color = Color(0.8, 0.352941, 0.607843, 0.419608)
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_4qhah")
+script = ExtResource("4_6xyth")
+
+[node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("state")]
+script = ExtResource("5_uiau0")
+state = NodePath("FollowPathState")
+
+[node name="FollowPathState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("actor", "simple_path_2d")]
+script = ExtResource("6_usa10")
+actor = NodePath("../..")
+simple_path_2d = NodePath("../../Path2D")
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

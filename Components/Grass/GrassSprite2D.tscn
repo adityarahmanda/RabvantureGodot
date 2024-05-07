@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://boq8e3qvgrxgx"]
+
+[ext_resource type="Material" uid="uid://brgs1ruh648bb" path="res://Shaders/grass_material.tres" id="1_jip4r"]
+[ext_resource type="Texture2D" uid="uid://cpsjl6fpfpn4q" path="res://Sprites/Tileset/Grass.png" id="2_swlwc"]
+
+[node name="GrassSprite2D" type="Sprite2D"]
+material = ExtResource("1_jip4r")
+position = Vector2(0, 8)
+texture = ExtResource("2_swlwc")
+hframes = 6
