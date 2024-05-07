@@ -5,6 +5,7 @@ class_name FollowPathState
 @export var simple_path_2d : SimplePath2D
 @export var follow_animation : String = "Walk"
 @export var is_vertical : bool = false
+@export var is_upside_down : bool = false
 
 var current_speed : float
 
