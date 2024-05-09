@@ -33,7 +33,7 @@ position = Vector2(-70, 8)
 offset = Vector2(0, -20)
 process_callback = 0
 limit_left = -500
-limit_top = -1500
+limit_top = -2000
 limit_right = 500
 limit_bottom = 80
 position_smoothing_enabled = true
@@ -54,12 +54,15 @@ script = ExtResource("6_0myb3")
 position = Vector2(188, -312)
 is_facing_right = false
 
-[node name="CheckpointArea3" parent="Services/CheckpointManager" instance=ExtResource("6_gg7yh")]
+[node name="CheckpointArea2" parent="Services/CheckpointManager" instance=ExtResource("6_gg7yh")]
 position = Vector2(284, -656)
 is_facing_right = false
 
-[node name="CheckpointArea2" parent="Services/CheckpointManager" instance=ExtResource("6_gg7yh")]
+[node name="CheckpointArea3" parent="Services/CheckpointManager" instance=ExtResource("6_gg7yh")]
 position = Vector2(20, -992)
+
+[node name="CheckpointArea4" parent="Services/CheckpointManager" instance=ExtResource("6_gg7yh")]
+position = Vector2(322, -1584)
 
 [node name="Canvases" type="Node2D" parent="."]
 
